@@ -1,0 +1,12 @@
+[Unit]
+Description=Recipe Collections V9 Multi-NIC Policy Routing
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/setup-multi-nic-routes.sh /etc/recipe-multinic.env
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

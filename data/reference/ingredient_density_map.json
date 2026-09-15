@@ -1,0 +1,34 @@
+[
+  {
+    "ingredient": "水",
+    "density_g_ml": 1.0,
+    "density_type": "liquid",
+    "status": "ACTIVE",
+    "source": "default",
+    "note": ""
+  },
+  {
+    "ingredient": "牛奶",
+    "density_g_ml": 1.03,
+    "density_type": "liquid",
+    "status": "ACTIVE",
+    "source": "default",
+    "note": ""
+  },
+  {
+    "ingredient": "醬油",
+    "density_g_ml": 1.16,
+    "density_type": "liquid",
+    "status": "ACTIVE",
+    "source": "default",
+    "note": ""
+  },
+  {
+    "ingredient": "橄欖油",
+    "density_g_ml": 0.91,
+    "density_type": "liquid",
+    "status": "ACTIVE",
+    "source": "default",
+    "note": ""
+  }
+]

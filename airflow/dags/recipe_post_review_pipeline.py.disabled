@@ -1,0 +1,93 @@
+from __future__ import annotations
+
+import json
+from datetime import datetime
+from pathlib import Path
+
+from airflow import DAG
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
+
+
+REVIEW_FILE = Path(
+    "/workspace/data/manual_review/manual_review.json"
+)
+
+
+def validate_manual_review():
+    if not REVIEW_FILE.exists():
+        raise RuntimeError(
+            f"manual review file not found: {REVIEW_FILE}"
+        )
+
+    rows = json.loads(
+        REVIEW_FILE.read_text(encoding="utf-8")
+    )
+
+    allowed = {"APPROVED", "REJECTED"}
+    approvals_by_ingredient = {}
+
+    for row in rows:
+        decision = (row.get("decision") or "").upper()
+
+        if decision not in allowed:
+            raise ValueError(
+                f"review_id={row.get('review_id')} "
+                f"decision is not finished: {decision!r}"
+            )
+
+        if decision == "APPROVED":
+            ingredient_id = row.get("ingredient_id")
+
+            if ingredient_id in approvals_by_ingredient:
+                raise ValueError(
+                    f"ingredient_id={ingredient_id} "
+                    "has more than one APPROVED candidate"
+                )
+
+            approvals_by_ingredient[ingredient_id] = (
+                row.get("review_id")
+            )
+
+    print(
+        "manual review validation passed. "
+        f"rows={len(rows)}, "
+        f"approved_ingredients={len(approvals_by_ingredient)}"
+    )
+
+
+with DAG(
+    dag_id="recipe_post_review_pipeline",
+    description=(
+        "After manual review: validate -> apply review -> "
+        "calculate recipe nutrition"
+    ),
+    start_date=datetime(2026, 9, 1),
+    schedule=None,
+    catchup=False,
+    max_active_runs=1,
+    tags=["recipe", "manual-review", "nutrition"],
+) as dag:
+
+    validate_task = PythonOperator(
+        task_id="validate_manual_review",
+        python_callable=validate_manual_review,
+    )
+
+    apply_task = BashOperator(
+        task_id="apply_manual_review",
+        bash_command=(
+            "cd /workspace/python && "
+            "python scripts/08_apply_manual_review.py"
+        ),
+    )
+
+    nutrition_task = BashOperator(
+        task_id="calculate_recipe_nutrition",
+        bash_command=(
+            "cd /workspace/python && "
+            "python scripts/09_calculate_recipe_nutrition.py"
+        ),
+    )
+
+    validate_task >> apply_task >> nutrition_task

@@ -1,0 +1,37 @@
+{
+  "version": "V8",
+  "status": "FORMAL",
+  "base": "Formal V7 + accepted V7-T-2 through V7-T-6 changes",
+  "checks": {
+    "docker_compose_yaml": "PASS",
+    "formal_services_preserved": "PASS",
+    "all_python_syntax": "PASS",
+    "mongodb_source_pipeline_preserved": "PASS",
+    "airflow_dag_preserved": "PASS",
+    "kafka_consumer_preserved": "PASS",
+    "crawler_files_preserved": "PASS",
+    "recipe_name_dedup_preserved": "PASS",
+    "keywords_normalization": "PASS",
+    "category_tables_and_alias_resolver": "PASS",
+    "multi_category_and": "PASS",
+    "unit_parser_regression": "PASS",
+    "calorie_quality_status": "PASS",
+    "whole_dataset_parser_static_check": "PASS"
+  },
+  "formal_services": [
+    "airflow",
+    "airflow-init",
+    "init-permissions",
+    "kafka",
+    "kafka-to-mongodb",
+    "mongodb",
+    "mysql",
+    "postgres",
+    "python"
+  ],
+  "whole_dataset_parser": {
+    "material_lines_checked": 257537,
+    "quantity_value_but_no_unit": 99
+  },
+  "runtime_note": "Docker containers were not started in this execution environment. YAML, all Python syntax, formal architecture preservation, parser regression, and whole-dataset static parsing checks passed."
+}

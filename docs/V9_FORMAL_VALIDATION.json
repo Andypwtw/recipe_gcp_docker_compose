@@ -1,0 +1,65 @@
+{
+  "version": "V9",
+  "base": "V8 formal",
+  "status": "STATIC_AND_LOGIC_VALIDATION_PASSED",
+  "checks": {
+    "docker_compose_yaml": "PASS",
+    "required_services": "PASS",
+    "v8_db_roles_preserved": "PASS",
+    "worker_nic_mapping": "PASS",
+    "kafka_five_topic_topology": "PASS",
+    "python_syntax": "PASS (34 files)",
+    "dispatcher_round_robin": "PASS",
+    "source_ip_binding_logic": "PASS",
+    "result_topic_to_mongodb": "PASS",
+    "airflow_v9_flow_static": "PASS",
+    "v8_etl_sequence_preserved": "PASS",
+    "v8_er_model_preserved": "PASS",
+    "fernet_example_format": "PASS",
+    "gcp_deploy_assets": "PASS",
+    "policy_routing_template": "PASS",
+    "v8_core_file_hashes": "PASS (19 files unchanged)",
+    "gcp_shell_syntax": "PASS (bash -n)",
+    "docker_compose_cli_config": "NOT RUN (Docker CLI unavailable in validation environment)"
+  },
+  "architecture": {
+    "crawler": "4 GCP Multi-NIC host-network workers",
+    "job_topics": [
+      "crawler_jobs_ip1",
+      "crawler_jobs_ip2",
+      "crawler_jobs_ip3",
+      "crawler_jobs_ip4"
+    ],
+    "result_topic": "ytower-recipes",
+    "raw_store": "MongoDB recipe_ai.raw_recipes",
+    "application_db": "MySQL recipe_ai",
+    "airflow_metadata_db": "PostgreSQL airflow",
+    "etl": "V8 01..09 retained"
+  },
+  "limitations": [
+    "Docker/GCP runtime integration was not executed in this environment.",
+    "The production YTower selectors/job-discovery logic remains intentionally NotImplemented until the user's verified crawler code is inserted.",
+    "Public egress IP verification must be performed on the actual GCP Linux VM after NIC/Cloud NAT/policy routing configuration."
+  ],
+  "v8_core_unchanged": {
+    "mysql/init/001_schema.sql": "UNCHANGED",
+    "python/app/api.py": "UNCHANGED",
+    "python/app/services/category_resolver.py": "UNCHANGED",
+    "python/app/services/normalization.py": "UNCHANGED",
+    "python/app/services/recommendation.py": "UNCHANGED",
+    "python/scripts/01_profile_mongodb.py": "UNCHANGED",
+    "python/scripts/02_clean_recipes.py": "UNCHANGED",
+    "python/scripts/03a_build_unit_weight_map.py": "UNCHANGED",
+    "python/scripts/03_normalize_recipes.py": "UNCHANGED",
+    "python/scripts/04_import_recipes_mysql.py": "UNCHANGED",
+    "python/scripts/04a_import_reference_maps.py": "UNCHANGED",
+    "python/scripts/04b_apply_weight_estimates.py": "UNCHANGED",
+    "python/scripts/04c_build_recipe_categories.py": "UNCHANGED",
+    "python/scripts/05_import_nutrition_excel.py": "UNCHANGED",
+    "python/scripts/06_match_ingredient_nutrition.py": "UNCHANGED",
+    "python/scripts/07_auto_review_nutrition.py": "UNCHANGED",
+    "python/scripts/08_apply_manual_review.py": "UNCHANGED",
+    "python/scripts/09_calculate_recipe_nutrition.py": "UNCHANGED",
+    "python/scripts/10_pipeline.py": "UNCHANGED"
+  }
+}

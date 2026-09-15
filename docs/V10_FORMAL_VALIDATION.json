@@ -1,0 +1,71 @@
+{
+  "version": "V10",
+  "type": "formal",
+  "basis": "V9 formal + promoted V9-T backend API changes; full formal infrastructure retained; no web frontend",
+  "checks": [
+    {
+      "check": "docker-compose YAML / formal services",
+      "status": "PASS",
+      "detail": "14 services; full formal infrastructure retained; no web frontend"
+    },
+    {
+      "check": "Python syntax (AST)",
+      "status": "PASS",
+      "detail": "34 Python files"
+    },
+    {
+      "check": "V10 API routes / search / Hermes static contract",
+      "status": "PASS",
+      "detail": "9 routes verified"
+    },
+    {
+      "check": "V9-T tested API promotion parity",
+      "status": "PASS",
+      "detail": "api.py differs only by formal mode label; recommendation.py identical"
+    },
+    {
+      "check": "Formal V9 infrastructure restored in V10",
+      "status": "PASS",
+      "detail": "Crawler/Kafka/MongoDB/Airflow/GCP assets present; pipeline starts from MongoDB"
+    },
+    {
+      "check": "Python package / formal dependencies",
+      "status": "PASS",
+      "detail": "4.0.0; Kafka and MongoDB deps retained; no Streamlit"
+    },
+    {
+      "check": "ER Model DBML ↔ MySQL Schema",
+      "status": "PASS",
+      "detail": "19 tables / 19 foreign keys matched"
+    },
+    {
+      "check": "V9 core preservation hash check",
+      "status": "PASS",
+      "detail": "78 V9 files unchanged outside intended V10 changes"
+    },
+    {
+      "check": "No bundled web frontend",
+      "status": "PASS",
+      "detail": "Frontend remains separate team project"
+    },
+    {
+      "check": "GCP shell syntax",
+      "status": "PASS",
+      "detail": "2 scripts"
+    },
+    {
+      "check": "Docker runtime / compose CLI",
+      "status": "NOT RUN",
+      "detail": "docker command not available in packaging environment"
+    },
+    {
+      "check": "Flask live route test",
+      "status": "NOT RUN",
+      "detail": "Flask is not installed in packaging environment; API validated statically and V9-T promotion parity checked"
+    }
+  ],
+  "limitations": [
+    "Docker runtime/build/up not executed when Docker CLI is unavailable.",
+    "Live Flask+MySQL integration was not executed in packaging environment because Flask/MySQL runtime services are unavailable here."
+  ]
+}

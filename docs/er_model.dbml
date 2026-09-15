@@ -1,0 +1,264 @@
+// V10 VERIFIED ER MODEL
+// Source of truth: Recipe_Collections_V10/mysql/init/001_schema.sql
+// Validation result:
+// - 19 tables matched
+// - 19 foreign-key relationships matched
+// - No missing FK
+// - No extra FK
+// - Composite PK/UNIQUE constraints retained
+// - etl_runs is intentionally standalone (system audit/log table)
+
+Project Recipe_Collections_V10 {
+  database_type: 'MySQL'
+  Note: 'Recipe Collections V10 正式版 ER Model；依 mysql/init/001_schema.sql 產生'
+}
+
+Table recipes {
+  id bigint [pk, increment]
+  seq varchar(50) [not null, unique]
+  name varchar(255) [not null]
+  published_date date
+  source_url varchar(500)
+  raw_keywords text
+  steps longtext
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table keywords {
+  id bigint [pk, increment]
+  keyword_name varchar(100) [not null, unique]
+}
+
+Table recipe_keywords {
+  recipe_id bigint [not null]
+  keyword_id bigint [not null]
+
+  indexes {
+    (recipe_id, keyword_id) [pk]
+  }
+}
+
+Table categories {
+  id bigint [pk, increment]
+  category_name varchar(100) [not null, unique]
+  category_type varchar(50) [not null]
+  is_active boolean [not null, default: true]
+  created_at timestamp
+  updated_at timestamp
+
+  indexes {
+    (category_type, category_name)
+  }
+}
+
+Table category_aliases {
+  id bigint [pk, increment]
+  category_id bigint [not null]
+  alias_name varchar(100) [not null, unique]
+  priority int [not null, default: 100]
+  is_active boolean [not null, default: true]
+  created_at timestamp
+
+  indexes {
+    alias_name
+  }
+}
+
+Table recipe_categories {
+  recipe_id bigint [not null]
+  category_id bigint [not null]
+  source_keyword varchar(100) [not null]
+  created_at timestamp
+
+  indexes {
+    (recipe_id, category_id) [pk]
+    (category_id, recipe_id)
+  }
+}
+
+Table ingredients {
+  id bigint [pk, increment]
+  canonical_name varchar(255) [not null, unique]
+  category varchar(100)
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table ingredient_aliases {
+  id bigint [pk, increment]
+  ingredient_id bigint [not null]
+  alias_name varchar(255) [not null, unique]
+  source varchar(100)
+  created_at timestamp
+}
+
+Table units {
+  id bigint [pk, increment]
+  canonical_unit varchar(50) [not null, unique]
+  unit_type varchar(50) [not null, default: 'unknown']
+  to_gram_factor decimal(18,6)
+  to_ml_factor decimal(18,6)
+  is_qualitative boolean [default: false]
+  created_at timestamp
+}
+
+Table recipe_ingredients {
+  id bigint [pk, increment]
+  recipe_id bigint [not null]
+  line_no int [not null]
+  raw_text varchar(1000)
+  raw_name varchar(255)
+  ingredient_id bigint
+  raw_amount_text varchar(255)
+  quantity_min decimal(18,6)
+  quantity_max decimal(18,6)
+  quantity_value decimal(18,6)
+  unit_id bigint
+  weight_g decimal(18,6)
+  is_estimated boolean [default: false]
+  needs_manual_review boolean [default: false]
+  review_reason varchar(500)
+  created_at timestamp
+
+  indexes {
+    (recipe_id, line_no) [unique]
+  }
+}
+
+Table ingredient_unit_weights {
+  id bigint [pk, increment]
+  ingredient_id bigint [not null]
+  unit_id bigint [not null]
+  grams_per_unit decimal(18,6) [not null]
+  confidence varchar(20)
+  status varchar(20) [default: 'ACTIVE']
+  source varchar(255)
+  note varchar(500)
+  updated_at timestamp
+
+  indexes {
+    (ingredient_id, unit_id) [unique]
+  }
+}
+
+Table ingredient_densities {
+  id bigint [pk, increment]
+  ingredient_id bigint [not null, unique]
+  density_g_ml decimal(18,6) [not null]
+  density_type varchar(32) [default: 'liquid']
+  confidence varchar(20)
+  status varchar(20) [default: 'ACTIVE']
+  source varchar(255)
+  note varchar(500)
+  updated_at timestamp
+}
+
+Table nutrition_source {
+  id bigint [pk, increment]
+  food_code varchar(100) [not null, unique]
+  food_category varchar(255)
+  food_name varchar(255) [not null]
+  content_description text
+  common_names text
+  waste_percent decimal(18,6)
+  raw_data json
+  created_at timestamp
+
+  indexes {
+    food_name
+  }
+}
+
+Table nutrient_definitions {
+  id bigint [pk, increment]
+  nutrient_name varchar(255) [not null]
+  unit varchar(50)
+  source_column_name varchar(255) [not null, unique]
+  nutrient_group varchar(100)
+  display_order int [not null]
+  created_at timestamp
+}
+
+Table nutrition_values {
+  nutrition_source_id bigint [not null]
+  nutrient_id bigint [not null]
+  value_numeric decimal(24,10)
+  value_text varchar(255)
+
+  indexes {
+    (nutrition_source_id, nutrient_id) [pk]
+  }
+}
+
+Table ingredient_nutrition_map {
+  id bigint [pk, increment]
+  ingredient_id bigint [not null, unique]
+  nutrition_source_id bigint [not null]
+  match_method varchar(50)
+  match_score decimal(8,6)
+  status varchar(20)
+  reviewed_at timestamp
+  created_at timestamp
+}
+
+Table manual_review {
+  id bigint [pk, increment]
+  ingredient_id bigint [not null]
+  candidate_nutrition_id bigint
+  candidate_name varchar(255)
+  score decimal(8,6)
+  status varchar(20) [default: 'PENDING']
+  note varchar(500)
+  created_at timestamp
+  reviewed_at timestamp
+}
+
+Table recipe_nutrition_summary {
+  id bigint [pk, increment]
+  recipe_id bigint [not null, unique]
+  energy_kcal decimal(18,6)
+  coverage_percent decimal(8,2)
+  calorie_status varchar(30) [not null, default: 'INSUFFICIENT']
+  calculated_at timestamp
+}
+
+Table etl_runs {
+  id bigint [pk, increment]
+  run_type varchar(100) [not null]
+  status varchar(30) [not null]
+  started_at timestamp
+  finished_at timestamp
+  message text
+
+  Note: '系統 ETL 執行紀錄；獨立 Audit/Log Table，不需要 FK'
+}
+
+Ref: recipe_keywords.recipe_id > recipes.id [delete: cascade]
+Ref: recipe_keywords.keyword_id > keywords.id [delete: cascade]
+
+Ref: category_aliases.category_id > categories.id [delete: cascade]
+Ref: recipe_categories.recipe_id > recipes.id [delete: cascade]
+Ref: recipe_categories.category_id > categories.id [delete: cascade]
+
+Ref: ingredient_aliases.ingredient_id > ingredients.id [delete: cascade]
+
+Ref: recipe_ingredients.recipe_id > recipes.id [delete: cascade]
+Ref: recipe_ingredients.ingredient_id > ingredients.id
+Ref: recipe_ingredients.unit_id > units.id
+
+Ref: ingredient_unit_weights.ingredient_id > ingredients.id
+Ref: ingredient_unit_weights.unit_id > units.id
+
+Ref: ingredient_densities.ingredient_id > ingredients.id
+
+Ref: nutrition_values.nutrition_source_id > nutrition_source.id [delete: cascade]
+Ref: nutrition_values.nutrient_id > nutrient_definitions.id [delete: cascade]
+
+Ref: ingredient_nutrition_map.ingredient_id > ingredients.id
+Ref: ingredient_nutrition_map.nutrition_source_id > nutrition_source.id
+
+Ref: manual_review.ingredient_id > ingredients.id
+Ref: manual_review.candidate_nutrition_id > nutrition_source.id
+
+Ref: recipe_nutrition_summary.recipe_id > recipes.id [delete: cascade]

@@ -1,0 +1,271 @@
+{
+  "version": "V11",
+  "generated_on": "2026-09-15",
+  "overall_static_status": "PASS",
+  "checks": [
+    {
+      "check": "docker_compose_yaml_parse",
+      "status": "PASS",
+      "details": {
+        "service_count": 17,
+        "services": [
+          "init-permissions",
+          "mysql",
+          "mongodb",
+          "kafka",
+          "kafka-init",
+          "postgres",
+          "airflow-init",
+          "airflow-webserver",
+          "airflow-scheduler",
+          "proxy-manager",
+          "crawler-direct",
+          "crawler-worker-1",
+          "crawler-worker-2",
+          "crawler-worker-3",
+          "crawler-worker-4",
+          "mongo-writer",
+          "python"
+        ]
+      }
+    },
+    {
+      "check": "required_services",
+      "status": "PASS",
+      "details": {
+        "expected": [
+          "airflow-init",
+          "airflow-scheduler",
+          "airflow-webserver",
+          "crawler-direct",
+          "crawler-worker-1",
+          "crawler-worker-2",
+          "crawler-worker-3",
+          "crawler-worker-4",
+          "init-permissions",
+          "kafka",
+          "kafka-init",
+          "mongo-writer",
+          "mongodb",
+          "mysql",
+          "postgres",
+          "proxy-manager",
+          "python"
+        ],
+        "actual": [
+          "airflow-init",
+          "airflow-scheduler",
+          "airflow-webserver",
+          "crawler-direct",
+          "crawler-worker-1",
+          "crawler-worker-2",
+          "crawler-worker-3",
+          "crawler-worker-4",
+          "init-permissions",
+          "kafka",
+          "kafka-init",
+          "mongo-writer",
+          "mongodb",
+          "mysql",
+          "postgres",
+          "proxy-manager",
+          "python"
+        ]
+      }
+    },
+    {
+      "check": "compose_build_paths",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "check": "python_syntax",
+      "status": "PASS",
+      "details": {
+        "files": 34,
+        "errors": []
+      }
+    },
+    {
+      "check": "shell_syntax",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "check": "compose_integration_contract",
+      "status": "PASS",
+      "details": {
+        "named_volumes": true,
+        "mysql_init_mount": true,
+        "internal_mysql": true,
+        "internal_mongo": true,
+        "internal_kafka": true,
+        "internal_postgres": true,
+        "app_mysql_user": true,
+        "app_mongo_user": true,
+        "no_multinic_active": true,
+        "no_web_frontend": true
+      }
+    },
+    {
+      "check": "mongo_writer_raw_recipes",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "check": "crawler_safety_fixes",
+      "status": "PASS",
+      "details": {
+        "direct_consumer_recreate": true,
+        "direct_browser_headers": true,
+        "poll_interval_16h": true
+      }
+    },
+    {
+      "check": "airflow_v11_flow",
+      "status": "PASS",
+      "details": {
+        "dispatch_crawler_jobs": true,
+        "wait_crawler_jobs": true,
+        "wait_mongodb_writer": true,
+        "run_recipe_pipeline": true,
+        "check_pipeline_result": true,
+        "job_baseline": true,
+        "result_baseline": true,
+        "ytower-crawler-group": true,
+        "ytower-mongo-writer": true
+      }
+    },
+    {
+      "check": "er_model_schema_match",
+      "status": "PASS",
+      "details": {
+        "sql_tables": 19,
+        "dbml_tables": 19,
+        "sql_fks": 19,
+        "dbml_refs": 19
+      }
+    },
+    {
+      "check": "v10_core_preserved",
+      "status": "PASS",
+      "details": {
+        "mysql/init/001_schema.sql": true,
+        "docs/er_model.dbml": true,
+        "python/scripts/05_import_nutrition_excel.py": true,
+        "python/scripts/06_match_ingredient_nutrition.py": true,
+        "python/scripts/07_auto_review_nutrition.py": true,
+        "python/scripts/08_apply_manual_review.py": true,
+        "python/scripts/09_calculate_recipe_nutrition.py": true,
+        "python/scripts/10_pipeline.py": true,
+        "python/app/services/category_resolver.py": true,
+        "python/app/services/recommendation.py": true,
+        "python/app/services/normalization.py": true
+      }
+    },
+    {
+      "check": "raw_data_profile",
+      "status": "PASS",
+      "details": {
+        "rows": 29597,
+        "prefix_count": 31,
+        "prefixes": [
+          "A01",
+          "A02",
+          "A03",
+          "A04",
+          "A05",
+          "A06",
+          "A07",
+          "A08",
+          "B01",
+          "B02",
+          "B03",
+          "B04",
+          "C01",
+          "D01",
+          "E01",
+          "F01",
+          "F02",
+          "F03",
+          "F04",
+          "F05",
+          "F06",
+          "F07",
+          "F08",
+          "G01",
+          "G02",
+          "H01",
+          "H02",
+          "H03",
+          "I01",
+          "I02",
+          "I03"
+        ],
+        "max_numeric_seq": 3899,
+        "max_consecutive_gap": 14,
+        "max_gap_range": [
+          "G02",
+          1,
+          14
+        ],
+        "missing_fields": {
+          "材料": 6
+        }
+      }
+    },
+    {
+      "check": "material_parser_full_scan",
+      "status": "PASS",
+      "details": {
+        "material_lines": 257537,
+        "parse_errors": 0,
+        "raw_names_trailing_approx": 74,
+        "canonical_names_trailing_approx_after_fix": 0
+      }
+    },
+    {
+      "check": "published_date_full_scan",
+      "status": "PASS",
+      "details": {
+        "date_rows": 29597,
+        "unparseable": 0,
+        "simple_date_rows": 22184,
+        "date_time_rows": 7413
+      }
+    },
+    {
+      "check": "hermes_api_auth_compat",
+      "status": "PASS",
+      "details": {
+        "contract": "response remains {items:[...]}",
+        "auth": "conditional if HERMES_API_KEY set"
+      }
+    },
+    {
+      "check": "version_marker",
+      "status": "PASS",
+      "details": "V11 internal package version 5.0.0"
+    },
+    {
+      "check": "docker_cli_config",
+      "status": "NOT_RUN",
+      "details": "docker command not found in artifact-generation environment"
+    },
+    {
+      "check": "docker_runtime_build_up",
+      "status": "NOT_RUN",
+      "details": "must be verified on target Docker/GCP host"
+    },
+    {
+      "check": "ytower_live_selector_encoding",
+      "status": "NOT_RUN",
+      "details": "must be verified against live YTower from target crawler environment"
+    },
+    {
+      "check": "free_proxy_live_quality",
+      "status": "NOT_RUN",
+      "details": "dynamic external condition; must be verified at runtime"
+    }
+  ]
+}
