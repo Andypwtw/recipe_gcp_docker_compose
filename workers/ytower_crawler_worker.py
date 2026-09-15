@@ -12,7 +12,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from kafka import KafkaConsumer, KafkaProducer
-
+from requests import exceptions as req_exc
 from proxy_pool import (
     build_proxy_session,
     get_proxy_collection,
@@ -169,7 +169,7 @@ def request_recipe_page(
                 return "blocked", response, f"challenge/http {response.status_code}", latency_ms
 
             if 500 <= response.status_code < 600:
-                raise requests.HTTPError(f"HTTP {response.status_code}", response=response)
+                raise req_exc.HTTPError(f"HTTP {response.status_code}", response=response)
 
             if response.status_code != 200:
                 return (
@@ -181,7 +181,7 @@ def request_recipe_page(
 
             return "ok", response, None, latency_ms
 
-        except (requests.Timeout, requests.ConnectionError, requests.ProxyError, requests.HTTPError) as exc:
+        except (req_exc.Timeout, req_exc.ConnectionError, req_exc.ProxyError, req_exc.HTTPError) as exc:
             last_error = str(exc)
             if attempt < REQUEST_RETRIES:
                 sleep_seconds = min(2 ** attempt, 8) + random.uniform(0, 1)
