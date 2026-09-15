@@ -4,8 +4,10 @@ import random
 import signal
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional, Tuple
+from urllib.parse import urljoin
+import re
 
 import requests
 from bs4 import BeautifulSoup
@@ -44,6 +46,12 @@ COOLDOWN_SLEEP_MAX = float(os.getenv("COOLDOWN_SLEEP_MAX", "20"))
 DIRECT_BLOCK_COOLDOWN_SECONDS = int(os.getenv("DIRECT_BLOCK_COOLDOWN_SECONDS", "900"))
 DIRECT_BLOCK_MAX_RETRIES = int(os.getenv("DIRECT_BLOCK_MAX_RETRIES", "2"))
 MAX_POLL_INTERVAL_MS = int(os.getenv("MAX_POLL_INTERVAL_MS", str(16 * 60 * 60 * 1000)))
+YTOWER_SEARCH_URL = os.getenv("YTOWER_SEARCH_URL", "https://www.ytower.com.tw/recipe/recipe-search.asp")
+YTOWER_SEARCH_PAGE_PARAM = os.getenv("YTOWER_SEARCH_PAGE_PARAM", "page")
+YTOWER_SEARCH_CHUNK_SIZE = int(os.getenv("YTOWER_SEARCH_CHUNK_SIZE", "50"))
+YTOWER_SEARCH_OLD_PAGE_STOP = int(os.getenv("YTOWER_SEARCH_OLD_PAGE_STOP", "2"))
+SEQ_RE = re.compile(r"(?:[?&]seq=|\b)([A-I]\d{2}-\d{3,4})", re.I)
+DATE_RE = re.compile(r"(20\d{2})[./\-年](\d{1,2})[./\-月](\d{1,2})")
 
 CHALLENGE_MARKERS = (
     "captcha",
@@ -422,6 +430,140 @@ def crawl_job(job: dict, producer: KafkaProducer, proxy_collection=None, initial
             session.close()
 
 
+
+def _parse_cutoff(value: str) -> datetime:
+    dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt
+
+
+def _extract_search_entries(html: str):
+    """Return [(SEQ, datetime|None)]. Missing dates are kept deliberately to avoid false negatives."""
+    soup = BeautifulSoup(html, "html.parser")
+    found = {}
+    for a in soup.find_all("a", href=True):
+        href = a.get("href", "")
+        m = SEQ_RE.search(href)
+        if not m:
+            continue
+        seq = m.group(1).upper()
+        container = a
+        for _ in range(4):
+            if container.parent is None:
+                break
+            container = container.parent
+            text = container.get_text(" ", strip=True)
+            dm = DATE_RE.search(text)
+            if dm:
+                try:
+                    found[seq] = datetime(int(dm.group(1)), int(dm.group(2)), int(dm.group(3)), tzinfo=timezone.utc)
+                except ValueError:
+                    found.setdefault(seq, None)
+                break
+        else:
+            found.setdefault(seq, None)
+        found.setdefault(seq, None)
+    return list(found.items())
+
+
+def _get_search_page(session, page: int):
+    params = {} if page == 1 else {YTOWER_SEARCH_PAGE_PARAM: page}
+    response = session.get(YTOWER_SEARCH_URL, params=params, timeout=REQUEST_TIMEOUT)
+    if looks_like_challenge(response):
+        raise BlockedPageError(f"search page={page}: challenge/http {response.status_code}")
+    if response.status_code >= 500:
+        raise RetryableRequestError(f"search page={page}: HTTP {response.status_code}")
+    response.raise_for_status()
+    response.encoding = response.apparent_encoding or "big5"
+    return response
+
+
+def incremental_discovery_job(job, producer, session):
+    cutoff = _parse_cutoff(job["cutoff_iso"])
+    max_pages = int(job.get("search_max_pages", 100))
+    selected, seen = [], set()
+    old_pages = 0
+    for page in range(1, max_pages + 1):
+        response = _get_search_page(session, page)
+        entries = _extract_search_entries(response.text)
+        new_entries = [(seq, dt) for seq, dt in entries if seq not in seen]
+        if not new_entries:
+            print(f"[{WORKER_NAME}] incremental discovery stop page={page}: no new SEQ", flush=True)
+            break
+        all_dated = all(dt is not None for _, dt in new_entries)
+        page_has_recent = False
+        for seq, dt in new_entries:
+            seen.add(seq)
+            # Unknown date is included on purpose: overlap + Mongo upsert is safer than dropping a recipe.
+            if dt is None or dt >= cutoff:
+                selected.append(seq)
+                page_has_recent = True
+        if all_dated and not page_has_recent:
+            old_pages += 1
+        else:
+            old_pages = 0
+        print(f"[{WORKER_NAME}] search page={page} entries={len(new_entries)} selected_total={len(selected)}", flush=True)
+        if old_pages >= YTOWER_SEARCH_OLD_PAGE_STOP:
+            print(f"[{WORKER_NAME}] stop after {old_pages} fully-old dated pages", flush=True)
+            break
+        time.sleep(random.uniform(CRAWL_SLEEP_MIN, CRAWL_SLEEP_MAX))
+
+    for i in range(0, len(selected), YTOWER_SEARCH_CHUNK_SIZE):
+        seqs = selected[i:i + YTOWER_SEARCH_CHUNK_SIZE]
+        producer.send(KAFKA_JOB_TOPIC, key=f"incremental-{i//YTOWER_SEARCH_CHUNK_SIZE}".encode(),
+                      value={"job_type": "seq_list", "seqs": seqs, "cutoff_iso": job["cutoff_iso"]}).get(timeout=30)
+    producer.flush()
+    print(f"[{WORKER_NAME}] incremental discovery selected={len(selected)} jobs={(len(selected)+YTOWER_SEARCH_CHUNK_SIZE-1)//YTOWER_SEARCH_CHUNK_SIZE}", flush=True)
+    return len(selected)
+
+
+def seq_list_job(job, producer, proxy_collection=None, initial_proxy=None, initial_session=None):
+    seqs = list(dict.fromkeys(str(x).upper() for x in job.get("seqs", []) if x))
+    cutoff = _parse_cutoff(job["cutoff_iso"]) if job.get("cutoff_iso") else None
+    proxy_doc, session = initial_proxy, initial_session
+    if NETWORK_MODE == "direct":
+        session = session or build_direct_session()
+    elif proxy_doc is None or session is None:
+        proxy_doc, session = wait_for_proxy(proxy_collection)
+    produced = 0
+    try:
+        for seq in seqs:
+            m = re.fullmatch(r"([A-I]\d{2})-(\d{3,4})", seq)
+            if not m:
+                continue
+            prefix, seq_num = m.group(1), int(m.group(2))
+            status, response, error, latency_ms = request_recipe_page(seq, session)
+            if status == "blocked":
+                raise BlockedPageError(f"{seq}: {error}")
+            if status == "retryable_error":
+                raise RetryableRequestError(f"{seq}: {error}")
+            if status == "not_found" or response is None:
+                continue
+            data = parse_recipe_response(seq, seq_num, prefix, response)
+            if not data:
+                continue
+            # Search-page date is the discovery filter. Recipe-page date is retained as source data;
+            # unknown/unparseable recipe dates are not discarded.
+            if NETWORK_MODE == "proxy" and proxy_doc is not None:
+                mark_proxy_success(proxy_collection, proxy_doc["_id"], WORKER_NAME, latency_ms=latency_ms)
+                data["proxy_exit_ip"] = proxy_doc.get("exit_ip")
+                data["proxy_country_code"] = proxy_doc.get("country_code")
+            else:
+                data["proxy_exit_ip"] = data["proxy_country_code"] = None
+            producer.send(KAFKA_RESULT_TOPIC, key=seq.encode(), value=data).get(timeout=30)
+            produced += 1
+            time.sleep(random.uniform(DIRECT_CRAWL_SLEEP_MIN, DIRECT_CRAWL_SLEEP_MAX) if NETWORK_MODE == "direct" else random.uniform(CRAWL_SLEEP_MIN, CRAWL_SLEEP_MAX))
+        producer.flush()
+        print(f"[{WORKER_NAME}] seq_list finished seqs={len(seqs)} produced={produced}", flush=True)
+        return produced
+    finally:
+        if NETWORK_MODE == "proxy" and proxy_doc is not None:
+            try: release_proxy(proxy_collection, proxy_doc["_id"], WORKER_NAME)
+            except Exception: pass
+        if session is not None: session.close()
+
+
 def create_consumer() -> KafkaConsumer:
     return KafkaConsumer(
         KAFKA_JOB_TOPIC,
@@ -437,13 +579,22 @@ def create_consumer() -> KafkaConsumer:
 
 
 def process_message(consumer, message, producer, proxy_collection=None, proxy_doc=None, session=None):
-    crawl_job(
-        message.value,
-        producer,
-        proxy_collection=proxy_collection,
-        initial_proxy=proxy_doc,
-        initial_session=session,
-    )
+    job = message.value
+    job_type = job.get("job_type", "prefix_range")
+    if job_type == "incremental_discovery":
+        # Discovery uses the same network session as the worker and only enqueues SEQ chunks.
+        # It never treats 403/CAPTCHA as a missing recipe.
+        active_session = session or (build_direct_session() if NETWORK_MODE == "direct" else None)
+        if active_session is None:
+            raise RuntimeError("proxy discovery requires an active leased proxy session")
+        incremental_discovery_job(job, producer, active_session)
+        if NETWORK_MODE == "proxy" and proxy_doc is not None:
+            release_proxy(proxy_collection, proxy_doc["_id"], WORKER_NAME)
+        active_session.close()
+    elif job_type == "seq_list":
+        seq_list_job(job, producer, proxy_collection, proxy_doc, session)
+    else:
+        crawl_job(job, producer, proxy_collection=proxy_collection, initial_proxy=proxy_doc, initial_session=session)
     consumer.commit()
 
 
