@@ -34,6 +34,7 @@ REQUEST_RETRIES = int(os.getenv("REQUEST_RETRIES", "3"))
 MAX_PROXY_SWITCHES_PER_SEQ = int(os.getenv("MAX_PROXY_SWITCHES_PER_SEQ", "5"))
 PROXY_WAIT_SECONDS = int(os.getenv("PROXY_WAIT_SECONDS", "15"))
 MAX_NOT_FOUND_LIMIT = int(os.getenv("MAX_NOT_FOUND_LIMIT", "50"))
+FULL_CRAWL_CHUNK_SIZE = int(os.getenv("FULL_CRAWL_CHUNK_SIZE", "250"))
 COOLDOWN_SUCCESS_COUNT = int(os.getenv("COOLDOWN_SUCCESS_COUNT", "50"))
 CRAWL_SLEEP_MIN = float(os.getenv("CRAWL_SLEEP_MIN", "2.5"))
 CRAWL_SLEEP_MAX = float(os.getenv("CRAWL_SLEEP_MAX", "5.0"))
@@ -280,29 +281,54 @@ def fetch_numeric_seq(
     return "numeric_not_found", None
 
 
-def crawl_job(job: dict, producer: KafkaProducer, proxy_collection=None, initial_proxy=None, initial_session=None) -> int:
+def crawl_job(
+    job: dict,
+    producer: KafkaProducer,
+    proxy_collection=None,
+    initial_proxy=None,
+    initial_session=None,
+) -> dict:
+    """
+    處理一個 prefix chunk。
+
+    FULL crawl 採 sequential chunk relay：
+      1-250 成功後才 enqueue 251-500。
+    因此不會預先把後續 chunk 全部排入 Kafka。
+
+    consecutive_not_found 會由 job 帶到下一個 chunk，保留跨 chunk 的
+    「連續 50 個 numeric SEQ 不存在就停止」語意。
+    """
     prefix = str(job["prefix"])
     start_num = max(1, int(job.get("start_num", 1)))
-    end_num = int(job.get("end_num", 5000))
+    requested_end = int(job.get("end_num", start_num + FULL_CRAWL_CHUNK_SIZE - 1))
+    max_seq_number = int(job.get("max_seq_number", requested_end))
+    chunk_size = max(1, int(job.get("chunk_size", FULL_CRAWL_CHUNK_SIZE)))
+    end_num = min(requested_end, max_seq_number)
     max_not_found = int(job.get("max_not_found_limit", MAX_NOT_FOUND_LIMIT))
+    consecutive_not_found = int(job.get("consecutive_not_found", 0))
 
-    consecutive_not_found = 0
     success_count = 0
     produced = 0
+    stopped = False
+    last_seq_num = start_num - 1
     proxy_doc = initial_proxy
     session = initial_session
+    owns_session = initial_session is None
 
     if NETWORK_MODE == "direct":
         session = session or build_direct_session()
         print(
-            f"[{WORKER_NAME}] start job prefix={prefix} range={start_num}-{end_num} mode=direct",
+            f"[{WORKER_NAME}] start chunk prefix={prefix} range={start_num}-{end_num} "
+            f"missing_in={consecutive_not_found} mode=direct",
             flush=True,
         )
     else:
         if proxy_doc is None or session is None:
             proxy_doc, session = wait_for_proxy(proxy_collection)
+            owns_session = True
         print(
-            f"[{WORKER_NAME}] start job prefix={prefix} range={start_num}-{end_num} mode=proxy",
+            f"[{WORKER_NAME}] start chunk prefix={prefix} range={start_num}-{end_num} "
+            f"missing_in={consecutive_not_found} mode=proxy",
             flush=True,
         )
 
@@ -311,6 +337,7 @@ def crawl_job(job: dict, producer: KafkaProducer, proxy_collection=None, initial
             if _stop_requested:
                 raise RuntimeError("shutdown requested")
 
+            last_seq_num = seq_num
             direct_block_retries = 0
             proxy_switches = 0
 
@@ -324,6 +351,7 @@ def crawl_job(job: dict, producer: KafkaProducer, proxy_collection=None, initial
                         proxy_doc=proxy_doc,
                     )
                     break
+
                 except BlockedPageError as exc:
                     if NETWORK_MODE == "direct":
                         direct_block_retries += 1
@@ -336,65 +364,92 @@ def crawl_job(job: dict, producer: KafkaProducer, proxy_collection=None, initial
                         )
                         if direct_block_retries > DIRECT_BLOCK_MAX_RETRIES:
                             raise RuntimeError(
-                                f"direct IP remains blocked at {prefix}-{seq_num}; job offset not committed"
+                                f"direct IP remains blocked at {prefix}-{seq_num}; "
+                                "chunk offset not committed"
                             ) from exc
                         time.sleep(DIRECT_BLOCK_COOLDOWN_SECONDS)
                         session.close()
                         session = build_direct_session()
+                        owns_session = True
                         continue
 
                     proxy_switches += 1
-                    mark_proxy_failure(proxy_collection, proxy_doc["_id"], WORKER_NAME, str(exc))
+                    mark_proxy_failure(
+                        proxy_collection, proxy_doc["_id"], WORKER_NAME, str(exc)
+                    )
                     session.close()
+                    try:
+                        release_proxy(
+                            proxy_collection, proxy_doc["_id"], WORKER_NAME
+                        )
+                    except Exception:
+                        pass
                     print(
-                        f"[{WORKER_NAME}] proxy challenge at {prefix}-{seq_num}; switching proxy "
-                        f"({proxy_switches}/{MAX_PROXY_SWITCHES_PER_SEQ})",
+                        f"[{WORKER_NAME}] proxy challenge at {prefix}-{seq_num}; "
+                        f"switching proxy ({proxy_switches}/{MAX_PROXY_SWITCHES_PER_SEQ})",
                         file=sys.stderr,
                         flush=True,
                     )
                     if proxy_switches >= MAX_PROXY_SWITCHES_PER_SEQ:
                         raise RuntimeError(
-                            f"no usable proxy after {proxy_switches} challenge switches at {prefix}-{seq_num}"
+                            f"no usable proxy after {proxy_switches} challenge switches "
+                            f"at {prefix}-{seq_num}"
                         ) from exc
                     proxy_doc, session = wait_for_proxy(proxy_collection)
+                    owns_session = True
                     continue
 
                 except RetryableRequestError as exc:
                     if NETWORK_MODE == "direct":
                         raise RuntimeError(
-                            f"direct retryable error at {prefix}-{seq_num}; job offset not committed: {exc}"
+                            f"direct retryable error at {prefix}-{seq_num}; "
+                            f"chunk offset not committed: {exc}"
                         ) from exc
 
                     proxy_switches += 1
-                    mark_proxy_failure(proxy_collection, proxy_doc["_id"], WORKER_NAME, str(exc))
+                    mark_proxy_failure(
+                        proxy_collection, proxy_doc["_id"], WORKER_NAME, str(exc)
+                    )
                     session.close()
+                    try:
+                        release_proxy(
+                            proxy_collection, proxy_doc["_id"], WORKER_NAME
+                        )
+                    except Exception:
+                        pass
                     print(
-                        f"[{WORKER_NAME}] proxy/network error at {prefix}-{seq_num}; switching proxy "
-                        f"({proxy_switches}/{MAX_PROXY_SWITCHES_PER_SEQ})",
+                        f"[{WORKER_NAME}] proxy/network error at {prefix}-{seq_num}; "
+                        f"switching proxy ({proxy_switches}/{MAX_PROXY_SWITCHES_PER_SEQ})",
                         file=sys.stderr,
                         flush=True,
                     )
                     if proxy_switches >= MAX_PROXY_SWITCHES_PER_SEQ:
                         raise RuntimeError(
-                            f"no usable proxy after {proxy_switches} switches at {prefix}-{seq_num}"
+                            f"no usable proxy after {proxy_switches} switches "
+                            f"at {prefix}-{seq_num}"
                         ) from exc
                     proxy_doc, session = wait_for_proxy(proxy_collection)
+                    owns_session = True
                     continue
 
             if numeric_status == "numeric_not_found":
                 consecutive_not_found += 1
                 if consecutive_not_found >= max_not_found:
+                    stopped = True
                     print(
                         f"[{WORKER_NAME}] {prefix}: STOP at numeric seq={seq_num}; "
                         f"{consecutive_not_found} consecutive numeric SEQs missing",
                         flush=True,
                     )
                     break
-                time.sleep(random.uniform(NOT_FOUND_SLEEP_MIN, NOT_FOUND_SLEEP_MAX))
+                time.sleep(
+                    random.uniform(NOT_FOUND_SLEEP_MIN, NOT_FOUND_SLEEP_MAX)
+                )
                 continue
 
             consecutive_not_found = 0
             success_count += 1
+
             if NETWORK_MODE == "proxy" and proxy_doc is not None:
                 data["proxy_exit_ip"] = proxy_doc.get("exit_ip")
                 data["proxy_country_code"] = proxy_doc.get("country_code")
@@ -410,25 +465,82 @@ def crawl_job(job: dict, producer: KafkaProducer, proxy_collection=None, initial
             produced += 1
 
             if NETWORK_MODE == "direct":
-                time.sleep(random.uniform(DIRECT_CRAWL_SLEEP_MIN, DIRECT_CRAWL_SLEEP_MAX))
+                time.sleep(
+                    random.uniform(
+                        DIRECT_CRAWL_SLEEP_MIN, DIRECT_CRAWL_SLEEP_MAX
+                    )
+                )
             else:
                 time.sleep(random.uniform(CRAWL_SLEEP_MIN, CRAWL_SLEEP_MAX))
 
-            if COOLDOWN_SUCCESS_COUNT > 0 and success_count % COOLDOWN_SUCCESS_COUNT == 0:
-                time.sleep(random.uniform(COOLDOWN_SLEEP_MIN, COOLDOWN_SLEEP_MAX))
+            if (
+                COOLDOWN_SUCCESS_COUNT > 0
+                and success_count % COOLDOWN_SUCCESS_COUNT == 0
+            ):
+                time.sleep(
+                    random.uniform(COOLDOWN_SLEEP_MIN, COOLDOWN_SLEEP_MAX)
+                )
 
         producer.flush()
-        print(f"[{WORKER_NAME}] finish {prefix}: produced={produced}", flush=True)
-        return produced
-    finally:
-        if NETWORK_MODE == "proxy" and proxy_doc is not None:
-            try:
-                release_proxy(proxy_collection, proxy_doc["_id"], WORKER_NAME)
-            except Exception:
-                pass
-        if session is not None:
-            session.close()
 
+        # 只有目前 chunk 完整成功且 prefix 尚未停止，才 relay 下一個 chunk。
+        next_start = end_num + 1
+        if not stopped and next_start <= max_seq_number:
+            next_end = min(
+                next_start + chunk_size - 1,
+                max_seq_number,
+            )
+            next_job = {
+                "job_type": "prefix_chunk",
+                "prefix": prefix,
+                "start_num": next_start,
+                "end_num": next_end,
+                "max_seq_number": max_seq_number,
+                "chunk_size": chunk_size,
+                "max_not_found_limit": max_not_found,
+                "consecutive_not_found": consecutive_not_found,
+            }
+            producer.send(
+                KAFKA_JOB_TOPIC,
+                key=prefix.encode("utf-8"),
+                value=next_job,
+            ).get(timeout=30)
+            producer.flush()
+            print(
+                f"[{WORKER_NAME}] relay next chunk {prefix} "
+                f"{next_start}-{next_end} missing_out={consecutive_not_found}",
+                flush=True,
+            )
+
+        print(
+            f"[{WORKER_NAME}] finish chunk {prefix} {start_num}-{end_num}: "
+            f"produced={produced} missing_out={consecutive_not_found} "
+            f"stopped={stopped}",
+            flush=True,
+        )
+        return {
+            "produced": produced,
+            "stopped": stopped,
+            "last_seq_num": last_seq_num,
+            "consecutive_not_found": consecutive_not_found,
+        }
+
+    finally:
+        # main() 傳入的 session/proxy 由 main() 持有，成功後繼續使用，
+        # 不在每個 chunk 結束時 release/close，避免每個 job 都離開 group。
+        if owns_session:
+            if NETWORK_MODE == "proxy" and proxy_doc is not None:
+                try:
+                    release_proxy(
+                        proxy_collection, proxy_doc["_id"], WORKER_NAME
+                    )
+                except Exception:
+                    pass
+            if session is not None:
+                try:
+                    session.close()
+                except Exception:
+                    pass
 
 
 def _parse_cutoff(value: str) -> datetime:
@@ -518,50 +630,107 @@ def incremental_discovery_job(job, producer, session):
     return len(selected)
 
 
-def seq_list_job(job, producer, proxy_collection=None, initial_proxy=None, initial_session=None):
-    seqs = list(dict.fromkeys(str(x).upper() for x in job.get("seqs", []) if x))
-    cutoff = _parse_cutoff(job["cutoff_iso"]) if job.get("cutoff_iso") else None
+def seq_list_job(
+    job,
+    producer,
+    proxy_collection=None,
+    initial_proxy=None,
+    initial_session=None,
+):
+    seqs = list(
+        dict.fromkeys(
+            str(x).upper()
+            for x in job.get("seqs", [])
+            if x
+        )
+    )
     proxy_doc, session = initial_proxy, initial_session
+    owns_session = initial_session is None
+
     if NETWORK_MODE == "direct":
         session = session or build_direct_session()
     elif proxy_doc is None or session is None:
         proxy_doc, session = wait_for_proxy(proxy_collection)
+        owns_session = True
+
     produced = 0
     try:
         for seq in seqs:
+            if _stop_requested:
+                raise RuntimeError("shutdown requested")
+
             m = re.fullmatch(r"([A-I]\d{2})-(\d{3,4})", seq)
             if not m:
                 continue
+
             prefix, seq_num = m.group(1), int(m.group(2))
-            status, response, error, latency_ms = request_recipe_page(seq, session)
+            status, response, error, latency_ms = request_recipe_page(
+                seq, session
+            )
             if status == "blocked":
                 raise BlockedPageError(f"{seq}: {error}")
             if status == "retryable_error":
                 raise RetryableRequestError(f"{seq}: {error}")
             if status == "not_found" or response is None:
                 continue
-            data = parse_recipe_response(seq, seq_num, prefix, response)
+
+            data = parse_recipe_response(
+                seq, seq_num, prefix, response
+            )
             if not data:
                 continue
-            # Search-page date is the discovery filter. Recipe-page date is retained as source data;
-            # unknown/unparseable recipe dates are not discarded.
+
             if NETWORK_MODE == "proxy" and proxy_doc is not None:
-                mark_proxy_success(proxy_collection, proxy_doc["_id"], WORKER_NAME, latency_ms=latency_ms)
+                mark_proxy_success(
+                    proxy_collection,
+                    proxy_doc["_id"],
+                    WORKER_NAME,
+                    latency_ms=latency_ms,
+                )
                 data["proxy_exit_ip"] = proxy_doc.get("exit_ip")
                 data["proxy_country_code"] = proxy_doc.get("country_code")
             else:
-                data["proxy_exit_ip"] = data["proxy_country_code"] = None
-            producer.send(KAFKA_RESULT_TOPIC, key=seq.encode(), value=data).get(timeout=30)
+                data["proxy_exit_ip"] = None
+                data["proxy_country_code"] = None
+
+            producer.send(
+                KAFKA_RESULT_TOPIC,
+                key=seq.encode(),
+                value=data,
+            ).get(timeout=30)
             produced += 1
-            time.sleep(random.uniform(DIRECT_CRAWL_SLEEP_MIN, DIRECT_CRAWL_SLEEP_MAX) if NETWORK_MODE == "direct" else random.uniform(CRAWL_SLEEP_MIN, CRAWL_SLEEP_MAX))
+
+            delay = (
+                random.uniform(
+                    DIRECT_CRAWL_SLEEP_MIN,
+                    DIRECT_CRAWL_SLEEP_MAX,
+                )
+                if NETWORK_MODE == "direct"
+                else random.uniform(CRAWL_SLEEP_MIN, CRAWL_SLEEP_MAX)
+            )
+            time.sleep(delay)
+
         producer.flush()
-        print(f"[{WORKER_NAME}] seq_list finished seqs={len(seqs)} produced={produced}", flush=True)
+        print(
+            f"[{WORKER_NAME}] seq_list finished "
+            f"seqs={len(seqs)} produced={produced}",
+            flush=True,
+        )
         return produced
     finally:
-        if NETWORK_MODE == "proxy" and proxy_doc is not None:
-            try: release_proxy(proxy_collection, proxy_doc["_id"], WORKER_NAME)
-            except Exception: pass
-        if session is not None: session.close()
+        if owns_session:
+            if NETWORK_MODE == "proxy" and proxy_doc is not None:
+                try:
+                    release_proxy(
+                        proxy_collection, proxy_doc["_id"], WORKER_NAME
+                    )
+                except Exception:
+                    pass
+            if session is not None:
+                try:
+                    session.close()
+                except Exception:
+                    pass
 
 
 def create_consumer() -> KafkaConsumer:
@@ -578,29 +747,67 @@ def create_consumer() -> KafkaConsumer:
     )
 
 
-def process_message(consumer, message, producer, proxy_collection=None, proxy_doc=None, session=None):
+def process_message(
+    consumer,
+    message,
+    producer,
+    proxy_collection=None,
+    proxy_doc=None,
+    session=None,
+):
     job = message.value
-    job_type = job.get("job_type", "prefix_range")
+    job_type = job.get("job_type", "prefix_chunk")
+
     if job_type == "incremental_discovery":
-        # Discovery uses the same network session as the worker and only enqueues SEQ chunks.
-        # It never treats 403/CAPTCHA as a missing recipe.
-        active_session = session or (build_direct_session() if NETWORK_MODE == "direct" else None)
+        active_session = session or (
+            build_direct_session()
+            if NETWORK_MODE == "direct"
+            else None
+        )
+        owns_session = session is None
         if active_session is None:
-            raise RuntimeError("proxy discovery requires an active leased proxy session")
-        incremental_discovery_job(job, producer, active_session)
-        if NETWORK_MODE == "proxy" and proxy_doc is not None:
-            release_proxy(proxy_collection, proxy_doc["_id"], WORKER_NAME)
-        active_session.close()
+            raise RuntimeError(
+                "proxy discovery requires an active leased proxy session"
+            )
+        try:
+            incremental_discovery_job(
+                job, producer, active_session
+            )
+        finally:
+            if owns_session:
+                active_session.close()
+
     elif job_type == "seq_list":
-        seq_list_job(job, producer, proxy_collection, proxy_doc, session)
+        seq_list_job(
+            job,
+            producer,
+            proxy_collection,
+            proxy_doc,
+            session,
+        )
+
+    elif job_type in {"prefix_chunk", "prefix_range"}:
+        # prefix_range 保留相容性；新 Airflow 只會送第一個 prefix_chunk。
+        crawl_job(
+            job,
+            producer,
+            proxy_collection=proxy_collection,
+            initial_proxy=proxy_doc,
+            initial_session=session,
+        )
+
     else:
-        crawl_job(job, producer, proxy_collection=proxy_collection, initial_proxy=proxy_doc, initial_session=session)
+        raise ValueError(f"unsupported job_type={job_type!r}")
+
+    # relay/result producer 都已確認成功後，才 commit 目前 job offset。
     consumer.commit()
 
 
 def main() -> int:
     if NETWORK_MODE not in {"direct", "proxy"}:
-        raise ValueError("CRAWLER_NETWORK_MODE must be direct or proxy")
+        raise ValueError(
+            "CRAWLER_NETWORK_MODE must be direct or proxy"
+        )
 
     mongo_client = None
     proxy_collection = None
@@ -609,70 +816,67 @@ def main() -> int:
 
     producer = KafkaProducer(
         bootstrap_servers=KAFKA_BOOTSTRAP_SERVERS,
-        value_serializer=lambda v: json.dumps(v, ensure_ascii=False).encode("utf-8"),
+        value_serializer=lambda v: json.dumps(
+            v, ensure_ascii=False
+        ).encode("utf-8"),
         acks="all",
         retries=5,
     )
 
+    consumer = None
+    proxy_doc = None
+    session = None
+
     try:
-        if NETWORK_MODE == "direct":
-            print(
-                f"[{WORKER_NAME}] mode=direct; always available on {KAFKA_JOB_TOPIC}",
-                flush=True,
-            )
-            # A failed prefix job must never be skipped by a later successful commit.
-            # Recreate the consumer after any job failure so the uncommitted offset is
-            # re-delivered from the consumer group's last committed position.
-            while not _stop_requested:
+        while not _stop_requested:
+            # Proxy worker 沒有 verified proxy 時完全不加入 consumer group。
+            if NETWORK_MODE == "proxy" and (
+                proxy_doc is None or session is None
+            ):
+                proxy_doc, session = wait_for_proxy(
+                    proxy_collection
+                )
+                print(
+                    f"[{WORKER_NAME}] proxy ready; "
+                    "joining Kafka group",
+                    flush=True,
+                )
+            elif NETWORK_MODE == "direct" and session is None:
+                session = build_direct_session()
+                print(
+                    f"[{WORKER_NAME}] mode=direct; "
+                    f"always available on {KAFKA_JOB_TOPIC}",
+                    flush=True,
+                )
+
+            if consumer is None:
                 consumer = create_consumer()
-                recreate_consumer = False
+
+            try:
+                records = consumer.poll(
+                    timeout_ms=1000,
+                    max_records=1,
+                )
+            except Exception as exc:
+                print(
+                    f"[{WORKER_NAME}] Kafka poll failed: {exc}",
+                    file=sys.stderr,
+                    flush=True,
+                )
                 try:
-                    while not _stop_requested and not recreate_consumer:
-                        records = consumer.poll(timeout_ms=1000, max_records=1)
-                        for _, messages in records.items():
-                            for message in messages:
-                                try:
-                                    process_message(consumer, message, producer)
-                                except Exception as exc:
-                                    print(
-                                        f"[{WORKER_NAME}] job failed; offset not committed; "
-                                        f"recreating consumer so the failed job is re-delivered: {exc}",
-                                        file=sys.stderr,
-                                        flush=True,
-                                    )
-                                    recreate_consumer = True
-                                    time.sleep(5)
-                                    break
-                            if recreate_consumer:
-                                break
-                finally:
                     consumer.close()
-        else:
-            print(
-                f"[{WORKER_NAME}] mode=proxy; leases a verified TW proxy before joining Kafka group",
-                flush=True,
-            )
-            while not _stop_requested:
-                proxy_doc = None
-                session = None
+                except Exception:
+                    pass
                 consumer = None
-                try:
-                    proxy_doc, session = wait_for_proxy(proxy_collection)
-                    consumer = create_consumer()
+                time.sleep(5)
+                continue
 
-                    # 只有拿到可用 Proxy 後才加入 consumer group 並取一個大 prefix job。
-                    deadline = time.monotonic() + 15
-                    message = None
-                    while not _stop_requested and time.monotonic() < deadline and message is None:
-                        records = consumer.poll(timeout_ms=1000, max_records=1)
-                        for _, messages in records.items():
-                            if messages:
-                                message = messages[0]
-                                break
+            if not records:
+                continue
 
-                    if message is None:
-                        continue
-
+            job_failed = False
+            for _, messages in records.items():
+                for message in messages:
                     try:
                         process_message(
                             consumer,
@@ -682,30 +886,92 @@ def main() -> int:
                             proxy_doc=proxy_doc,
                             session=session,
                         )
-                        # crawl_job 已關閉/釋放 initial proxy，避免 finally 重複處理。
-                        proxy_doc = None
-                        session = None
                     except Exception as exc:
+                        job_failed = True
                         print(
-                            f"[{WORKER_NAME}] job failed; offset not committed: {exc}",
+                            f"[{WORKER_NAME}] job failed; "
+                            "offset not committed; "
+                            f"failed chunk will be re-delivered: {exc}",
                             file=sys.stderr,
                             flush=True,
                         )
-                        time.sleep(5)
-                finally:
-                    if consumer is not None:
-                        consumer.close()
-                    if proxy_doc is not None:
-                        try:
-                            release_proxy(proxy_collection, proxy_doc["_id"], WORKER_NAME)
-                        except Exception:
-                            pass
-                    if session is not None:
-                        session.close()
+                        break
+                if job_failed:
+                    break
+
+            if not job_failed:
+                # 成功後保留同一 consumer + session/proxy，
+                # 直接回 poll，不因每個 chunk LeaveGroup。
+                continue
+
+            # 失敗 job 不 commit。關閉 consumer，讓 Kafka 從最後
+            # committed offset 重送「該 chunk」，而不是整個 prefix。
+            if consumer is not None:
+                try:
+                    consumer.close()
+                except Exception:
+                    pass
+                consumer = None
+
+            # Direct 只重建 HTTP session；Proxy 則釋放目前 proxy，
+            # 下一輪先取得新的 verified proxy 再加入 group。
+            if session is not None:
+                try:
+                    session.close()
+                except Exception:
+                    pass
+                session = None
+
+            if NETWORK_MODE == "proxy" and proxy_doc is not None:
+                try:
+                    release_proxy(
+                        proxy_collection,
+                        proxy_doc["_id"],
+                        WORKER_NAME,
+                    )
+                except Exception:
+                    pass
+                proxy_doc = None
+
+            time.sleep(5)
+
     finally:
-        producer.close()
+        if consumer is not None:
+            try:
+                consumer.close()
+            except Exception:
+                pass
+
+        if NETWORK_MODE == "proxy" and proxy_doc is not None:
+            try:
+                release_proxy(
+                    proxy_collection,
+                    proxy_doc["_id"],
+                    WORKER_NAME,
+                )
+            except Exception:
+                pass
+
+        if session is not None:
+            try:
+                session.close()
+            except Exception:
+                pass
+
+        try:
+            producer.flush()
+        except Exception:
+            pass
+        try:
+            producer.close()
+        except Exception:
+            pass
+
         if mongo_client is not None:
-            mongo_client.close()
+            try:
+                mongo_client.close()
+            except Exception:
+                pass
 
     return 0
 

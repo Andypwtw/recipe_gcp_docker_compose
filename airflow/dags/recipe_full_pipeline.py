@@ -19,6 +19,7 @@ CRAWLER_GROUP = "ytower-crawler-group"
 MONGO_WRITER_GROUP = "ytower-mongo-writer"
 MAX_SEQ_NUMBER = int(os.getenv("MAX_SEQ_NUMBER", "5000"))
 MAX_NOT_FOUND_LIMIT = int(os.getenv("MAX_NOT_FOUND_LIMIT", "50"))
+FULL_CRAWL_CHUNK_SIZE = int(os.getenv("FULL_CRAWL_CHUNK_SIZE", "250"))
 UPDATE_INTERVAL_DAYS = int(os.getenv("YTOWER_UPDATE_INTERVAL_DAYS", "7"))
 CHECKPOINT_OVERLAP_DAYS = int(os.getenv("YTOWER_CHECKPOINT_OVERLAP_DAYS", "1"))
 SEARCH_MAX_PAGES = int(os.getenv("YTOWER_SEARCH_MAX_PAGES", "100"))
@@ -123,10 +124,16 @@ def dispatch_crawler_jobs():
     try:
         if mode == "full":
             for prefix in generate_prefixes():
+                first_end = min(FULL_CRAWL_CHUNK_SIZE, MAX_SEQ_NUMBER)
                 job = {
-                    "job_type": "prefix_range", "prefix": prefix,
-                    "start_num": 1, "end_num": MAX_SEQ_NUMBER,
+                    "job_type": "prefix_chunk",
+                    "prefix": prefix,
+                    "start_num": 1,
+                    "end_num": first_end,
+                    "max_seq_number": MAX_SEQ_NUMBER,
+                    "chunk_size": FULL_CRAWL_CHUNK_SIZE,
                     "max_not_found_limit": MAX_NOT_FOUND_LIMIT,
+                    "consecutive_not_found": 0,
                 }
                 producer.send(JOB_TOPIC, key=prefix.encode(), value=job).get(timeout=30)
                 dispatched += 1
