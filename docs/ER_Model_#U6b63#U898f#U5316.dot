@@ -1,0 +1,42 @@
+
+digraph ER {
+  graph [rankdir=LR, bgcolor="white", pad="0.3", nodesep="0.45", ranksep="0.7"];
+  node [shape=record, fontname="Noto Sans CJK TC", fontsize=10];
+  edge [fontname="Noto Sans CJK TC", fontsize=9];
+
+  recipes [label="{recipes|PK id|UK seq|name|steps}"];
+  keywords [label="{keywords|PK id|UK keyword_name}"];
+  recipe_keywords [label="{recipe_keywords|PK/FK recipe_id|PK/FK keyword_id}"];
+  ingredients [label="{ingredients|PK id|UK canonical_name|category}"];
+  ingredient_aliases [label="{ingredient_aliases|PK id|FK ingredient_id|UK alias_name}"];
+  units [label="{units|PK id|UK canonical_unit|unit_type}"];
+  recipe_ingredients [label="{recipe_ingredients|PK id|FK recipe_id|FK ingredient_id|FK unit_id|quantity_value|weight_g}"];
+  ingredient_unit_weights [label="{ingredient_unit_weights|PK id|FK ingredient_id|FK unit_id|grams_per_unit}"];
+  ingredient_densities [label="{ingredient_densities|PK id|FK ingredient_id|density_g_ml}"];
+
+  nutrition_source [label="{nutrition_source|PK id|UK food_code|food_name|food_category|raw_data}"];
+  nutrient_definitions [label="{nutrient_definitions|PK id|UK source_column_name|nutrient_name|unit|nutrient_group}"];
+  nutrition_values [label="{nutrition_values|PK/FK nutrition_source_id|PK/FK nutrient_id|value_numeric|value_text}"];
+  ingredient_nutrition_map [label="{ingredient_nutrition_map|PK id|UK/FK ingredient_id|FK nutrition_source_id|match_score|status}"];
+  manual_review [label="{manual_review|PK id|FK ingredient_id|FK candidate_nutrition_id|score|status}"];
+  recipe_nutrition_summary [label="{recipe_nutrition_summary|PK id|UK/FK recipe_id|energy_kcal|coverage_percent}"];
+  etl_runs [label="{etl_runs|PK id|run_type|status|started_at|finished_at}"];
+
+  recipes -> recipe_keywords [label="1:N"];
+  keywords -> recipe_keywords [label="1:N"];
+  recipes -> recipe_ingredients [label="1:N"];
+  ingredients -> recipe_ingredients [label="1:N"];
+  units -> recipe_ingredients [label="1:N"];
+  ingredients -> ingredient_aliases [label="1:N"];
+  ingredients -> ingredient_unit_weights [label="1:N"];
+  units -> ingredient_unit_weights [label="1:N"];
+  ingredients -> ingredient_densities [label="1:1"];
+
+  nutrition_source -> nutrition_values [label="1:N"];
+  nutrient_definitions -> nutrition_values [label="1:N"];
+  ingredients -> ingredient_nutrition_map [label="1:1"];
+  nutrition_source -> ingredient_nutrition_map [label="1:N"];
+  ingredients -> manual_review [label="1:N"];
+  nutrition_source -> manual_review [label="1:N"];
+  recipes -> recipe_nutrition_summary [label="1:1"];
+}
