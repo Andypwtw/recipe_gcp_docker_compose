@@ -1,0 +1,7 @@
+kafka:
+  brokers:
+    - kafka:9092
+  clientId: recipe-v11-redpanda-console
+
+server:
+  listenPort: 8080

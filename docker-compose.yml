@@ -431,6 +431,21 @@ services:
     command: ["python", "/app/workers/mongo_writer.py"]
     networks: [recipe-net]
 
+  redpanda-console:
+    image: docker.redpanda.com/redpandadata/console:latest
+    container_name: recipe-v11-redpanda-console
+    restart: unless-stopped
+    depends_on:
+      kafka-init:
+        condition: service_completed_successfully
+    environment:
+      CONFIG_FILEPATH: /etc/redpanda/console-config.yml
+    ports:
+      - "${REDPANDA_BIND_HOST:-0.0.0.0}:${REDPANDA_CONSOLE_PORT:-8081}:8080"
+    volumes:
+      - ./redpanda/console-config.yml:/etc/redpanda/console-config.yml:ro
+    networks: [recipe-net]
+
   python:
     build:
       context: ./python
