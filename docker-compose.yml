@@ -37,7 +37,10 @@ x-airflow-common: &airflow-common
 
     MAX_SEQ_NUMBER: ${MAX_SEQ_NUMBER:-5000}
     MAX_NOT_FOUND_LIMIT: ${MAX_NOT_FOUND_LIMIT:-50}
-    YTOWER_DAG_SCHEDULE: ${YTOWER_DAG_SCHEDULE:-}
+    YTOWER_DAG_SCHEDULE: ${YTOWER_DAG_SCHEDULE:-@daily}
+    YTOWER_UPDATE_INTERVAL_DAYS: ${YTOWER_UPDATE_INTERVAL_DAYS:-7}
+    YTOWER_CHECKPOINT_OVERLAP_DAYS: ${YTOWER_CHECKPOINT_OVERLAP_DAYS:-1}
+    YTOWER_SEARCH_MAX_PAGES: ${YTOWER_SEARCH_MAX_PAGES:-100}
   volumes:
     - ./airflow/dags:/opt/airflow/dags:ro
     - airflow_logs:/opt/airflow/logs
@@ -84,6 +87,10 @@ x-crawler-common: &crawler-common
     NOT_FOUND_SLEEP_MAX: ${NOT_FOUND_SLEEP_MAX:-1.2}
     COOLDOWN_SLEEP_MIN: ${COOLDOWN_SLEEP_MIN:-10}
     COOLDOWN_SLEEP_MAX: ${COOLDOWN_SLEEP_MAX:-20}
+    YTOWER_SEARCH_URL: ${YTOWER_SEARCH_URL:-https://www.ytower.com.tw/recipe/recipe-search.asp}
+    YTOWER_SEARCH_PAGE_PARAM: ${YTOWER_SEARCH_PAGE_PARAM:-page}
+    YTOWER_SEARCH_CHUNK_SIZE: ${YTOWER_SEARCH_CHUNK_SIZE:-50}
+    YTOWER_SEARCH_OLD_PAGE_STOP: ${YTOWER_SEARCH_OLD_PAGE_STOP:-2}
   command: ["python", "/app/workers/ytower_crawler_worker.py"]
   networks: [recipe-net]
 
@@ -343,6 +350,8 @@ services:
       PROXY_STALE_HOURS: ${PROXY_STALE_HOURS:-12}
       PROXY_MAX_FAILURES: ${PROXY_MAX_FAILURES:-3}
       PROXY_LEASE_SECONDS: ${PROXY_LEASE_SECONDS:-1800}
+      LUMIPROXY_PROXY_URLS: ${LUMIPROXY_PROXY_URLS:-}
+      CROXY_PROXY_URLS: ${CROXY_PROXY_URLS:-}
     command: ["python", "/app/workers/proxy_manager.py"]
     networks: [recipe-net]
 
