@@ -126,6 +126,21 @@ TEXT_SOURCES = [
         ),
         "scheme": "socks5h",
     },
+    {
+        "name": "proxifly_tw",
+        "url": "https://cdn.jsdelivr.net/gh/proxifly/free-proxy-list@main/proxies/countries/TW/data.txt",
+        "scheme": None,
+    },
+    {
+        "name": "hproxy_tw",
+        "url": "https://raw.githubusercontent.com/hproxy-com/free-proxy-list/main/by-country/TW.txt",
+        "scheme": "http",
+    },
+    {
+        "name": "proxmint_tw_api",
+        "url": "https://proxmint.com/api/free-proxies?country=tw&format=txt",
+        "scheme": None,
+    },
 ]
 
 
@@ -529,6 +544,39 @@ def fetch_json_source(source):
     return results
 
 
+
+def configured_provider_candidates():
+    """Optional authenticated provider endpoints supplied by the operator.
+
+    LumiProxy/Croxy credentials are never hard-coded. Put extracted proxy URLs in .env
+    as comma-separated values. These endpoints still pass the same HTTPS/GeoIP validation.
+    """
+    merged = {}
+    for env_name, provider in (("LUMIPROXY_PROXY_URLS", "lumiproxy"), ("CROXY_PROXY_URLS", "croxy")):
+        raw = os.getenv(env_name, "").strip()
+        if not raw:
+            continue
+        for value in re.split(r"[\\s,]+", raw):
+            if not value:
+                continue
+            try:
+                parsed = urlparse(value)
+                if parsed.scheme not in {"http", "https", "socks4", "socks5", "socks5h"} or not parsed.hostname or not parsed.port:
+                    continue
+                scheme = "socks5h" if parsed.scheme == "socks5" else parsed.scheme
+                auth = ""
+                if parsed.username is not None:
+                    from urllib.parse import quote
+                    auth = quote(parsed.username, safe="")
+                    if parsed.password is not None:
+                        auth += ":" + quote(parsed.password, safe="")
+                    auth += "@"
+                url = f"{scheme}://{auth}{parsed.hostname}:{parsed.port}"
+                merged.setdefault(url, set()).add(provider)
+            except Exception:
+                continue
+    return merged
+
 # ============================================================
 # Discovery
 # ============================================================
@@ -550,15 +598,11 @@ def discover_candidates(collection):
             )
 
     for source in JSON_SOURCES:
-        for proxy_url in fetch_json_source(
-            source
-        ):
-            merged.setdefault(
-                proxy_url,
-                set(),
-            ).add(
-                source["name"]
-            )
+        for proxy_url in fetch_json_source(source):
+            merged.setdefault(proxy_url, set()).add(source["name"])
+
+    for proxy_url, providers in configured_provider_candidates().items():
+        merged.setdefault(proxy_url, set()).update(providers)
 
     if not merged:
         print(
