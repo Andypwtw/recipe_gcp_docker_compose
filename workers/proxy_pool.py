@@ -13,6 +13,7 @@ MONGO_APP_PASSWORD = os.environ["MONGO_APP_PASSWORD"]
 PROXY_COUNTRY_CODE = os.getenv("PROXY_COUNTRY_CODE", "TW").upper()
 PROXY_MAX_FAILURES = int(os.getenv("PROXY_MAX_FAILURES", "3"))
 PROXY_LEASE_SECONDS = int(os.getenv("PROXY_LEASE_SECONDS", "1800"))
+PROXY_FAILURE_COOLDOWN_SECONDS = int(os.getenv("PROXY_FAILURE_COOLDOWN_SECONDS", "300"))
 
 
 def utcnow():
@@ -33,8 +34,9 @@ def get_proxy_collection():
     return client, collection
 
 
-def lease_proxy(collection, worker_name: str):
+def lease_proxy(collection, worker_name: str, exclude_proxy_ids=None):
     now = utcnow()
+    exclude_proxy_ids = list(exclude_proxy_ids or [])
     lease_until = now + timedelta(seconds=PROXY_LEASE_SECONDS)
     query = {
         "is_alive": True,
@@ -58,6 +60,9 @@ def lease_proxy(collection, worker_name: str):
             },
         ],
     }
+    if exclude_proxy_ids:
+        query["_id"] = {"$nin": exclude_proxy_ids}
+
     update = {
         "$set": {
             "leased_by": worker_name,
@@ -128,15 +133,18 @@ def mark_proxy_failure(collection, proxy_id, worker_name: str, error: str):
         },
         return_document=ReturnDocument.AFTER,
     )
-    if doc and int(doc.get("consecutive_failures", 0)) >= PROXY_MAX_FAILURES:
+    if doc:
+        consecutive_failures = int(doc.get("consecutive_failures", 0))
+        set_values = {
+            "quarantine_until": now + timedelta(seconds=PROXY_FAILURE_COOLDOWN_SECONDS),
+        }
+        if consecutive_failures >= PROXY_MAX_FAILURES:
+            set_values["is_alive"] = False
+            set_values["quarantine_until"] = now + timedelta(minutes=30)
+
         collection.update_one(
             {"_id": proxy_id},
-            {
-                "$set": {
-                    "is_alive": False,
-                    "quarantine_until": now + timedelta(minutes=30),
-                }
-            },
+            {"$set": set_values},
         )
 
 
