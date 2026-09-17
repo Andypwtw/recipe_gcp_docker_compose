@@ -34,7 +34,7 @@ REQUEST_RETRIES = int(os.getenv("REQUEST_RETRIES", "3"))
 MAX_PROXY_SWITCHES_PER_SEQ = int(os.getenv("MAX_PROXY_SWITCHES_PER_SEQ", "5"))
 PROXY_WAIT_SECONDS = int(os.getenv("PROXY_WAIT_SECONDS", "15"))
 MAX_NOT_FOUND_LIMIT = int(os.getenv("MAX_NOT_FOUND_LIMIT", "50"))
-FULL_CRAWL_CHUNK_SIZE = int(os.getenv("FULL_CRAWL_CHUNK_SIZE", "250"))
+FULL_CRAWL_CHUNK_SIZE = int(os.getenv("FULL_CRAWL_CHUNK_SIZE", "50"))
 COOLDOWN_SUCCESS_COUNT = int(os.getenv("COOLDOWN_SUCCESS_COUNT", "50"))
 CRAWL_SLEEP_MIN = float(os.getenv("CRAWL_SLEEP_MIN", "2.5"))
 CRAWL_SLEEP_MAX = float(os.getenv("CRAWL_SLEEP_MAX", "5.0"))
@@ -75,6 +75,11 @@ class BlockedPageError(RuntimeError):
 
 
 class RetryableRequestError(RuntimeError):
+    pass
+
+
+class ServerResponseError(RuntimeError):
+    """伺服器 5xx 重試耗盡；記錄後跳過該 numeric SEQ，不算 missing。"""
     pass
 
 
@@ -156,6 +161,7 @@ def request_recipe_page(
     """
     url = f"https://www.ytower.com.tw/recipe/iframe-recipe.asp?seq={seq}"
     last_error = None
+    last_http_status = None
 
     for attempt in range(1, REQUEST_RETRIES + 1):
         started = time.monotonic()
@@ -170,6 +176,7 @@ def request_recipe_page(
                 return "blocked", response, f"challenge/http {response.status_code}", latency_ms
 
             if 500 <= response.status_code < 600:
+                last_http_status = response.status_code
                 raise req_exc.HTTPError(f"HTTP {response.status_code}", response=response)
 
             if response.status_code != 200:
@@ -193,6 +200,8 @@ def request_recipe_page(
                 )
                 time.sleep(sleep_seconds)
 
+    if last_http_status is not None and 500 <= last_http_status < 600:
+        return "server_error", None, last_error or f"HTTP {last_http_status}", None
     return "retryable_error", None, last_error or "request failed", None
 
 
@@ -261,6 +270,8 @@ def fetch_numeric_seq(
 
         if status == "blocked":
             raise BlockedPageError(f"{seq}: {error or 'challenge detected'}")
+        if status == "server_error":
+            raise ServerResponseError(f"{seq}: {error or 'server 5xx'}")
         if status == "retryable_error":
             raise RetryableRequestError(f"{seq}: {error or 'request failed'}")
         if status == "not_found":
@@ -292,7 +303,7 @@ def crawl_job(
     處理一個 prefix chunk。
 
     FULL crawl 採 sequential chunk relay：
-      1-250 成功後才 enqueue 251-500。
+      1-50 成功後才 enqueue 51-100。
     因此不會預先把後續 chunk 全部排入 Kafka。
 
     consecutive_not_found 會由 job 帶到下一個 chunk，保留跨 chunk 的
@@ -302,8 +313,11 @@ def crawl_job(
     start_num = max(1, int(job.get("start_num", 1)))
     requested_end = int(job.get("end_num", start_num + FULL_CRAWL_CHUNK_SIZE - 1))
     max_seq_number = int(job.get("max_seq_number", requested_end))
-    chunk_size = max(1, int(job.get("chunk_size", FULL_CRAWL_CHUNK_SIZE)))
-    end_num = min(requested_end, max_seq_number)
+    # 強制以目前設定的 chunk size 為準。
+    # Kafka 裡即使還有舊的 250-range job，也只處理前 50 筆，
+    # 成功後再 relay 下一個 50，避免為了改設定而清空 Kafka。
+    chunk_size = max(1, FULL_CRAWL_CHUNK_SIZE)
+    end_num = min(start_num + chunk_size - 1, requested_end, max_seq_number)
     max_not_found = int(job.get("max_not_found_limit", MAX_NOT_FOUND_LIMIT))
     consecutive_not_found = int(job.get("consecutive_not_found", 0))
 
@@ -399,6 +413,18 @@ def crawl_job(
                     owns_session = True
                     continue
 
+                except ServerResponseError as exc:
+                    # 單一 numeric SEQ 在 REQUEST_RETRIES 次後仍為 HTTP 5xx：
+                    # 記錄後跳過，不算 not_found，也不把網站 5xx 當成 proxy failure。
+                    print(
+                        f"[{WORKER_NAME}] SKIP server 5xx at {prefix}-{seq_num}: {exc}; "
+                        "not counted as missing; continue next numeric SEQ",
+                        file=sys.stderr,
+                        flush=True,
+                    )
+                    numeric_status, data = "server_error_skipped", None
+                    break
+
                 except RetryableRequestError as exc:
                     if NETWORK_MODE == "direct":
                         raise RuntimeError(
@@ -431,6 +457,10 @@ def crawl_job(
                     proxy_doc, session = wait_for_proxy(proxy_collection)
                     owns_session = True
                     continue
+
+            if numeric_status == "server_error_skipped":
+                # 5xx 既不是 found 也不是 missing；保留目前 consecutive_not_found。
+                continue
 
             if numeric_status == "numeric_not_found":
                 consecutive_not_found += 1
