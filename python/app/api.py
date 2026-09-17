@@ -160,8 +160,11 @@ def list_recipes():
                 r.raw_keywords,
                 r.source_url,
                 CAST(TRUNCATE(rns.energy_kcal, 0) AS SIGNED) AS energy_kcal,
+                ROUND(rns.estimated_price, 2) AS estimated_price,
                 ROUND(rns.coverage_percent, 2) AS calorie_coverage_percent,
-                rns.calorie_status
+                ROUND(rns.price_coverage_percent, 2) AS price_coverage_percent,
+                rns.calorie_status,
+                rns.price_status
             FROM recipes r
             LEFT JOIN recipe_nutrition_summary rns
               ON rns.recipe_id = r.id
@@ -197,8 +200,11 @@ def random_recipes():
                 r.name,
                 r.raw_keywords,
                 CAST(TRUNCATE(rns.energy_kcal, 0) AS SIGNED) AS energy_kcal,
+                ROUND(rns.estimated_price, 2) AS estimated_price,
                 ROUND(rns.coverage_percent, 2) AS calorie_coverage_percent,
-                rns.calorie_status
+                ROUND(rns.price_coverage_percent, 2) AS price_coverage_percent,
+                rns.calorie_status,
+                rns.price_status
             FROM recipes r
             LEFT JOIN recipe_nutrition_summary rns
               ON rns.recipe_id = r.id
@@ -270,8 +276,11 @@ def search_recipes():
             r.source_url,
             r.raw_keywords,
             CAST(TRUNCATE(rns.energy_kcal, 0) AS SIGNED) AS energy_kcal,
+            ROUND(rns.estimated_price, 2) AS estimated_price,
             ROUND(rns.coverage_percent, 2) AS calorie_coverage_percent,
-            rns.calorie_status
+            ROUND(rns.price_coverage_percent, 2) AS price_coverage_percent,
+            rns.calorie_status,
+            rns.price_status
         FROM recipes r
         LEFT JOIN recipe_ingredients ri
           ON ri.recipe_id = r.id
@@ -311,8 +320,11 @@ def get_recipe(seq: str):
             SELECT
                 r.*,
                 CAST(TRUNCATE(rns.energy_kcal, 0) AS SIGNED) AS energy_kcal,
+                ROUND(rns.estimated_price, 2) AS estimated_price,
                 ROUND(rns.coverage_percent, 2) AS calorie_coverage_percent,
-                rns.calorie_status
+                ROUND(rns.price_coverage_percent, 2) AS price_coverage_percent,
+                rns.calorie_status,
+                rns.price_status
             FROM recipes r
             LEFT JOIN recipe_nutrition_summary rns
               ON rns.recipe_id = r.id

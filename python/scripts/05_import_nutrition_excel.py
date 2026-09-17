@@ -10,6 +10,7 @@ from app.db import get_connection
 
 
 XLSX = Path("/workspace/data/reference/food_nutrition_2025.xlsx")
+PRICE_SOURCE_COLUMN = "每100g的價格"
 
 META_COLUMNS = {
     "整合編號",
@@ -18,6 +19,7 @@ META_COLUMNS = {
     "內容物描述",
     "俗名",
     "廢棄率(%)",
+    PRICE_SOURCE_COLUMN,
 }
 
 
@@ -101,6 +103,57 @@ def to_numeric_or_text(value):
         return None, text
 
 
+
+def parse_price_per_100g(value):
+    """將 Excel 的每100g價格轉成 Decimal 可接受的數值。
+
+    空白或無效值回傳 None。0 允許保留；負值視為無效。
+    """
+    value = clean_value(value)
+    if value is None or value == "":
+        return None
+
+    if isinstance(value, bool):
+        return None
+
+    try:
+        if isinstance(value, (int, float)):
+            number = float(value)
+        else:
+            text = str(value).strip()
+            if not text:
+                return None
+            for token in (",", "NT$", "NT＄", "$", "元"):
+                text = text.replace(token, "")
+            number = float(text.strip())
+    except (TypeError, ValueError):
+        return None
+
+    if number < 0:
+        return None
+    return number
+
+
+def ensure_price_column(cur):
+    cur.execute(
+        """
+        SELECT COUNT(*) AS n
+        FROM information_schema.columns
+        WHERE table_schema = DATABASE()
+          AND table_name = 'nutrition_source'
+          AND column_name = 'price_per_100g'
+        """
+    )
+    if cur.fetchone()["n"] == 0:
+        cur.execute(
+            """
+            ALTER TABLE nutrition_source
+            ADD COLUMN price_per_100g DECIMAL(18,4) NULL
+            AFTER waste_percent
+            """
+        )
+
+
 def main():
     if not XLSX.exists():
         raise FileNotFoundError(
@@ -125,6 +178,8 @@ def main():
     ]
 
     with get_connection() as conn, conn.cursor() as cur:
+        ensure_price_column(cur)
+
         # Nutrition source 重建時，先清除所有依賴它的 Mapping。
         # 06~08 會在同一次 Pipeline 中重新建立。
         cur.execute("DELETE FROM ingredient_nutrition_map")
@@ -197,9 +252,10 @@ def main():
                     content_description,
                     common_names,
                     waste_percent,
+                    price_per_100g,
                     raw_data
                 )
-                VALUES (%s, %s, %s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                 """,
                 (
                     str(food_code),
@@ -208,6 +264,7 @@ def main():
                     data.get("內容物描述"),
                     data.get("俗名"),
                     data.get("廢棄率(%)"),
+                    parse_price_per_100g(data.get(PRICE_SOURCE_COLUMN)),
                     json.dumps(
                         data,
                         ensure_ascii=False,
@@ -279,7 +336,7 @@ def main():
     )
     print(
         "Current application calculation mode: "
-        "ENERGY_KCAL_ONLY"
+        "ENERGY_KCAL_AND_PRICE"
     )
 
 

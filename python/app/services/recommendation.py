@@ -130,8 +130,11 @@ def recommend_recipes(
             r.name,
             {matched_expr} AS matched_ingredients,
             CAST(TRUNCATE(rns.energy_kcal, 0) AS SIGNED) AS energy_kcal,
+            ROUND(rns.estimated_price, 2) AS estimated_price,
             ROUND(rns.coverage_percent, 2) AS calorie_coverage_percent,
-            rns.calorie_status
+            ROUND(rns.price_coverage_percent, 2) AS price_coverage_percent,
+            rns.calorie_status,
+            rns.price_status
         FROM recipes r
         {' '.join(joins)}
         WHERE {where_sql}
@@ -140,8 +143,11 @@ def recommend_recipes(
             r.seq,
             r.name,
             rns.energy_kcal,
+            rns.estimated_price,
             rns.coverage_percent,
-            rns.calorie_status
+            rns.price_coverage_percent,
+            rns.calorie_status,
+            rns.price_status
         ORDER BY {order_sql}
         LIMIT %s
     """
@@ -202,8 +208,11 @@ def recommend_recipes_page(
             r.name,
             {matched_expr} AS matched_ingredients,
             CAST(TRUNCATE(rns.energy_kcal, 0) AS SIGNED) AS energy_kcal,
+            ROUND(rns.estimated_price, 2) AS estimated_price,
             ROUND(rns.coverage_percent, 2) AS calorie_coverage_percent,
-            rns.calorie_status
+            ROUND(rns.price_coverage_percent, 2) AS price_coverage_percent,
+            rns.calorie_status,
+            rns.price_status
         FROM recipes r
         {' '.join(joins)}
         WHERE {where_sql}
@@ -212,8 +221,11 @@ def recommend_recipes_page(
             r.seq,
             r.name,
             rns.energy_kcal,
+            rns.estimated_price,
             rns.coverage_percent,
-            rns.calorie_status
+            rns.price_coverage_percent,
+            rns.calorie_status,
+            rns.price_status
         ORDER BY matched_ingredients DESC, r.seq
         LIMIT %s OFFSET %s
     """

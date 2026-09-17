@@ -188,6 +188,7 @@ CREATE TABLE IF NOT EXISTS nutrition_source (
   content_description TEXT,
   common_names TEXT,
   waste_percent DECIMAL(18,6),
+  price_per_100g DECIMAL(18,4),
   raw_data JSON,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   UNIQUE KEY uq_nutrition_food_code (food_code),
@@ -268,8 +269,11 @@ CREATE TABLE IF NOT EXISTS recipe_nutrition_summary (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
   recipe_id BIGINT NOT NULL UNIQUE,
   energy_kcal DECIMAL(18,6),
+  estimated_price DECIMAL(18,2),
   coverage_percent DECIMAL(8,2),
+  price_coverage_percent DECIMAL(8,2),
   calorie_status VARCHAR(30) NOT NULL DEFAULT 'INSUFFICIENT',
+  price_status VARCHAR(30) NOT NULL DEFAULT 'INSUFFICIENT',
   calculated_at TIMESTAMP NULL,
   CONSTRAINT fk_rns_recipe
     FOREIGN KEY (recipe_id) REFERENCES recipes(id)
