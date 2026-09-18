@@ -16,6 +16,22 @@ from app.services.recommendation import (
 app = Flask(__name__)
 
 
+def _payload_string_list(value) -> list[str]:
+    """Normalize optional JSON string/list fields into a clean list of strings."""
+    if value is None:
+        return []
+    if isinstance(value, str):
+        value = [value]
+    if not isinstance(value, (list, tuple, set)):
+        return []
+    return [str(item).strip() for item in value if str(item).strip()]
+
+
+def _payload_text(payload: dict) -> str:
+    """Accept both current `text` and legacy Hermes `message` payload keys."""
+    return str(payload.get("text") or payload.get("message") or "").strip()
+
+
 def _parse_positive_int(name: str, default: int, maximum: int | None = None) -> int:
     raw = request.args.get(name)
     if raw is None:
@@ -367,9 +383,9 @@ def resolve_categories():
 @app.post("/api/v1/recommend")
 def recommend_for_web():
     payload = request.get_json(silent=True) or {}
-    text = str(payload.get("text") or "").strip()
-    ingredients = payload.get("ingredients", [])
-    categories = payload.get("categories", [])
+    text = _payload_text(payload)
+    ingredients = _payload_string_list(payload.get("ingredients"))
+    categories = _payload_string_list(payload.get("categories"))
 
     try:
         page = max(int(payload.get("page", 1)), 1)
@@ -413,9 +429,9 @@ def recommend_for_hermes():
             return jsonify({"error": "unauthorized"}), 401
 
     payload = request.get_json(silent=True) or {}
-    text = str(payload.get("text") or "").strip()
-    ingredients = payload.get("ingredients", [])
-    categories = payload.get("categories", [])
+    text = _payload_text(payload)
+    ingredients = _payload_string_list(payload.get("ingredients"))
+    categories = _payload_string_list(payload.get("categories"))
 
     try:
         limit = int(payload.get("limit", 10))
@@ -432,3 +448,10 @@ def recommend_for_hermes():
             )
         }
     )
+
+if __name__ == "__main__":
+    # Docker/GCP test entrypoint. Binding to 0.0.0.0 exposes the service
+    # through Docker's published port; default API port is 5001.
+    host = os.getenv("FLASK_HOST", "0.0.0.0")
+    port = int(os.getenv("FLASK_PORT", "5001"))
+    app.run(host=host, port=port)

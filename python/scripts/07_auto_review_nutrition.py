@@ -7,6 +7,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from app.db import get_connection
+from app.services.normalization import nutrition_match_base
 
 AUDIT_OUT = Path("/workspace/data/processed/auto_review_result.json")
 
@@ -65,23 +66,9 @@ SOFT_SUFFIXES = [
 
 
 def normalize_name(value: str) -> str:
-    s = unicodedata.normalize("NFKC", str(value or "")).strip()
-    s = s.replace("蕃", "番")
-    s = re.sub(r"20\d{2}年取樣", "", s)
-    s = re.sub(r"平均值", "", s)
-    s = re.sub(r"^[A-Za-z\.\s]+(?=[\u4e00-\u9fff])", "", s)
-    s = re.sub(r"(?<=[\u4e00-\u9fff])[A-Za-z\d]+$", "", s)
-    s = re.sub(r"[()（）\[\]【】,，、\s_\-\.]+", "", s)
-
-    changed = True
-    while changed:
-        changed = False
-        for suffix in SOFT_SUFFIXES:
-            if len(s) > len(suffix) + 1 and s.endswith(suffix):
-                s = s[:-len(suffix)]
-                changed = True
-                break
-    return s
+    # Use the same normalization as 06_match_ingredient_nutrition.py so
+    # parenthetical sample notes / source group prefixes cannot block review.
+    return nutrition_match_base(value)
 
 
 def synonym_match(a: str, b: str) -> bool:

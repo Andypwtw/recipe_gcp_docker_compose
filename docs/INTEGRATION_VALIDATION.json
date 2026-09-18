@@ -1,0 +1,212 @@
+{
+  "project": "recipe_gcp_docker_compose_NORMALIZATION_COVERAGE_INTEGRATED_FULL",
+  "basis": "uploaded recipe_gcp_docker_compose.zip + latest normalization/coverage fix",
+  "validation_type": "static + offline corpus tests; Docker/MySQL runtime unavailable in this environment",
+  "checks": [
+    {
+      "check": "python_syntax_all",
+      "status": "PASS",
+      "detail": "42 files; errors=[]"
+    },
+    {
+      "check": "docker_compose_yaml_parse",
+      "status": "PASS",
+      "detail": "18 services"
+    },
+    {
+      "check": "production_service_set",
+      "status": "PASS",
+      "detail": "services=['airflow-init', 'airflow-scheduler', 'airflow-webserver', 'crawler-direct', 'crawler-worker-1', 'crawler-worker-2', 'crawler-worker-3', 'crawler-worker-4', 'init-permissions', 'kafka', 'kafka-init', 'mongo-writer', 'mongodb', 'mysql', 'postgres', 'proxy-manager', 'python', 'redpanda-console']"
+    },
+    {
+      "check": "compose_dependency_refs",
+      "status": "PASS",
+      "detail": "bad=[]"
+    },
+    {
+      "check": "compose_referenced_paths",
+      "status": "PASS",
+      "detail": "missing=[]"
+    },
+    {
+      "check": "preserve_docker-compose_yml",
+      "status": "PASS",
+      "detail": "identical to uploaded base"
+    },
+    {
+      "check": "preserve_airflow_dags_recipe_full_pipeline_py",
+      "status": "PASS",
+      "detail": "identical to uploaded base"
+    },
+    {
+      "check": "preserve_workers_ytower_crawler_worker_py",
+      "status": "PASS",
+      "detail": "identical to uploaded base"
+    },
+    {
+      "check": "preserve_workers_proxy_manager_py",
+      "status": "PASS",
+      "detail": "identical to uploaded base"
+    },
+    {
+      "check": "preserve_workers_proxy_pool_py",
+      "status": "PASS",
+      "detail": "identical to uploaded base"
+    },
+    {
+      "check": "preserve_workers_mongo_writer_py",
+      "status": "PASS",
+      "detail": "identical to uploaded base"
+    },
+    {
+      "check": "preserve_python_scripts_02_clean_recipes_py",
+      "status": "PASS",
+      "detail": "identical to uploaded base"
+    },
+    {
+      "check": "preserve_python_scripts_10_pipeline_py",
+      "status": "PASS",
+      "detail": "identical to uploaded base"
+    },
+    {
+      "check": "preserve_python_pyproject_toml",
+      "status": "PASS",
+      "detail": "identical to uploaded base"
+    },
+    {
+      "check": "preserve_python_Dockerfile",
+      "status": "PASS",
+      "detail": "identical to uploaded base"
+    },
+    {
+      "check": "production_mongodb_pipeline",
+      "status": "PASS",
+      "detail": "10_pipeline starts from MongoDB"
+    },
+    {
+      "check": "production_python_data_mount",
+      "status": "PASS",
+      "detail": "['./data:/workspace/data']"
+    },
+    {
+      "check": "production_python_port",
+      "status": "PASS",
+      "detail": "['${FLASK_BIND_HOST:-0.0.0.0}:${FLASK_PORT:-5001}:5000']"
+    },
+    {
+      "check": "reference_json_parse",
+      "status": "PASS",
+      "detail": "errors=[]"
+    },
+    {
+      "check": "high_conf_qualitative_rules",
+      "status": "PASS",
+      "detail": "active=23, min_confidence=82.0"
+    },
+    {
+      "check": "no_generic_適量_auto_convert",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_qualitative_amount_rules",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_weight_coverage_percent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "migration_010_mysql8_idempotent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "existing_db_table_self_heal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "existing_db_summary_self_heal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "weighted_calorie_price_coverage",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "summary_insert_column_count",
+      "status": "PASS",
+      "detail": "columns=['recipe_id', 'energy_kcal', 'estimated_price', 'coverage_percent', 'price_coverage_percent', 'weight_coverage_percent', 'calorie_status', 'price_status', 'calculated_at']"
+    },
+    {
+      "check": "hermes_text_message_compat",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ingredient_intent_fallback",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ingredient_group_not_forced_category",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deterministic_recommendation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "normalization_parser_cases",
+      "status": "PASS",
+      "detail": "12 cases; errors=[]"
+    },
+    {
+      "check": "raw_corpus_parse_quality",
+      "status": "PASS",
+      "detail": "recipes=29597, lines=257537, direct_weight=89815, qualitative=31186, high_conf_matches=9749, zero_weight=0, empty_name=0, leftover_prefix=0"
+    },
+    {
+      "check": "unit_weight_map_smoke",
+      "status": "PASS",
+      "detail": "map_rows=13, candidate_rows=13"
+    },
+    {
+      "check": "qualitative_xlsx_readable",
+      "status": "PASS",
+      "detail": "6 sheets readable with artifact_tool; no formula error tokens found"
+    },
+    {
+      "check": "shell_syntax",
+      "status": "PASS",
+      "detail": "all active scripts/*.sh passed bash -n"
+    }
+  ],
+  "summary": {
+    "pass": 37,
+    "fail": 0,
+    "python_files": 42,
+    "production_services": 18,
+    "raw_recipes": 29597,
+    "raw_ingredient_lines": 257537,
+    "direct_weight_lines": 89815,
+    "qualitative_lines": 31186,
+    "high_conf_rule_matches": 9749,
+    "high_conf_rule_count": 23
+  },
+  "runtime_not_executed": [
+    "docker compose config",
+    "docker compose up",
+    "MySQL migration execution",
+    "MongoDB runtime",
+    "Airflow runtime",
+    "Flask/Hermes E2E"
+  ]
+}

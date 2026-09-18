@@ -175,6 +175,38 @@ CREATE TABLE IF NOT EXISTS ingredient_densities (
     FOREIGN KEY (ingredient_id) REFERENCES ingredients(id)
 );
 
+
+-- ============================================================
+-- 高信心「少許」等定性用量換算規則
+-- 僅 auto_convert=TRUE 且 confidence_score>=80 的規則
+-- 才可自動寫入 recipe_ingredients.weight_g。
+-- 「適量」預設不做固定克數換算。
+-- ============================================================
+CREATE TABLE IF NOT EXISTS qualitative_amount_rules (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  ingredient_id BIGINT NOT NULL,
+  ingredient_alias VARCHAR(255) NOT NULL,
+  qualitative_term VARCHAR(50) NOT NULL,
+  canonical_rule_name VARCHAR(255),
+  conversion_type VARCHAR(50) NOT NULL DEFAULT 'ESTIMATED_HIGH_CONFIDENCE',
+  default_grams DECIMAL(18,6) NOT NULL,
+  min_grams DECIMAL(18,6),
+  max_grams DECIMAL(18,6),
+  confidence_score DECIMAL(6,2) NOT NULL,
+  auto_convert BOOLEAN NOT NULL DEFAULT FALSE,
+  status VARCHAR(20) NOT NULL DEFAULT 'ACTIVE',
+  source_url_1 TEXT,
+  source_url_2 TEXT,
+  note VARCHAR(1000),
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_qar_alias_term (ingredient_alias, qualitative_term),
+  INDEX idx_qar_ingredient_term (ingredient_id, qualitative_term, status),
+  CONSTRAINT fk_qar_ingredient
+    FOREIGN KEY (ingredient_id) REFERENCES ingredients(id)
+    ON DELETE CASCADE
+);
+
 -- ============================================================
 -- 食品營養資料：食品主檔
 -- Excel 的食品識別/描述欄位放在這裡。
@@ -272,6 +304,7 @@ CREATE TABLE IF NOT EXISTS recipe_nutrition_summary (
   estimated_price DECIMAL(18,2),
   coverage_percent DECIMAL(8,2),
   price_coverage_percent DECIMAL(8,2),
+  weight_coverage_percent DECIMAL(8,2),
   calorie_status VARCHAR(30) NOT NULL DEFAULT 'INSUFFICIENT',
   price_status VARCHAR(30) NOT NULL DEFAULT 'INSUFFICIENT',
   calculated_at TIMESTAMP NULL,

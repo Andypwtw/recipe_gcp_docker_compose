@@ -1,17 +1,12 @@
 from __future__ import annotations
 
-"""Ingredient intent rules used by recommendation endpoints.
+"""Ingredient-intent rules for recommendation endpoints.
 
-The category table contains ingredient-group labels such as 雞肉/牛肉.  Those
-labels are useful for navigation, but using recipe_categories alone can return
-recipes that do not actually contain the requested ingredient.  This module
-converts common ingredient-group intents into canonical-name SQL LIKE patterns
-that are applied against recipe_ingredients -> ingredients.
+Recipe categories are useful metadata, but a request such as "我想吃雞肉"
+should also require an actual chicken ingredient.  This module translates
+common ingredient-group intents into canonical ingredient-name LIKE patterns.
 """
 
-# Each value is one logical ingredient group. A recipe must match at least one
-# pattern in the selected group. Multiple requested groups are combined with
-# AND by recommendation.py (e.g. 雞肉 + 洋蔥 means both must be present).
 INGREDIENT_GROUP_PATTERNS: dict[str, tuple[str, ...]] = {
     "雞肉": (
         "%雞肉%",
@@ -60,8 +55,6 @@ INGREDIENT_GROUP_PATTERNS: dict[str, tuple[str, ...]] = {
     ),
 }
 
-# Exclusions prevent broad chicken patterns such as %土雞% from matching eggs,
-# stock/powders, sauces, vegetarian mock foods, etc.
 INGREDIENT_GROUP_EXCLUDES: dict[str, tuple[str, ...]] = {
     "雞肉": (
         "%雞蛋%",
@@ -87,3 +80,16 @@ def patterns_for_group(group_name: str) -> tuple[str, ...]:
 
 def excludes_for_group(group_name: str) -> tuple[str, ...]:
     return INGREDIENT_GROUP_EXCLUDES.get(str(group_name or "").strip(), ())
+
+
+def detect_ingredient_groups(text: str) -> list[str]:
+    """Detect supported ingredient-group names directly from natural language.
+
+    This is intentionally small and deterministic.  It gives the API a fallback
+    even if category_aliases has not been populated yet.
+    """
+    query = str(text or "").strip()
+    if not query:
+        return []
+
+    return [group for group in INGREDIENT_GROUP_PATTERNS if group in query]
