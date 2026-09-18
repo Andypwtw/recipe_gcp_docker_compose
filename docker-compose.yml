@@ -41,65 +41,90 @@ x-airflow-common: &airflow-common
     YTOWER_UPDATE_INTERVAL_DAYS: ${YTOWER_UPDATE_INTERVAL_DAYS:-7}
     YTOWER_CHECKPOINT_OVERLAP_DAYS: ${YTOWER_CHECKPOINT_OVERLAP_DAYS:-1}
     YTOWER_SEARCH_MAX_PAGES: ${YTOWER_SEARCH_MAX_PAGES:-100}
+
   volumes:
     - ./airflow/dags:/opt/airflow/dags:ro
     - airflow_logs:/opt/airflow/logs
     - airflow_plugins:/opt/airflow/plugins
     - ./python:/workspace/python:ro
     - ./data:/workspace/data
-  networks: [recipe-net]
+
+  networks:
+    - recipe-net
+
 
 x-crawler-common: &crawler-common
   build:
     context: .
     dockerfile: crawler/Dockerfile
   restart: unless-stopped
+
   depends_on:
     kafka-init:
       condition: service_completed_successfully
+
   environment: &crawler-common-env
     KAFKA_BOOTSTRAP_SERVERS: kafka:9092
     KAFKA_JOB_TOPIC: ${KAFKA_JOB_TOPIC:-crawler_jobs}
     KAFKA_RESULT_TOPIC: ${KAFKA_RESULT_TOPIC:-ytower_recipe_results}
     KAFKA_GROUP_ID: ytower-crawler-group
+
     REQUEST_TIMEOUT: ${REQUEST_TIMEOUT:-20}
     REQUEST_RETRIES: ${REQUEST_RETRIES:-3}
     MAX_POLL_INTERVAL_MS: ${MAX_POLL_INTERVAL_MS:-57600000}
+
     MAX_NOT_FOUND_LIMIT: ${MAX_NOT_FOUND_LIMIT:-50}
     MAX_PROXY_SWITCHES_PER_SEQ: ${MAX_PROXY_SWITCHES_PER_SEQ:-5}
+
     PROXY_WAIT_SECONDS: ${PROXY_WAIT_SECONDS:-15}
     PROXY_COUNTRY_CODE: ${PROXY_COUNTRY_CODE:-TW}
     PROXY_MAX_FAILURES: ${PROXY_MAX_FAILURES:-3}
     PROXY_LEASE_SECONDS: ${PROXY_LEASE_SECONDS:-1800}
+
     MONGO_HOST: mongodb
     MONGO_PORT: "27017"
     MONGO_DATABASE: ${MONGO_DATABASE:-recipe_ai}
     MONGO_APP_USER: ${MONGO_APP_USER}
     MONGO_APP_PASSWORD: ${MONGO_APP_PASSWORD}
+
     COOLDOWN_SUCCESS_COUNT: ${COOLDOWN_SUCCESS_COUNT:-50}
+
     CRAWL_SLEEP_MIN: ${CRAWL_SLEEP_MIN:-2.5}
     CRAWL_SLEEP_MAX: ${CRAWL_SLEEP_MAX:-5.0}
+
     DIRECT_CRAWL_SLEEP_MIN: ${DIRECT_CRAWL_SLEEP_MIN:-4.0}
     DIRECT_CRAWL_SLEEP_MAX: ${DIRECT_CRAWL_SLEEP_MAX:-8.0}
+
     DIRECT_BLOCK_COOLDOWN_SECONDS: ${DIRECT_BLOCK_COOLDOWN_SECONDS:-900}
     DIRECT_BLOCK_MAX_RETRIES: ${DIRECT_BLOCK_MAX_RETRIES:-2}
+
     NOT_FOUND_SLEEP_MIN: ${NOT_FOUND_SLEEP_MIN:-0.5}
     NOT_FOUND_SLEEP_MAX: ${NOT_FOUND_SLEEP_MAX:-1.2}
+
     COOLDOWN_SLEEP_MIN: ${COOLDOWN_SLEEP_MIN:-10}
     COOLDOWN_SLEEP_MAX: ${COOLDOWN_SLEEP_MAX:-20}
+
     YTOWER_SEARCH_URL: ${YTOWER_SEARCH_URL:-https://www.ytower.com.tw/recipe/recipe-search.asp}
     YTOWER_SEARCH_PAGE_PARAM: ${YTOWER_SEARCH_PAGE_PARAM:-page}
     YTOWER_SEARCH_CHUNK_SIZE: ${YTOWER_SEARCH_CHUNK_SIZE:-50}
     YTOWER_SEARCH_OLD_PAGE_STOP: ${YTOWER_SEARCH_OLD_PAGE_STOP:-2}
-  command: ["python", "/app/workers/ytower_crawler_worker.py"]
-  networks: [recipe-net]
+
+  command:
+    - python
+    - /app/workers/ytower_crawler_worker.py
+
+  networks:
+    - recipe-net
+
 
 services:
+
   init-permissions:
     image: alpine:3.20
     container_name: recipe-v11-init-permissions
     user: root
     restart: "no"
+
     command: >
       sh -c "
         mkdir -p /mnt/mysql /mnt/mongodb /mnt/kafka /mnt/postgres /mnt/airflow-logs /mnt/airflow-plugins &&
@@ -110,6 +135,7 @@ services:
         chown -R ${AIRFLOW_UID:-50000}:0 /mnt/airflow-logs /mnt/airflow-plugins &&
         chmod -R 775 /mnt/airflow-logs /mnt/airflow-plugins
       "
+
     volumes:
       - mysql_data:/mnt/mysql
       - mongodb_data:/mnt/mongodb
@@ -118,13 +144,16 @@ services:
       - airflow_logs:/mnt/airflow-logs
       - airflow_plugins:/mnt/airflow-plugins
 
+
   mysql:
     image: mysql:8.4
     container_name: recipe-v11-mysql
     restart: unless-stopped
+
     depends_on:
       init-permissions:
         condition: service_completed_successfully
+
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_ROOT_HOST: "%"
@@ -132,28 +161,39 @@ services:
       MYSQL_USER: ${MYSQL_USER:-recipe_app}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       TZ: ${TZ:-Asia/Taipei}
+
     ports:
       - "127.0.0.1:${MYSQL_PORT:-3307}:3306"
+
     volumes:
       - mysql_data:/var/lib/mysql
       - ./mysql/init:/docker-entrypoint-initdb.d:ro
+
     healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      test:
+        - CMD-SHELL
+        - mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent
       interval: 10s
       timeout: 5s
       retries: 20
       start_period: 20s
-    networks: [recipe-net]
+
+    networks:
+      - recipe-net
+
 
   mongodb:
     build:
       context: ./mongodb
       dockerfile: Dockerfile
+
     container_name: recipe-v11-mongodb
     restart: unless-stopped
+
     depends_on:
       init-permissions:
         condition: service_completed_successfully
+
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER:-root}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
@@ -161,62 +201,95 @@ services:
       MONGO_APP_USER: ${MONGO_APP_USER}
       MONGO_APP_PASSWORD: ${MONGO_APP_PASSWORD}
       TZ: ${TZ:-Asia/Taipei}
+
     ports:
       - "127.0.0.1:${MONGO_PORT:-27018}:27017"
+
     volumes:
       - mongodb_data:/data/db
       - ./mongodb/init:/docker-entrypoint-initdb.d:ro
+
     healthcheck:
-      test: ["CMD-SHELL", "mongosh --quiet --username $$MONGO_INITDB_ROOT_USERNAME --password $$MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase admin --eval 'db.adminCommand({ping:1}).ok' | grep 1"]
+      test:
+        - CMD-SHELL
+        - mongosh --quiet --username $$MONGO_INITDB_ROOT_USERNAME --password $$MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase admin --eval 'db.adminCommand({ping:1}).ok' | grep 1
       interval: 10s
       timeout: 5s
       retries: 20
       start_period: 20s
-    networks: [recipe-net]
+
+    networks:
+      - recipe-net
+
 
   kafka:
     image: apache/kafka:3.8.0
     container_name: recipe-v11-kafka
     restart: unless-stopped
+
     depends_on:
       init-permissions:
         condition: service_completed_successfully
+
     environment:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
+
       KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:29093
+
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+
       KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:29093,PLAINTEXT_HOST://:9094
+
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://127.0.0.1:${KAFKA_PORT:-9094}
+
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+
       KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+
       KAFKA_CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
+
       TZ: ${TZ:-Asia/Taipei}
+
     ports:
       - "127.0.0.1:${KAFKA_PORT:-9094}:9094"
+
     volumes:
       - kafka_data:/tmp/kraft-combined-logs
+
     healthcheck:
-      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list >/dev/null 2>&1"]
+      test:
+        - CMD-SHELL
+        - /opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list >/dev/null 2>&1
       interval: 10s
       timeout: 10s
       retries: 20
       start_period: 20s
-    networks: [recipe-net]
+
+    networks:
+      - recipe-net
+
 
   kafka-init:
     image: apache/kafka:3.8.0
     container_name: recipe-v11-kafka-init
     restart: "no"
+
     depends_on:
       kafka:
         condition: service_healthy
-    entrypoint: ["/bin/bash", "-ec"]
+
+    entrypoint:
+      - /bin/bash
+      - -ec
+
     command:
       - |
         JOB_TOPIC="$${KAFKA_JOB_TOPIC:-crawler_jobs}"
@@ -224,53 +297,107 @@ services:
         JOB_PARTITIONS="$${KAFKA_JOB_PARTITIONS:-5}"
         RESULT_PARTITIONS="$${KAFKA_RESULT_PARTITIONS:-4}"
 
-        /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --create --if-not-exists --topic "$$JOB_TOPIC" --partitions "$$JOB_PARTITIONS" --replication-factor 1
-        /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --create --if-not-exists --topic "$$RESULT_TOPIC" --partitions "$$RESULT_PARTITIONS" --replication-factor 1
+        /opt/kafka/bin/kafka-topics.sh \
+          --bootstrap-server kafka:9092 \
+          --create \
+          --if-not-exists \
+          --topic "$$JOB_TOPIC" \
+          --partitions "$$JOB_PARTITIONS" \
+          --replication-factor 1
 
-        CURRENT_JOB_PARTITIONS="$$(/opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --describe --topic "$$JOB_TOPIC" | head -n 1 | sed -n 's/.*PartitionCount: \([0-9][0-9]*\).*/\1/p')"
+        /opt/kafka/bin/kafka-topics.sh \
+          --bootstrap-server kafka:9092 \
+          --create \
+          --if-not-exists \
+          --topic "$$RESULT_TOPIC" \
+          --partitions "$$RESULT_PARTITIONS" \
+          --replication-factor 1
+
+        CURRENT_JOB_PARTITIONS="$$(/opt/kafka/bin/kafka-topics.sh \
+          --bootstrap-server kafka:9092 \
+          --describe \
+          --topic "$$JOB_TOPIC" \
+          | head -n 1 \
+          | sed -n 's/.*PartitionCount: \([0-9][0-9]*\).*/\1/p')"
+
         if [ -n "$$CURRENT_JOB_PARTITIONS" ] && [ "$$CURRENT_JOB_PARTITIONS" -lt "$$JOB_PARTITIONS" ]; then
-          /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --alter --topic "$$JOB_TOPIC" --partitions "$$JOB_PARTITIONS"
+          /opt/kafka/bin/kafka-topics.sh \
+            --bootstrap-server kafka:9092 \
+            --alter \
+            --topic "$$JOB_TOPIC" \
+            --partitions "$$JOB_PARTITIONS"
         fi
 
-        CURRENT_RESULT_PARTITIONS="$$(/opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --describe --topic "$$RESULT_TOPIC" | head -n 1 | sed -n 's/.*PartitionCount: \([0-9][0-9]*\).*/\1/p')"
+        CURRENT_RESULT_PARTITIONS="$$(/opt/kafka/bin/kafka-topics.sh \
+          --bootstrap-server kafka:9092 \
+          --describe \
+          --topic "$$RESULT_TOPIC" \
+          | head -n 1 \
+          | sed -n 's/.*PartitionCount: \([0-9][0-9]*\).*/\1/p')"
+
         if [ -n "$$CURRENT_RESULT_PARTITIONS" ] && [ "$$CURRENT_RESULT_PARTITIONS" -lt "$$RESULT_PARTITIONS" ]; then
-          /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --alter --topic "$$RESULT_TOPIC" --partitions "$$RESULT_PARTITIONS"
+          /opt/kafka/bin/kafka-topics.sh \
+            --bootstrap-server kafka:9092 \
+            --alter \
+            --topic "$$RESULT_TOPIC" \
+            --partitions "$$RESULT_PARTITIONS"
         fi
 
-        /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --describe --topic "$$JOB_TOPIC"
-        /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --describe --topic "$$RESULT_TOPIC"
+        /opt/kafka/bin/kafka-topics.sh \
+          --bootstrap-server kafka:9092 \
+          --describe \
+          --topic "$$JOB_TOPIC"
+
+        /opt/kafka/bin/kafka-topics.sh \
+          --bootstrap-server kafka:9092 \
+          --describe \
+          --topic "$$RESULT_TOPIC"
+
     environment:
       KAFKA_JOB_TOPIC: ${KAFKA_JOB_TOPIC:-crawler_jobs}
       KAFKA_RESULT_TOPIC: ${KAFKA_RESULT_TOPIC:-ytower_recipe_results}
       KAFKA_JOB_PARTITIONS: ${KAFKA_JOB_PARTITIONS:-5}
       KAFKA_RESULT_PARTITIONS: ${KAFKA_RESULT_PARTITIONS:-4}
-    networks: [recipe-net]
+
+    networks:
+      - recipe-net
+
 
   postgres:
     image: postgres:16-alpine
     container_name: recipe-v11-postgres
     restart: unless-stopped
+
     depends_on:
       init-permissions:
         condition: service_completed_successfully
+
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-airflow}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB:-airflow}
       TZ: ${TZ:-Asia/Taipei}
+
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-airflow} -d ${POSTGRES_DB:-airflow}"]
+      test:
+        - CMD-SHELL
+        - pg_isready -U ${POSTGRES_USER:-airflow} -d ${POSTGRES_DB:-airflow}
       interval: 10s
       timeout: 5s
       retries: 20
-    networks: [recipe-net]
+
+    networks:
+      - recipe-net
+
 
   airflow-init:
     <<: *airflow-common
     container_name: recipe-v11-airflow-init
     restart: "no"
+
     depends_on:
       postgres:
         condition: service_healthy
@@ -280,7 +407,9 @@ services:
         condition: service_healthy
       kafka-init:
         condition: service_completed_successfully
+
     entrypoint: /bin/bash
+
     command:
       - -c
       - |
@@ -293,53 +422,71 @@ services:
           --email admin@example.com \
           --password "${AIRFLOW_ADMIN_PASSWORD}" || true
 
+
   airflow-webserver:
     <<: *airflow-common
     container_name: recipe-v11-airflow-webserver
     restart: unless-stopped
+
     depends_on:
       airflow-init:
         condition: service_completed_successfully
+
     command: webserver
+
     ports:
       - "${AIRFLOW_BIND_HOST:-0.0.0.0}:${AIRFLOW_PORT:-8080}:8080"
+
     healthcheck:
-      test: ["CMD-SHELL", "curl --fail http://localhost:8080/health >/dev/null || exit 1"]
+      test:
+        - CMD-SHELL
+        - curl --fail http://localhost:8080/health >/dev/null || exit 1
       interval: 30s
       timeout: 10s
       retries: 10
       start_period: 30s
+
 
   airflow-scheduler:
     <<: *airflow-common
     container_name: recipe-v11-airflow-scheduler
     restart: unless-stopped
+
     depends_on:
       airflow-init:
         condition: service_completed_successfully
+
     command: scheduler
+
     healthcheck:
-      test: ["CMD-SHELL", "airflow jobs check --job-type SchedulerJob --hostname \"$${HOSTNAME}\""]
+      test:
+        - CMD-SHELL
+        - airflow jobs check --job-type SchedulerJob --hostname "$${HOSTNAME}"
       interval: 30s
       timeout: 10s
       retries: 10
       start_period: 30s
 
+
   proxy-manager:
     build:
       context: .
       dockerfile: crawler/Dockerfile
+
     container_name: recipe-v11-proxy-manager
     restart: unless-stopped
+
     depends_on:
       mongodb:
         condition: service_healthy
+
     environment:
       MONGO_HOST: mongodb
       MONGO_PORT: "27017"
       MONGO_DATABASE: ${MONGO_DATABASE:-recipe_ai}
       MONGO_APP_USER: ${MONGO_APP_USER}
       MONGO_APP_PASSWORD: ${MONGO_APP_PASSWORD}
+
       PROXY_COUNTRY_CODE: ${PROXY_COUNTRY_CODE:-TW}
       PROXY_DISCOVERY_INTERVAL: ${PROXY_DISCOVERY_INTERVAL:-1800}
       PROXY_VALIDATION_TIMEOUT: ${PROXY_VALIDATION_TIMEOUT:-15}
@@ -350,143 +497,210 @@ services:
       PROXY_STALE_HOURS: ${PROXY_STALE_HOURS:-12}
       PROXY_MAX_FAILURES: ${PROXY_MAX_FAILURES:-3}
       PROXY_LEASE_SECONDS: ${PROXY_LEASE_SECONDS:-1800}
+
       LUMIPROXY_PROXY_URLS: ${LUMIPROXY_PROXY_URLS:-}
       CROXY_PROXY_URLS: ${CROXY_PROXY_URLS:-}
-    command: ["python", "/app/workers/proxy_manager.py"]
-    networks: [recipe-net]
+
+    command:
+      - python
+      - /app/workers/proxy_manager.py
+
+    networks:
+      - recipe-net
+
 
   crawler-direct:
     <<: *crawler-common
     container_name: recipe-v11-crawler-direct
+
     environment:
       <<: *crawler-common-env
       WORKER_NAME: crawler-direct
       CRAWLER_NETWORK_MODE: direct
 
+
   crawler-worker-1:
     <<: *crawler-common
     container_name: recipe-v11-crawler-worker-1
+
     depends_on:
       kafka-init:
         condition: service_completed_successfully
       proxy-manager:
         condition: service_started
+
     environment:
       <<: *crawler-common-env
       WORKER_NAME: crawler-worker-1
       CRAWLER_NETWORK_MODE: proxy
 
+
   crawler-worker-2:
     <<: *crawler-common
     container_name: recipe-v11-crawler-worker-2
+
     depends_on:
       kafka-init:
         condition: service_completed_successfully
       proxy-manager:
         condition: service_started
+
     environment:
       <<: *crawler-common-env
       WORKER_NAME: crawler-worker-2
       CRAWLER_NETWORK_MODE: proxy
 
+
   crawler-worker-3:
     <<: *crawler-common
     container_name: recipe-v11-crawler-worker-3
+
     depends_on:
       kafka-init:
         condition: service_completed_successfully
       proxy-manager:
         condition: service_started
+
     environment:
       <<: *crawler-common-env
       WORKER_NAME: crawler-worker-3
       CRAWLER_NETWORK_MODE: proxy
 
+
   crawler-worker-4:
     <<: *crawler-common
     container_name: recipe-v11-crawler-worker-4
+
     depends_on:
       kafka-init:
         condition: service_completed_successfully
       proxy-manager:
         condition: service_started
+
     environment:
       <<: *crawler-common-env
       WORKER_NAME: crawler-worker-4
       CRAWLER_NETWORK_MODE: proxy
 
+
   mongo-writer:
     build:
       context: .
       dockerfile: crawler/Dockerfile
+
     container_name: recipe-v11-mongo-writer
     restart: unless-stopped
+
     depends_on:
       mongodb:
         condition: service_healthy
       kafka-init:
         condition: service_completed_successfully
+
     environment:
       KAFKA_BOOTSTRAP_SERVERS: kafka:9092
       KAFKA_RESULT_TOPIC: ${KAFKA_RESULT_TOPIC:-ytower_recipe_results}
       KAFKA_GROUP_ID: ytower-mongo-writer
+
       MONGO_HOST: mongodb
       MONGO_PORT: "27017"
       MONGO_DATABASE: ${MONGO_DATABASE:-recipe_ai}
       MONGO_COLLECTION: ${MONGO_COLLECTION:-raw_recipes}
       MONGO_APP_USER: ${MONGO_APP_USER}
       MONGO_APP_PASSWORD: ${MONGO_APP_PASSWORD}
+
       MONGO_BATCH_SIZE: ${MONGO_BATCH_SIZE:-50}
-    command: ["python", "/app/workers/mongo_writer.py"]
-    networks: [recipe-net]
+
+    command:
+      - python
+      - /app/workers/mongo_writer.py
+
+    networks:
+      - recipe-net
+
 
   redpanda-console:
     image: docker.redpanda.com/redpandadata/console:latest
     container_name: recipe-v11-redpanda-console
     restart: unless-stopped
+
     depends_on:
       kafka-init:
         condition: service_completed_successfully
+
     environment:
       CONFIG_FILEPATH: /etc/redpanda/console-config.yml
+
     ports:
       - "${REDPANDA_BIND_HOST:-0.0.0.0}:${REDPANDA_CONSOLE_PORT:-8081}:8080"
+
     volumes:
       - ./redpanda/console-config.yml:/etc/redpanda/console-config.yml:ro
-    networks: [recipe-net]
+
+    networks:
+      - recipe-net
+
 
   python:
     build:
       context: ./python
       dockerfile: Dockerfile
+
     container_name: recipe-v11-python
     restart: unless-stopped
+
     depends_on:
       mysql:
         condition: service_healthy
+
     environment:
       DB_HOST: mysql
       DB_PORT: "3306"
       DB_NAME: ${MYSQL_DATABASE:-recipe_ai}
       DB_USER: ${MYSQL_USER:-recipe_app}
       DB_PASSWORD: ${MYSQL_PASSWORD}
+
       MONGO_URI: mongodb://${MONGO_APP_USER}:${MONGO_APP_PASSWORD}@mongodb:27017/${MONGO_DATABASE:-recipe_ai}?authSource=${MONGO_DATABASE:-recipe_ai}
       MONGO_DATABASE: ${MONGO_DATABASE:-recipe_ai}
       MONGO_COLLECTION: ${MONGO_COLLECTION:-raw_recipes}
+
       HERMES_API_KEY: ${HERMES_API_KEY:-}
+
       PYTHONPATH: /workspace/python
       UV_PROJECT_ENVIRONMENT: /opt/venv
       PYTHONDONTWRITEBYTECODE: "1"
+
+    # ==========================================================
+    # V11 FIX
+    # Host:
+    #   ./data
+    #
+    # Container:
+    #   /workspace/data
+    #
+    # 讓 10_pipeline.py、03a、05、09 等 ETL 程式
+    # 可以看到 Host 的 data/reference、data/processed 等資料。
+    # ==========================================================
+    volumes:
+      - ./data:/workspace/data
+
     ports:
       - "${FLASK_BIND_HOST:-0.0.0.0}:${FLASK_PORT:-5001}:5000"
+
     command: uv run flask --app app.api:app run --host=0.0.0.0 --port=5000
+
     healthcheck:
-      test: ["CMD-SHELL", "curl --fail http://localhost:5000/health >/dev/null || exit 1"]
+      test:
+        - CMD-SHELL
+        - curl --fail http://localhost:5000/health >/dev/null || exit 1
       interval: 15s
       timeout: 5s
       retries: 10
       start_period: 20s
-    networks: [recipe-net]
+
+    networks:
+      - recipe-net
+
 
 volumes:
   mysql_data:
@@ -495,6 +709,7 @@ volumes:
   postgres_data:
   airflow_logs:
   airflow_plugins:
+
 
 networks:
   recipe-net:
