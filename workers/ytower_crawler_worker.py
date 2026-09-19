@@ -25,6 +25,7 @@ from proxy_pool import (
 KAFKA_BOOTSTRAP_SERVERS = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "kafka:9092")
 KAFKA_JOB_TOPIC = os.getenv("KAFKA_JOB_TOPIC", "crawler_jobs")
 KAFKA_RESULT_TOPIC = os.getenv("KAFKA_RESULT_TOPIC", "ytower_recipe_results")
+KAFKA_INCREMENTAL_STATUS_TOPIC = os.getenv("KAFKA_INCREMENTAL_STATUS_TOPIC", "crawler_incremental_status")
 KAFKA_GROUP_ID = os.getenv("KAFKA_GROUP_ID", "ytower-crawler-group")
 WORKER_NAME = os.getenv("WORKER_NAME", "crawler-worker")
 NETWORK_MODE = os.getenv("CRAWLER_NETWORK_MODE", "proxy").strip().lower()
@@ -51,6 +52,7 @@ YTOWER_SEARCH_URL = os.getenv("YTOWER_SEARCH_URL", "https://www.ytower.com.tw/re
 YTOWER_SEARCH_PAGE_PARAM = os.getenv("YTOWER_SEARCH_PAGE_PARAM", "page")
 YTOWER_SEARCH_CHUNK_SIZE = int(os.getenv("YTOWER_SEARCH_CHUNK_SIZE", "50"))
 YTOWER_SEARCH_OLD_PAGE_STOP = int(os.getenv("YTOWER_SEARCH_OLD_PAGE_STOP", "2"))
+YTOWER_INCREMENTAL_OLD_STREAK_LIMIT = int(os.getenv("YTOWER_INCREMENTAL_OLD_STREAK_LIMIT", "20"))
 SEQ_RE = re.compile(r"(?:[?&]seq=|\b)([A-I]\d{2}-\d{3,4})", re.I)
 DATE_RE = re.compile(r"(20\d{2})[./\-年](\d{1,2})[./\-月](\d{1,2})")
 
@@ -581,32 +583,19 @@ def _parse_cutoff(value: str) -> datetime:
 
 
 def _extract_search_entries(html: str):
-    """Return [(SEQ, datetime|None)]. Missing dates are kept deliberately to avoid false negatives."""
+    """依搜尋頁 DOM 順序回傳唯一 SEQ。搜尋頁本身沒有上線日期。"""
     soup = BeautifulSoup(html, "html.parser")
-    found = {}
+    found = []
+    seen = set()
     for a in soup.find_all("a", href=True):
-        href = a.get("href", "")
-        m = SEQ_RE.search(href)
+        m = SEQ_RE.search(a.get("href", ""))
         if not m:
             continue
         seq = m.group(1).upper()
-        container = a
-        for _ in range(4):
-            if container.parent is None:
-                break
-            container = container.parent
-            text = container.get_text(" ", strip=True)
-            dm = DATE_RE.search(text)
-            if dm:
-                try:
-                    found[seq] = datetime(int(dm.group(1)), int(dm.group(2)), int(dm.group(3)), tzinfo=timezone.utc)
-                except ValueError:
-                    found.setdefault(seq, None)
-                break
-        else:
-            found.setdefault(seq, None)
-        found.setdefault(seq, None)
-    return list(found.items())
+        if seq not in seen:
+            seen.add(seq)
+            found.append(seq)
+    return found
 
 
 def _get_search_page(session, page: int):
@@ -621,43 +610,170 @@ def _get_search_page(session, page: int):
     return response
 
 
+def _parse_publish_date(value: str):
+    """把詳細頁的上線日期轉成 UTC datetime；無法解析時回傳 None。"""
+    if not value:
+        return None
+    m = DATE_RE.search(str(value))
+    if not m:
+        return None
+    try:
+        return datetime(
+            int(m.group(1)), int(m.group(2)), int(m.group(3)),
+            tzinfo=timezone.utc,
+        )
+    except ValueError:
+        return None
+
+
 def incremental_discovery_job(job, producer, session):
+    """
+    搜尋頁只取得 SEQ；逐筆進入詳細頁取得上線日期。
+    依搜尋頁順序由新到舊處理，連續 N 筆早於 cutoff 後立即停止，
+    不再先把全部 SEQ 拆成 seq_list jobs。
+    """
     cutoff = _parse_cutoff(job["cutoff_iso"])
     max_pages = int(job.get("search_max_pages", 100))
-    selected, seen = [], set()
-    old_pages = 0
+    old_streak_limit = max(
+        1,
+        int(job.get("old_streak_limit", YTOWER_INCREMENTAL_OLD_STREAK_LIMIT)),
+    )
+
+    seen = set()
+    old_streak = 0
+    checked = 0
+    produced = 0
+    stop_for_old_streak = False
+
     for page in range(1, max_pages + 1):
         response = _get_search_page(session, page)
-        entries = _extract_search_entries(response.text)
-        new_entries = [(seq, dt) for seq, dt in entries if seq not in seen]
-        if not new_entries:
-            print(f"[{WORKER_NAME}] incremental discovery stop page={page}: no new SEQ", flush=True)
+        entries = [seq for seq in _extract_search_entries(response.text) if seq not in seen]
+
+        if not entries:
+            print(
+                f"[{WORKER_NAME}] incremental discovery stop page={page}: no new SEQ",
+                flush=True,
+            )
             break
-        all_dated = all(dt is not None for _, dt in new_entries)
-        page_has_recent = False
-        for seq, dt in new_entries:
+
+        print(
+            f"[{WORKER_NAME}] search page={page} entries={len(entries)} "
+            f"checked={checked} produced={produced} "
+            f"old_streak={old_streak}/{old_streak_limit}",
+            flush=True,
+        )
+
+        for seq in entries:
+            if _stop_requested:
+                raise RuntimeError("shutdown requested")
+
             seen.add(seq)
-            # Unknown date is included on purpose: overlap + Mongo upsert is safer than dropping a recipe.
-            if dt is None or dt >= cutoff:
-                selected.append(seq)
-                page_has_recent = True
-        if all_dated and not page_has_recent:
-            old_pages += 1
-        else:
-            old_pages = 0
-        print(f"[{WORKER_NAME}] search page={page} entries={len(new_entries)} selected_total={len(selected)}", flush=True)
-        if old_pages >= YTOWER_SEARCH_OLD_PAGE_STOP:
-            print(f"[{WORKER_NAME}] stop after {old_pages} fully-old dated pages", flush=True)
+            checked += 1
+
+            m = re.fullmatch(r"([A-I]\d{2})-(\d{3,4})", seq)
+            if not m:
+                continue
+            prefix, seq_num = m.group(1), int(m.group(2))
+
+            status, detail_response, error, latency_ms = request_recipe_page(seq, session)
+            if status == "blocked":
+                raise BlockedPageError(f"{seq}: {error}")
+            if status == "server_error":
+                raise ServerResponseError(f"{seq}: {error}")
+            if status == "retryable_error":
+                raise RetryableRequestError(f"{seq}: {error}")
+            if status == "not_found" or detail_response is None:
+                print(f"[{WORKER_NAME}] incremental skip {seq}: not found", flush=True)
+                continue
+
+            try:
+                data = parse_recipe_response(seq, seq_num, prefix, detail_response)
+            except Exception as exc:
+                raise RetryableRequestError(f"parse error {seq}: {exc}") from exc
+            if not data:
+                continue
+
+            publish_dt = _parse_publish_date(data.get("上線日期", ""))
+
+            if publish_dt is None:
+                # 詳細頁仍無法取得日期時保守保留，避免誤停。
+                old_streak = 0
+                should_produce = True
+                date_label = "unknown"
+            elif publish_dt >= cutoff:
+                old_streak = 0
+                should_produce = True
+                date_label = publish_dt.date().isoformat()
+            else:
+                old_streak += 1
+                should_produce = False
+                date_label = publish_dt.date().isoformat()
+
+            print(
+                f"[{WORKER_NAME}] incremental detail seq={seq} date={date_label} "
+                f"recent={should_produce} old_streak={old_streak}/{old_streak_limit}",
+                flush=True,
+            )
+
+            if should_produce:
+                data["proxy_exit_ip"] = None
+                data["proxy_country_code"] = None
+                producer.send(
+                    KAFKA_RESULT_TOPIC,
+                    key=seq.encode(),
+                    value=data,
+                ).get(timeout=30)
+                produced += 1
+
+            if old_streak >= old_streak_limit:
+                stop_for_old_streak = True
+                print(
+                    f"[{WORKER_NAME}] incremental discovery STOP: "
+                    f"{old_streak} consecutive detail-page dates older than cutoff "
+                    f"{cutoff.isoformat()} (page={page}, seq={seq})",
+                    flush=True,
+                )
+                break
+
+            delay = random.uniform(DIRECT_CRAWL_SLEEP_MIN, DIRECT_CRAWL_SLEEP_MAX)
+            time.sleep(delay)
+
+        if stop_for_old_streak:
             break
+
         time.sleep(random.uniform(CRAWL_SLEEP_MIN, CRAWL_SLEEP_MAX))
 
-    for i in range(0, len(selected), YTOWER_SEARCH_CHUNK_SIZE):
-        seqs = selected[i:i + YTOWER_SEARCH_CHUNK_SIZE]
-        producer.send(KAFKA_JOB_TOPIC, key=f"incremental-{i//YTOWER_SEARCH_CHUNK_SIZE}".encode(),
-                      value={"job_type": "seq_list", "seqs": seqs, "cutoff_iso": job["cutoff_iso"]}).get(timeout=30)
+    crawl_run_id = str(job.get("crawl_run_id") or "").strip()
+    if not crawl_run_id:
+        raise RuntimeError("incremental_discovery job is missing crawl_run_id")
+
+    # Run-specific completion record. Airflow uses this instead of MongoDB's
+    # global collection-size delta, so delayed writes from an older run cannot
+    # make a zero-result incremental crawl look like it found new recipes.
+    status_payload = {
+        "crawl_run_id": crawl_run_id,
+        "mode": "incremental",
+        "checked": checked,
+        "produced": produced,
+        "old_streak": old_streak,
+        "old_streak_limit": old_streak_limit,
+        "completed_at": datetime.now(timezone.utc).isoformat(),
+        "worker": WORKER_NAME,
+    }
+    producer.send(
+        KAFKA_INCREMENTAL_STATUS_TOPIC,
+        key=crawl_run_id.encode("utf-8"),
+        value=status_payload,
+    ).get(timeout=30)
     producer.flush()
-    print(f"[{WORKER_NAME}] incremental discovery selected={len(selected)} jobs={(len(selected)+YTOWER_SEARCH_CHUNK_SIZE-1)//YTOWER_SEARCH_CHUNK_SIZE}", flush=True)
-    return len(selected)
+
+    print(
+        f"[{WORKER_NAME}] incremental discovery finished "
+        f"run_id={crawl_run_id} checked={checked} produced={produced} "
+        f"old_streak={old_streak}/{old_streak_limit}",
+        flush=True,
+    )
+    return produced
 
 
 def seq_list_job(

@@ -16,8 +16,11 @@ from pymongo import MongoClient
 
 KAFKA_BOOTSTRAP_SERVERS = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "kafka:9092")
 JOB_TOPIC = os.getenv("KAFKA_JOB_TOPIC", "crawler_jobs")
+INCREMENTAL_JOB_TOPIC = os.getenv("KAFKA_INCREMENTAL_JOB_TOPIC", "crawler_direct_jobs")
 RESULT_TOPIC = os.getenv("KAFKA_RESULT_TOPIC", "ytower_recipe_results")
+INCREMENTAL_STATUS_TOPIC = os.getenv("KAFKA_INCREMENTAL_STATUS_TOPIC", "crawler_incremental_status")
 CRAWLER_GROUP = "ytower-crawler-group"
+INCREMENTAL_CRAWLER_GROUP = os.getenv("KAFKA_INCREMENTAL_GROUP_ID", "ytower-incremental-direct-group")
 MONGO_WRITER_GROUP = "ytower-mongo-writer"
 MAX_SEQ_NUMBER = int(os.getenv("MAX_SEQ_NUMBER", "5000"))
 MAX_NOT_FOUND_LIMIT = int(os.getenv("MAX_NOT_FOUND_LIMIT", "50"))
@@ -28,6 +31,8 @@ SEARCH_MAX_PAGES = int(os.getenv("YTOWER_SEARCH_MAX_PAGES", "100"))
 DAG_SCHEDULE = os.getenv("YTOWER_DAG_SCHEDULE", "@daily").strip() or None
 CRAWLER_WAIT_TIMEOUT_SECONDS = int(os.getenv("CRAWLER_WAIT_TIMEOUT_SECONDS", "604800"))  # 7 days
 MONGO_WRITER_WAIT_TIMEOUT_SECONDS = int(os.getenv("MONGO_WRITER_WAIT_TIMEOUT_SECONDS", "86400"))  # 1 day
+TEST_MODE = os.getenv("YTOWER_TEST_MODE", "false").strip().lower() in {"1", "true", "yes", "on"}
+TEST_LIMIT = max(1, int(os.getenv("YTOWER_TEST_LIMIT", "20")))
 
 MONGO_HOST = os.getenv("MONGO_HOST", "mongodb")
 MONGO_PORT = int(os.getenv("MONGO_PORT", "27017"))
@@ -131,11 +136,13 @@ def consumer_group_lag(topic: str, group_id: str):
         consumer.close()
 
 
-def dispatch_crawler_jobs():
+def dispatch_crawler_jobs(**context):
     state = get_state()
     full_done = bool(state.get("initial_full_crawl_completed") or state.get("initial_full_completed"))
     mode = "incremental" if full_done else "full"
-    job_baseline = topic_end_offset(JOB_TOPIC)
+    active_job_topic = INCREMENTAL_JOB_TOPIC if mode == "incremental" else JOB_TOPIC
+    active_crawler_group = INCREMENTAL_CRAWLER_GROUP if mode == "incremental" else CRAWLER_GROUP
+    job_baseline = topic_end_offset(active_job_topic)
     result_baseline = topic_end_offset(RESULT_TOPIC)
     if job_baseline < 0 or result_baseline < 0:
         raise RuntimeError("Kafka topics are not ready")
@@ -154,21 +161,52 @@ def dispatch_crawler_jobs():
     dispatched = 0
     try:
         if mode == "full":
-            for prefix in generate_prefixes():
-                first_end = min(FULL_CRAWL_CHUNK_SIZE, MAX_SEQ_NUMBER)
+            prefixes = generate_prefixes()
+
+            # E2E test mode intentionally dispatches only ONE bounded prefix job.
+            # This exercises Kafka -> crawler -> MongoDB -> checkpoint -> pipeline
+            # without allowing the worker to continue into the normal full range.
+            if TEST_MODE:
+                prefix = prefixes[0]
+                test_end = min(TEST_LIMIT, MAX_SEQ_NUMBER)
                 job = {
                     "job_type": "prefix_chunk", "prefix": prefix, "start_num": 1,
-                    "end_num": first_end, "max_seq_number": MAX_SEQ_NUMBER,
-                    "chunk_size": FULL_CRAWL_CHUNK_SIZE,
-                    "max_not_found_limit": MAX_NOT_FOUND_LIMIT, "consecutive_not_found": 0,
+                    "end_num": test_end, "max_seq_number": test_end,
+                    "chunk_size": test_end,
+                    "max_not_found_limit": min(MAX_NOT_FOUND_LIMIT, test_end),
+                    "consecutive_not_found": 0,
                 }
                 producer.send(JOB_TOPIC, key=prefix.encode(), value=job).get(timeout=30)
-                dispatched += 1
+                dispatched = 1
+                print(
+                    f"TEST MODE enabled: FULL crawl limited to "
+                    f"{prefix}001-{prefix}{test_end:04d} (limit={TEST_LIMIT})"
+                )
+            else:
+                for prefix in prefixes:
+                    first_end = min(FULL_CRAWL_CHUNK_SIZE, MAX_SEQ_NUMBER)
+                    job = {
+                        "job_type": "prefix_chunk", "prefix": prefix, "start_num": 1,
+                        "end_num": first_end, "max_seq_number": MAX_SEQ_NUMBER,
+                        "chunk_size": FULL_CRAWL_CHUNK_SIZE,
+                        "max_not_found_limit": MAX_NOT_FOUND_LIMIT, "consecutive_not_found": 0,
+                    }
+                    producer.send(JOB_TOPIC, key=prefix.encode(), value=job).get(timeout=30)
+                    dispatched += 1
         else:
             checkpoint = _as_utc(state.get("last_successful_crawl_at") or state.get("last_successful_checkpoint"))
             cutoff = checkpoint - timedelta(days=CHECKPOINT_OVERLAP_DAYS)
-            job = {"job_type": "incremental_discovery", "cutoff_iso": cutoff.isoformat(), "search_max_pages": SEARCH_MAX_PAGES}
-            producer.send(JOB_TOPIC, key=b"incremental-discovery", value=job).get(timeout=30)
+            incremental_pages = 1 if TEST_MODE else SEARCH_MAX_PAGES
+            crawl_run_id = context["run_id"]
+            job = {
+                "job_type": "incremental_discovery",
+                "cutoff_iso": cutoff.isoformat(),
+                "search_max_pages": incremental_pages,
+                "crawl_run_id": crawl_run_id,
+            }
+            if TEST_MODE:
+                print("TEST MODE enabled: incremental discovery limited to 1 search page")
+            producer.send(INCREMENTAL_JOB_TOPIC, key=b"incremental-discovery", value=job).get(timeout=30)
             dispatched = 1
         producer.flush()
     finally:
@@ -190,7 +228,10 @@ def dispatch_crawler_jobs():
 
     result = {
         "mode": mode, "dispatched": dispatched, "job_baseline": job_baseline,
+        "job_topic": active_job_topic, "crawler_group": active_crawler_group,
         "result_baseline": result_baseline, "raw_count_baseline": raw_count_baseline,
+        "crawl_run_id": context["run_id"],
+        "test_mode": TEST_MODE, "test_limit": TEST_LIMIT if TEST_MODE else None,
     }
     print(result)
     return result
@@ -200,7 +241,9 @@ def crawler_jobs_are_drained(**context):
     dispatch = context["ti"].xcom_pull(task_ids="dispatch_crawler_jobs") or {}
     baseline = int(dispatch.get("job_baseline") or 0)
     dispatched = int(dispatch.get("dispatched") or 0)
-    lag, end = consumer_group_lag(JOB_TOPIC, CRAWLER_GROUP)
+    job_topic = dispatch.get("job_topic") or JOB_TOPIC
+    crawler_group = dispatch.get("crawler_group") or CRAWLER_GROUP
+    lag, end = consumer_group_lag(job_topic, crawler_group)
     return dispatched > 0 and end >= baseline + dispatched and lag == 0
 
 
@@ -208,6 +251,49 @@ def mongodb_writer_is_synced(**context):
     lag, _ = consumer_group_lag(RESULT_TOPIC, MONGO_WRITER_GROUP)
     return lag == 0
 
+
+
+def get_incremental_run_status(crawl_run_id: str) -> dict:
+    """Read the dedicated incremental status topic and return this run's completion record."""
+    consumer = KafkaConsumer(
+        bootstrap_servers=KAFKA_BOOTSTRAP_SERVERS,
+        enable_auto_commit=False,
+        auto_offset_reset="earliest",
+        consumer_timeout_ms=5000,
+        value_deserializer=lambda x: json.loads(x.decode("utf-8")),
+    )
+    try:
+        partitions = consumer.partitions_for_topic(INCREMENTAL_STATUS_TOPIC)
+        if not partitions:
+            raise RuntimeError(
+                f"Incremental status topic is not ready: {INCREMENTAL_STATUS_TOPIC}"
+            )
+
+        tps = [TopicPartition(INCREMENTAL_STATUS_TOPIC, p) for p in sorted(partitions)]
+        consumer.assign(tps)
+        consumer.seek_to_beginning(*tps)
+        ends = consumer.end_offsets(tps)
+        found = None
+
+        while True:
+            if all(consumer.position(tp) >= ends[tp] for tp in tps):
+                break
+            records = consumer.poll(timeout_ms=1000, max_records=100)
+            if not records:
+                continue
+            for messages in records.values():
+                for message in messages:
+                    value = message.value or {}
+                    if value.get("crawl_run_id") == crawl_run_id:
+                        found = value
+
+        if found is None:
+            raise RuntimeError(
+                f"No incremental completion status found for crawl_run_id={crawl_run_id}"
+            )
+        return found
+    finally:
+        consumer.close()
 
 def mark_crawl_completed(**context):
     dispatch = context["ti"].xcom_pull(task_ids="dispatch_crawler_jobs") or {}
@@ -219,7 +305,23 @@ def mark_crawl_completed(**context):
     try:
         db = client[MONGO_DATABASE]
         current_count = db[MONGO_COLLECTION].count_documents({})
-        new_count = max(current_count - baseline, 0)
+        mongo_count_delta = max(current_count - baseline, 0)
+
+        if mode == "incremental":
+            crawl_run_id = str(dispatch.get("crawl_run_id") or context["run_id"])
+            run_status = get_incremental_run_status(crawl_run_id)
+            new_count = max(int(run_status.get("produced") or 0), 0)
+            print(
+                f"incremental run status: run_id={crawl_run_id} "
+                f"checked={run_status.get('checked')} produced={new_count} "
+                f"old_streak={run_status.get('old_streak')}/"
+                f"{run_status.get('old_streak_limit')}; "
+                f"mongo_count_delta={mongo_count_delta} ignored"
+            )
+        else:
+            # Keep the already-tested FULL behavior unchanged.
+            new_count = mongo_count_delta
+
         update = {
             "last_successful_crawl_at": now,
             "last_crawl_completed_at": now,

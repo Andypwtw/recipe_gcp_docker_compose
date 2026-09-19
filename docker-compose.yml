@@ -16,7 +16,10 @@ x-airflow-common: &airflow-common
 
     KAFKA_BOOTSTRAP_SERVERS: kafka:9092
     KAFKA_JOB_TOPIC: ${KAFKA_JOB_TOPIC:-crawler_jobs}
+    KAFKA_INCREMENTAL_JOB_TOPIC: ${KAFKA_INCREMENTAL_JOB_TOPIC:-crawler_direct_jobs}
+    KAFKA_INCREMENTAL_GROUP_ID: ${KAFKA_INCREMENTAL_GROUP_ID:-ytower-incremental-direct-group}
     KAFKA_RESULT_TOPIC: ${KAFKA_RESULT_TOPIC:-ytower_recipe_results}
+    KAFKA_INCREMENTAL_STATUS_TOPIC: ${KAFKA_INCREMENTAL_STATUS_TOPIC:-crawler_incremental_status}
 
     DB_HOST: mysql
     DB_PORT: "3306"
@@ -41,6 +44,9 @@ x-airflow-common: &airflow-common
     YTOWER_UPDATE_INTERVAL_DAYS: ${YTOWER_UPDATE_INTERVAL_DAYS:-7}
     YTOWER_CHECKPOINT_OVERLAP_DAYS: ${YTOWER_CHECKPOINT_OVERLAP_DAYS:-1}
     YTOWER_SEARCH_MAX_PAGES: ${YTOWER_SEARCH_MAX_PAGES:-100}
+    YTOWER_INCREMENTAL_OLD_STREAK_LIMIT: ${YTOWER_INCREMENTAL_OLD_STREAK_LIMIT:-20}
+    YTOWER_TEST_MODE: ${YTOWER_TEST_MODE:-false}
+    YTOWER_TEST_LIMIT: ${YTOWER_TEST_LIMIT:-20}
     CRAWLER_WAIT_TIMEOUT_SECONDS: ${CRAWLER_WAIT_TIMEOUT_SECONDS:-604800}
     MONGO_WRITER_WAIT_TIMEOUT_SECONDS: ${MONGO_WRITER_WAIT_TIMEOUT_SECONDS:-86400}
 
@@ -70,6 +76,7 @@ x-crawler-common: &crawler-common
     KAFKA_BOOTSTRAP_SERVERS: kafka:9092
     KAFKA_JOB_TOPIC: ${KAFKA_JOB_TOPIC:-crawler_jobs}
     KAFKA_RESULT_TOPIC: ${KAFKA_RESULT_TOPIC:-ytower_recipe_results}
+    KAFKA_INCREMENTAL_STATUS_TOPIC: ${KAFKA_INCREMENTAL_STATUS_TOPIC:-crawler_incremental_status}
     KAFKA_GROUP_ID: ytower-crawler-group
 
     REQUEST_TIMEOUT: ${REQUEST_TIMEOUT:-20}
@@ -111,6 +118,9 @@ x-crawler-common: &crawler-common
     YTOWER_SEARCH_PAGE_PARAM: ${YTOWER_SEARCH_PAGE_PARAM:-page}
     YTOWER_SEARCH_CHUNK_SIZE: ${YTOWER_SEARCH_CHUNK_SIZE:-50}
     YTOWER_SEARCH_OLD_PAGE_STOP: ${YTOWER_SEARCH_OLD_PAGE_STOP:-2}
+    YTOWER_INCREMENTAL_OLD_STREAK_LIMIT: ${YTOWER_INCREMENTAL_OLD_STREAK_LIMIT:-20}
+    YTOWER_TEST_MODE: ${YTOWER_TEST_MODE:-false}
+    YTOWER_TEST_LIMIT: ${YTOWER_TEST_LIMIT:-20}
 
   command:
     - python
@@ -303,8 +313,11 @@ services:
     command:
       - |
         JOB_TOPIC="$${KAFKA_JOB_TOPIC:-crawler_jobs}"
+        INCREMENTAL_JOB_TOPIC="$${KAFKA_INCREMENTAL_JOB_TOPIC:-crawler_direct_jobs}"
         RESULT_TOPIC="$${KAFKA_RESULT_TOPIC:-ytower_recipe_results}"
+        INCREMENTAL_STATUS_TOPIC="$${KAFKA_INCREMENTAL_STATUS_TOPIC:-crawler_incremental_status}"
         JOB_PARTITIONS="$${KAFKA_JOB_PARTITIONS:-5}"
+        INCREMENTAL_JOB_PARTITIONS="$${KAFKA_INCREMENTAL_JOB_PARTITIONS:-1}"
         RESULT_PARTITIONS="$${KAFKA_RESULT_PARTITIONS:-4}"
 
         /opt/kafka/bin/kafka-topics.sh \
@@ -319,8 +332,24 @@ services:
           --bootstrap-server kafka:9092 \
           --create \
           --if-not-exists \
+          --topic "$$INCREMENTAL_JOB_TOPIC" \
+          --partitions "$$INCREMENTAL_JOB_PARTITIONS" \
+          --replication-factor 1
+
+        /opt/kafka/bin/kafka-topics.sh \
+          --bootstrap-server kafka:9092 \
+          --create \
+          --if-not-exists \
           --topic "$$RESULT_TOPIC" \
           --partitions "$$RESULT_PARTITIONS" \
+          --replication-factor 1
+
+        /opt/kafka/bin/kafka-topics.sh \
+          --bootstrap-server kafka:9092 \
+          --create \
+          --if-not-exists \
+          --topic "$$INCREMENTAL_STATUS_TOPIC" \
+          --partitions 1 \
           --replication-factor 1
 
         CURRENT_JOB_PARTITIONS="$$(/opt/kafka/bin/kafka-topics.sh \
@@ -361,12 +390,25 @@ services:
         /opt/kafka/bin/kafka-topics.sh \
           --bootstrap-server kafka:9092 \
           --describe \
+          --topic "$$INCREMENTAL_JOB_TOPIC"
+
+        /opt/kafka/bin/kafka-topics.sh \
+          --bootstrap-server kafka:9092 \
+          --describe \
           --topic "$$RESULT_TOPIC"
+
+        /opt/kafka/bin/kafka-topics.sh \
+          --bootstrap-server kafka:9092 \
+          --describe \
+          --topic "$$INCREMENTAL_STATUS_TOPIC"
 
     environment:
       KAFKA_JOB_TOPIC: ${KAFKA_JOB_TOPIC:-crawler_jobs}
+      KAFKA_INCREMENTAL_JOB_TOPIC: ${KAFKA_INCREMENTAL_JOB_TOPIC:-crawler_direct_jobs}
       KAFKA_RESULT_TOPIC: ${KAFKA_RESULT_TOPIC:-ytower_recipe_results}
+      KAFKA_INCREMENTAL_STATUS_TOPIC: ${KAFKA_INCREMENTAL_STATUS_TOPIC:-crawler_incremental_status}
       KAFKA_JOB_PARTITIONS: ${KAFKA_JOB_PARTITIONS:-5}
+      KAFKA_INCREMENTAL_JOB_PARTITIONS: ${KAFKA_INCREMENTAL_JOB_PARTITIONS:-1}
       KAFKA_RESULT_PARTITIONS: ${KAFKA_RESULT_PARTITIONS:-4}
 
     networks:
@@ -526,6 +568,20 @@ services:
     environment:
       <<: *crawler-common-env
       WORKER_NAME: crawler-direct
+      CRAWLER_NETWORK_MODE: direct
+
+
+  # Incremental-only worker: every 7-day update uses the VM's original outbound IP.
+  # It consumes a dedicated Kafka topic, so proxy workers can never take these jobs.
+  crawler-incremental-direct:
+    <<: *crawler-common
+    container_name: recipe-v11-crawler-incremental-direct
+
+    environment:
+      <<: *crawler-common-env
+      KAFKA_JOB_TOPIC: ${KAFKA_INCREMENTAL_JOB_TOPIC:-crawler_direct_jobs}
+      KAFKA_GROUP_ID: ${KAFKA_INCREMENTAL_GROUP_ID:-ytower-incremental-direct-group}
+      WORKER_NAME: crawler-incremental-direct
       CRAWLER_NETWORK_MODE: direct
 
 
