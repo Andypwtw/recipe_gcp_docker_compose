@@ -41,6 +41,8 @@ x-airflow-common: &airflow-common
     YTOWER_UPDATE_INTERVAL_DAYS: ${YTOWER_UPDATE_INTERVAL_DAYS:-7}
     YTOWER_CHECKPOINT_OVERLAP_DAYS: ${YTOWER_CHECKPOINT_OVERLAP_DAYS:-1}
     YTOWER_SEARCH_MAX_PAGES: ${YTOWER_SEARCH_MAX_PAGES:-100}
+    CRAWLER_WAIT_TIMEOUT_SECONDS: ${CRAWLER_WAIT_TIMEOUT_SECONDS:-604800}
+    MONGO_WRITER_WAIT_TIMEOUT_SECONDS: ${MONGO_WRITER_WAIT_TIMEOUT_SECONDS:-86400}
 
   volumes:
     - ./airflow/dags:/opt/airflow/dags:ro
@@ -58,6 +60,7 @@ x-crawler-common: &crawler-common
     context: .
     dockerfile: crawler/Dockerfile
   restart: unless-stopped
+  user: "1000:0"
 
   depends_on:
     kafka-init:
@@ -113,6 +116,9 @@ x-crawler-common: &crawler-common
     - python
     - /app/workers/ytower_crawler_worker.py
 
+  volumes:
+    - ./data:/workspace/data
+
   networks:
     - recipe-net
 
@@ -127,13 +133,16 @@ services:
 
     command: >
       sh -c "
-        mkdir -p /mnt/mysql /mnt/mongodb /mnt/kafka /mnt/postgres /mnt/airflow-logs /mnt/airflow-plugins &&
+        mkdir -p /mnt/mysql /mnt/mongodb /mnt/kafka /mnt/postgres /mnt/airflow-logs /mnt/airflow-plugins /mnt/data/raw /mnt/data/reference /mnt/data/processed &&
         chown -R 999:999 /mnt/mysql &&
         chown -R 999:999 /mnt/mongodb &&
         chown -R 1000:1000 /mnt/kafka &&
         chown -R 70:70 /mnt/postgres &&
         chown -R ${AIRFLOW_UID:-50000}:0 /mnt/airflow-logs /mnt/airflow-plugins &&
-        chmod -R 775 /mnt/airflow-logs /mnt/airflow-plugins
+        chmod -R g+rwX /mnt/airflow-logs /mnt/airflow-plugins &&
+        find /mnt/airflow-logs /mnt/airflow-plugins -type d -exec chmod 2775 {} + &&
+        chmod -R a+rwX /mnt/data &&
+        find /mnt/data -type d -exec chmod 2777 {} +
       "
 
     volumes:
@@ -143,6 +152,7 @@ services:
       - postgres_data:/mnt/postgres
       - airflow_logs:/mnt/airflow-logs
       - airflow_plugins:/mnt/airflow-plugins
+      - ./data:/mnt/data
 
 
   mysql:
