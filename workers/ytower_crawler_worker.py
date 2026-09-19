@@ -53,6 +53,8 @@ YTOWER_SEARCH_PAGE_PARAM = os.getenv("YTOWER_SEARCH_PAGE_PARAM", "page")
 YTOWER_SEARCH_CHUNK_SIZE = int(os.getenv("YTOWER_SEARCH_CHUNK_SIZE", "50"))
 YTOWER_SEARCH_OLD_PAGE_STOP = int(os.getenv("YTOWER_SEARCH_OLD_PAGE_STOP", "2"))
 YTOWER_INCREMENTAL_OLD_STREAK_LIMIT = int(os.getenv("YTOWER_INCREMENTAL_OLD_STREAK_LIMIT", "20"))
+TEST_MODE = os.getenv("YTOWER_TEST_MODE", "false").strip().lower() in {"1", "true", "yes", "on"}
+TEST_LIMIT = max(1, int(os.getenv("YTOWER_TEST_LIMIT", "20")))
 SEQ_RE = re.compile(r"(?:[?&]seq=|\b)([A-I]\d{2}-\d{3,4})", re.I)
 DATE_RE = re.compile(r"(20\d{2})[./\-年](\d{1,2})[./\-月](\d{1,2})")
 
@@ -644,6 +646,7 @@ def incremental_discovery_job(job, producer, session):
     checked = 0
     produced = 0
     stop_for_old_streak = False
+    stop_for_test_limit = False
 
     for page in range(1, max_pages + 1):
         response = _get_search_page(session, page)
@@ -666,6 +669,17 @@ def incremental_discovery_job(job, producer, session):
         for seq in entries:
             if _stop_requested:
                 raise RuntimeError("shutdown requested")
+
+            # TEST MODE only: cap incremental detail checks to avoid sending
+            # hundreds of historical recipes during an E2E test.
+            if TEST_MODE and checked >= TEST_LIMIT:
+                stop_for_test_limit = True
+                print(
+                    f"[{WORKER_NAME}] incremental TEST MODE STOP: "
+                    f"checked={checked} limit={TEST_LIMIT}",
+                    flush=True,
+                )
+                break
 
             seen.add(seq)
             checked += 1
@@ -738,7 +752,7 @@ def incremental_discovery_job(job, producer, session):
             delay = random.uniform(DIRECT_CRAWL_SLEEP_MIN, DIRECT_CRAWL_SLEEP_MAX)
             time.sleep(delay)
 
-        if stop_for_old_streak:
+        if stop_for_old_streak or stop_for_test_limit:
             break
 
         time.sleep(random.uniform(CRAWL_SLEEP_MIN, CRAWL_SLEEP_MAX))
