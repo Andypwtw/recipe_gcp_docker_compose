@@ -141,6 +141,16 @@ services:
     user: root
     restart: "no"
 
+    # ==========================================================
+    # [FIX 2026-09-20] Airflow pipeline 資料目錄權限修正
+    # 問題：run_recipe_pipeline 的 01_profile_mongodb.py 無法建立
+    #       /workspace/data/processed，發生 PermissionError: [Errno 13]。
+    # 原因：Airflow 以 UID ${AIRFLOW_UID:-50000}:GID 0 執行，但 ./data
+    #       bind mount 的 owner/group 未保證與 Airflow 相容。
+    # 修正：將 /mnt/data owner 設為 Airflow UID、group 設為 0，並讓
+    #       owner/group 都有 rwX；目錄使用 setgid(2775)，讓後續新建
+    #       子目錄延續 group 0。crawler 使用 1000:0，因此仍可寫入。
+    # ==========================================================
     command: >
       sh -c "
         mkdir -p /mnt/mysql /mnt/mongodb /mnt/kafka /mnt/postgres /mnt/airflow-logs /mnt/airflow-plugins /mnt/data/raw /mnt/data/reference /mnt/data/processed &&
@@ -148,11 +158,9 @@ services:
         chown -R 999:999 /mnt/mongodb &&
         chown -R 1000:1000 /mnt/kafka &&
         chown -R 70:70 /mnt/postgres &&
-        chown -R ${AIRFLOW_UID:-50000}:0 /mnt/airflow-logs /mnt/airflow-plugins &&
-        chmod -R g+rwX /mnt/airflow-logs /mnt/airflow-plugins &&
-        find /mnt/airflow-logs /mnt/airflow-plugins -type d -exec chmod 2775 {} + &&
-        chmod -R a+rwX /mnt/data &&
-        find /mnt/data -type d -exec chmod 2777 {} +
+        chown -R ${AIRFLOW_UID:-50000}:0 /mnt/airflow-logs /mnt/airflow-plugins /mnt/data &&
+        chmod -R ug+rwX,o+rX /mnt/airflow-logs /mnt/airflow-plugins /mnt/data &&
+        find /mnt/airflow-logs /mnt/airflow-plugins /mnt/data -type d -exec chmod 2775 {} +
       "
 
     volumes:
@@ -451,6 +459,9 @@ services:
     restart: "no"
 
     depends_on:
+      # [FIX 2026-09-20] 明確等待資料目錄權限初始化完成後，再執行 Airflow DB 初始化。
+      init-permissions:
+        condition: service_completed_successfully
       postgres:
         condition: service_healthy
       mongodb:
@@ -481,6 +492,9 @@ services:
     restart: unless-stopped
 
     depends_on:
+      # [FIX 2026-09-20] Webserver 啟動前再次確認 data 權限初始化已完成。
+      init-permissions:
+        condition: service_completed_successfully
       airflow-init:
         condition: service_completed_successfully
 
@@ -505,6 +519,9 @@ services:
     restart: unless-stopped
 
     depends_on:
+      # [FIX 2026-09-20] Scheduler 會執行 run_recipe_pipeline，必須先確保 /workspace/data 可寫。
+      init-permissions:
+        condition: service_completed_successfully
       airflow-init:
         condition: service_completed_successfully
 
