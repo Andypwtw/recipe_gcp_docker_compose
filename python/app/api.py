@@ -176,7 +176,10 @@ def list_recipes():
                 r.raw_keywords,
                 r.source_url,
                 CAST(TRUNCATE(rns.energy_kcal, 0) AS SIGNED) AS energy_kcal,
-                ROUND(rns.estimated_price, 2) AS estimated_price,
+                CAST(TRUNCATE(rns.ingredient_energy_kcal, 0) AS SIGNED) AS ingredient_energy_kcal,
+                CAST(TRUNCATE(rns.seasoning_energy_kcal, 0) AS SIGNED) AS seasoning_energy_kcal,
+                CAST(rns.estimated_price AS SIGNED) AS estimated_price,
+                CASE WHEN rns.estimated_price IS NULL THEN '$無資料' ELSE CONCAT('$', CAST(rns.estimated_price AS SIGNED)) END AS total_price_display,
                 ROUND(rns.coverage_percent, 2) AS calorie_coverage_percent,
                 ROUND(rns.price_coverage_percent, 2) AS price_coverage_percent,
                 rns.calorie_status,
@@ -216,7 +219,10 @@ def random_recipes():
                 r.name,
                 r.raw_keywords,
                 CAST(TRUNCATE(rns.energy_kcal, 0) AS SIGNED) AS energy_kcal,
-                ROUND(rns.estimated_price, 2) AS estimated_price,
+                CAST(TRUNCATE(rns.ingredient_energy_kcal, 0) AS SIGNED) AS ingredient_energy_kcal,
+                CAST(TRUNCATE(rns.seasoning_energy_kcal, 0) AS SIGNED) AS seasoning_energy_kcal,
+                CAST(rns.estimated_price AS SIGNED) AS estimated_price,
+                CASE WHEN rns.estimated_price IS NULL THEN '$無資料' ELSE CONCAT('$', CAST(rns.estimated_price AS SIGNED)) END AS total_price_display,
                 ROUND(rns.coverage_percent, 2) AS calorie_coverage_percent,
                 ROUND(rns.price_coverage_percent, 2) AS price_coverage_percent,
                 rns.calorie_status,
@@ -292,7 +298,10 @@ def search_recipes():
             r.source_url,
             r.raw_keywords,
             CAST(TRUNCATE(rns.energy_kcal, 0) AS SIGNED) AS energy_kcal,
-            ROUND(rns.estimated_price, 2) AS estimated_price,
+                CAST(TRUNCATE(rns.ingredient_energy_kcal, 0) AS SIGNED) AS ingredient_energy_kcal,
+                CAST(TRUNCATE(rns.seasoning_energy_kcal, 0) AS SIGNED) AS seasoning_energy_kcal,
+            CAST(rns.estimated_price AS SIGNED) AS estimated_price,
+                CASE WHEN rns.estimated_price IS NULL THEN '$無資料' ELSE CONCAT('$', CAST(rns.estimated_price AS SIGNED)) END AS total_price_display,
             ROUND(rns.coverage_percent, 2) AS calorie_coverage_percent,
             ROUND(rns.price_coverage_percent, 2) AS price_coverage_percent,
             rns.calorie_status,
@@ -336,7 +345,10 @@ def get_recipe(seq: str):
             SELECT
                 r.*,
                 CAST(TRUNCATE(rns.energy_kcal, 0) AS SIGNED) AS energy_kcal,
-                ROUND(rns.estimated_price, 2) AS estimated_price,
+                CAST(TRUNCATE(rns.ingredient_energy_kcal, 0) AS SIGNED) AS ingredient_energy_kcal,
+                CAST(TRUNCATE(rns.seasoning_energy_kcal, 0) AS SIGNED) AS seasoning_energy_kcal,
+                CAST(rns.estimated_price AS SIGNED) AS estimated_price,
+                CASE WHEN rns.estimated_price IS NULL THEN '$無資料' ELSE CONCAT('$', CAST(rns.estimated_price AS SIGNED)) END AS total_price_display,
                 ROUND(rns.coverage_percent, 2) AS calorie_coverage_percent,
                 ROUND(rns.price_coverage_percent, 2) AS price_coverage_percent,
                 rns.calorie_status,
@@ -357,8 +369,36 @@ def get_recipe(seq: str):
             """
             SELECT
                 ri.line_no,
-                ri.raw_text
+                ri.raw_text,
+                i.canonical_name,
+                ri.weight_g,
+                CASE
+                    WHEN ri.weight_g IS NOT NULL AND ns.price_per_100g IS NOT NULL
+                    THEN CAST(CEILING(ns.price_per_100g * ri.weight_g / 100) AS SIGNED)
+                    ELSE NULL
+                END AS estimated_price,
+                CASE
+                    WHEN ri.weight_g IS NOT NULL AND ns.price_per_100g IS NOT NULL
+                    THEN CONCAT('$', CAST(CEILING(ns.price_per_100g * ri.weight_g / 100) AS SIGNED))
+                    ELSE '$無資料'
+                END AS price_display,
+                CONCAT(
+                    COALESCE(ri.raw_text, ''),
+                    ' ',
+                    CASE
+                        WHEN ri.weight_g IS NOT NULL AND ns.price_per_100g IS NOT NULL
+                        THEN CONCAT('$', CAST(CEILING(ns.price_per_100g * ri.weight_g / 100) AS SIGNED))
+                        ELSE '$無資料'
+                    END
+                ) AS display_text
             FROM recipe_ingredients ri
+            JOIN ingredients i
+              ON i.id = ri.ingredient_id
+            LEFT JOIN ingredient_nutrition_map inm
+              ON inm.ingredient_id = ri.ingredient_id
+             AND inm.status = 'APPROVED'
+            LEFT JOIN nutrition_source ns
+              ON ns.id = inm.nutrition_source_id
             WHERE ri.recipe_id = %s
             ORDER BY ri.line_no
             """,

@@ -4,10 +4,12 @@ import json
 from pathlib import Path
 
 from app.db import get_connection
+from app.services.calculation_policy import classify_ingredient, load_calculation_policy
 
 UNIT_MAP = Path("/workspace/data/reference/unit_weight_map.json")
 DENSITY = Path("/workspace/data/reference/ingredient_density_map.json")
 QUALITATIVE_RULES = Path("/workspace/data/reference/qualitative_amount_rules.json")
+CALCULATION_RULES = Path("/workspace/data/reference/ingredient_calculation_rules.json")
 
 
 def ensure_qualitative_rules_table(cur):
@@ -41,6 +43,37 @@ def ensure_qualitative_rules_table(cur):
     )
 
 
+
+def ensure_calculation_rules_table(cur):
+    cur.execute(
+        """
+        CREATE TABLE IF NOT EXISTS ingredient_calculation_rules (
+          id BIGINT PRIMARY KEY AUTO_INCREMENT,
+          ingredient_id BIGINT NOT NULL,
+          rule_key VARCHAR(100) NOT NULL,
+          ingredient_category VARCHAR(60) NOT NULL DEFAULT 'FOOD',
+          is_seasoning BOOLEAN NOT NULL DEFAULT FALSE,
+          calorie_policy VARCHAR(20) NOT NULL DEFAULT 'INCLUDE',
+          price_policy VARCHAR(20) NOT NULL DEFAULT 'INCLUDE',
+          calorie_ignore_threshold_kcal DECIMAL(10,4) NOT NULL DEFAULT 5.0000,
+          fallback_kcal_per_100g DECIMAL(12,4) NULL,
+          confidence_score DECIMAL(6,2) NOT NULL DEFAULT 100.00,
+          match_reason VARCHAR(255),
+          source VARCHAR(255) NOT NULL DEFAULT 'ingredient_calculation_rules.json',
+          note VARCHAR(1000),
+          status VARCHAR(20) NOT NULL DEFAULT 'ACTIVE',
+          updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            ON UPDATE CURRENT_TIMESTAMP,
+          UNIQUE KEY uq_icr_ingredient (ingredient_id),
+          INDEX idx_icr_price_policy (price_policy,is_seasoning,status),
+          INDEX idx_icr_calorie_policy (calorie_policy,status),
+          CONSTRAINT fk_icr_ingredient
+            FOREIGN KEY (ingredient_id) REFERENCES ingredients(id)
+            ON DELETE CASCADE
+        )
+        """
+    )
+
 def get_or_create_ingredient(cur, name: str) -> int:
     cur.execute(
         """
@@ -73,9 +106,11 @@ def main():
     imported_unit_weights = 0
     imported_densities = 0
     imported_qualitative = 0
+    imported_calculation_rules = 0
 
     with get_connection() as conn, conn.cursor() as cur:
         ensure_qualitative_rules_table(cur)
+        ensure_calculation_rules_table(cur)
 
         if UNIT_MAP.exists():
             for r in json.loads(UNIT_MAP.read_text(encoding="utf-8")):
@@ -183,12 +218,65 @@ def main():
                 )
                 imported_qualitative += 1
 
+
+        if CALCULATION_RULES.exists():
+            policy_data = load_calculation_policy(CALCULATION_RULES)
+            # This table is derived from the current ingredient master. Rebuild it
+            # every ETL run so changed policy definitions cannot leave stale rows.
+            cur.execute("DELETE FROM ingredient_calculation_rules")
+            cur.execute("SELECT id,canonical_name FROM ingredients ORDER BY id")
+            ingredient_rows = cur.fetchall()
+            for ingredient in ingredient_rows:
+                policy = classify_ingredient(ingredient["canonical_name"], policy_data)
+                if not policy["matched"]:
+                    continue
+                cur.execute(
+                    """
+                    INSERT INTO ingredient_calculation_rules
+                    (
+                      ingredient_id,rule_key,ingredient_category,is_seasoning,
+                      calorie_policy,price_policy,calorie_ignore_threshold_kcal,
+                      fallback_kcal_per_100g,confidence_score,match_reason,source,note,status
+                    )
+                    VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,'ACTIVE')
+                    ON DUPLICATE KEY UPDATE
+                      rule_key=VALUES(rule_key),
+                      ingredient_category=VALUES(ingredient_category),
+                      is_seasoning=VALUES(is_seasoning),
+                      calorie_policy=VALUES(calorie_policy),
+                      price_policy=VALUES(price_policy),
+                      calorie_ignore_threshold_kcal=VALUES(calorie_ignore_threshold_kcal),
+                      fallback_kcal_per_100g=VALUES(fallback_kcal_per_100g),
+                      confidence_score=VALUES(confidence_score),
+                      match_reason=VALUES(match_reason),
+                      source=VALUES(source),
+                      note=VALUES(note),
+                      status='ACTIVE'
+                    """,
+                    (
+                        ingredient["id"],
+                        policy["rule_key"],
+                        policy["ingredient_category"],
+                        policy["is_seasoning"],
+                        policy["calorie_policy"],
+                        policy["price_policy"],
+                        policy["calorie_ignore_threshold_kcal"],
+                        policy["fallback_kcal_per_100g"],
+                        policy["confidence_score"],
+                        policy["match_reason"],
+                        "ingredient_calculation_rules.json",
+                        policy.get("note"),
+                    ),
+                )
+                imported_calculation_rules += 1
+
         conn.commit()
 
     print("reference maps imported")
     print(f"unit weights={imported_unit_weights}")
     print(f"densities={imported_densities}")
     print(f"qualitative high-confidence rules={imported_qualitative}")
+    print(f"ingredient calculation policies={imported_calculation_rules}")
 
 
 if __name__ == "__main__":

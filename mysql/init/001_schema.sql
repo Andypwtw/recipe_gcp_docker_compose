@@ -212,6 +212,36 @@ CREATE TABLE IF NOT EXISTS qualitative_amount_rules (
 -- Excel 的食品識別/描述欄位放在這裡。
 -- raw_data 另外保留整列 Excel 原始資料，確保來源資料無損保存。
 -- ============================================================
+-- ============================================================
+-- 食材熱量/價格計算政策
+-- 由 data/reference/ingredient_calculation_rules.json 套用到現有 ingredients。
+-- 用於主要食材/辛香佐料/辛香料/調味料的熱量計算角色分類。
+-- ============================================================
+CREATE TABLE IF NOT EXISTS ingredient_calculation_rules (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  ingredient_id BIGINT NOT NULL,
+  rule_key VARCHAR(100) NOT NULL,
+  ingredient_category VARCHAR(60) NOT NULL DEFAULT 'FOOD',
+  is_seasoning BOOLEAN NOT NULL DEFAULT FALSE,
+  calorie_policy VARCHAR(20) NOT NULL DEFAULT 'INCLUDE',
+  price_policy VARCHAR(20) NOT NULL DEFAULT 'INCLUDE',
+  calorie_ignore_threshold_kcal DECIMAL(10,4) NOT NULL DEFAULT 5.0000,
+  fallback_kcal_per_100g DECIMAL(12,4),
+  confidence_score DECIMAL(6,2) NOT NULL DEFAULT 100.00,
+  match_reason VARCHAR(255),
+  source VARCHAR(255) NOT NULL DEFAULT 'ingredient_calculation_rules.json',
+  note VARCHAR(1000),
+  status VARCHAR(20) NOT NULL DEFAULT 'ACTIVE',
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_icr_ingredient (ingredient_id),
+  INDEX idx_icr_price_policy (price_policy,is_seasoning,status),
+  INDEX idx_icr_calorie_policy (calorie_policy,status),
+  CONSTRAINT fk_icr_ingredient
+    FOREIGN KEY (ingredient_id) REFERENCES ingredients(id)
+    ON DELETE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS nutrition_source (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
   food_code VARCHAR(100) NOT NULL,
@@ -301,10 +331,14 @@ CREATE TABLE IF NOT EXISTS recipe_nutrition_summary (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
   recipe_id BIGINT NOT NULL UNIQUE,
   energy_kcal DECIMAL(18,6),
+  ingredient_energy_kcal DECIMAL(18,6),
+  seasoning_energy_kcal DECIMAL(18,6),
   estimated_price DECIMAL(18,2),
   coverage_percent DECIMAL(8,2),
   price_coverage_percent DECIMAL(8,2),
   weight_coverage_percent DECIMAL(8,2),
+  price_weight_line_coverage_percent DECIMAL(8,2),
+  main_missing_ratio_percent DECIMAL(8,2),
   calorie_status VARCHAR(30) NOT NULL DEFAULT 'INSUFFICIENT',
   price_status VARCHAR(30) NOT NULL DEFAULT 'INSUFFICIENT',
   calculated_at TIMESTAMP NULL,

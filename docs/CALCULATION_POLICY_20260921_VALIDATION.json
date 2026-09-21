@@ -1,0 +1,26 @@
+{
+  "validated_at": "2026-09-21",
+  "scope": "2026-09-21 calorie, aromatic/spice, and per-ingredient price display policy",
+  "python_compile": "PASS",
+  "unit_tests": {
+    "status": "PASS",
+    "count": 11,
+    "covered_cases": [
+      "main missing ratio exactly 20 percent is allowed",
+      "main missing ratio over 20 percent with known kcal below 500 returns null",
+      "main missing ratio over 20 percent with known kcal exactly 500 returns null",
+      "main missing ratio over 20 percent with known kcal over 500 is retained",
+      "aromatic 79g excluded from main denominator and 80g included",
+      "ordinary seasoning 49g excluded and 50g included",
+      "high-energy seasoning 19g excluded and 20g included",
+      "main calorie null forces final calorie null",
+      "missing seasoning does not invalidate a valid main calorie",
+      "per-item price uses ceiling before total sum",
+      "all item prices missing returns null total / $無資料 display"
+    ]
+  },
+  "policy_json_parse": "PASS",
+  "docker_compose_yaml_parse": "PASS",
+  "docker_compose_runtime_validation": "NOT_RUN_DOCKER_CLI_NOT_AVAILABLE_IN_SANDBOX",
+  "database_runtime_validation": "NOT_RUN_NO_PROJECT_MYSQL_RUNTIME_IN_SANDBOX"
+}
