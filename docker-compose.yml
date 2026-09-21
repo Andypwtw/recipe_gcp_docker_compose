@@ -24,12 +24,10 @@ x-airflow-common: &airflow-common
     DB_HOST: mysql
     DB_PORT: "3306"
     DB_NAME: ${MYSQL_DATABASE:-recipe_ai}
-    DB_USER: ${MYSQL_USER:-recipe_app}
-    DB_PASSWORD: ${MYSQL_PASSWORD}
+    DB_USER: root
+    DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     MYSQL_DATABASE: ${MYSQL_DATABASE:-recipe_ai}
-    MYSQL_USER: ${MYSQL_USER:-recipe_app}
-    MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-
+ 
     MONGO_URI: mongodb://${MONGO_APP_USER}:${MONGO_APP_PASSWORD}@mongodb:27017/${MONGO_DATABASE:-recipe_ai}?authSource=${MONGO_DATABASE:-recipe_ai}
     MONGO_HOST: mongodb
     MONGO_PORT: "27017"
@@ -186,8 +184,6 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_ROOT_HOST: "%"
       MYSQL_DATABASE: ${MYSQL_DATABASE:-recipe_ai}
-      MYSQL_USER: ${MYSQL_USER:-recipe_app}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       TZ: ${TZ:-Asia/Taipei}
 
     ports:
@@ -740,8 +736,8 @@ services:
       DB_HOST: mysql
       DB_PORT: "3306"
       DB_NAME: ${MYSQL_DATABASE:-recipe_ai}
-      DB_USER: ${MYSQL_USER:-recipe_app}
-      DB_PASSWORD: ${MYSQL_PASSWORD}
+      DB_USER: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
 
       MONGO_URI: mongodb://${MONGO_APP_USER}:${MONGO_APP_PASSWORD}@mongodb:27017/${MONGO_DATABASE:-recipe_ai}?authSource=${MONGO_DATABASE:-recipe_ai}
       MONGO_DATABASE: ${MONGO_DATABASE:-recipe_ai}
