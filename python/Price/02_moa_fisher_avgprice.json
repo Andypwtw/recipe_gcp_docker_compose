@@ -1,0 +1,902 @@
+[
+  {
+    "SeafoodProdName": "休市",
+    "Avg_Price": 0.0
+  },
+  {
+    "SeafoodProdName": "吳郭魚",
+    "Avg_Price": 50.3
+  },
+  {
+    "SeafoodProdName": "尼羅紅魚",
+    "Avg_Price": 81.2
+  },
+  {
+    "SeafoodProdName": "鯉魚",
+    "Avg_Price": 82.3
+  },
+  {
+    "SeafoodProdName": "草魚",
+    "Avg_Price": 120.0
+  },
+  {
+    "SeafoodProdName": "大頭鰱",
+    "Avg_Price": 39.4
+  },
+  {
+    "SeafoodProdName": "烏鰡",
+    "Avg_Price": 131.7
+  },
+  {
+    "SeafoodProdName": "虱目魚",
+    "Avg_Price": 94.6
+  },
+  {
+    "SeafoodProdName": "虱目魚肚",
+    "Avg_Price": 384.3
+  },
+  {
+    "SeafoodProdName": "虱目魚頭",
+    "Avg_Price": 15.0
+  },
+  {
+    "SeafoodProdName": "烏仔魚",
+    "Avg_Price": 80.0
+  },
+  {
+    "SeafoodProdName": "加州鱸",
+    "Avg_Price": 107.7
+  },
+  {
+    "SeafoodProdName": "銀花鱸",
+    "Avg_Price": 147.3
+  },
+  {
+    "SeafoodProdName": "三角仔、金錢仔【養】",
+    "Avg_Price": 268.3
+  },
+  {
+    "SeafoodProdName": "象魚、臭肚",
+    "Avg_Price": 130.0
+  },
+  {
+    "SeafoodProdName": "龍膽石斑",
+    "Avg_Price": 81.4
+  },
+  {
+    "SeafoodProdName": "黃臘鰺(紅杉)",
+    "Avg_Price": 177.1
+  },
+  {
+    "SeafoodProdName": "香魚",
+    "Avg_Price": 154.5
+  },
+  {
+    "SeafoodProdName": "富貴魚、燕鯧",
+    "Avg_Price": 99.7
+  },
+  {
+    "SeafoodProdName": "午仔魚",
+    "Avg_Price": 196.9
+  },
+  {
+    "SeafoodProdName": "其他養殖",
+    "Avg_Price": 2.7
+  },
+  {
+    "SeafoodProdName": "加鱲",
+    "Avg_Price": 227.3
+  },
+  {
+    "SeafoodProdName": "赤宗",
+    "Avg_Price": 377.7
+  },
+  {
+    "SeafoodProdName": "盤仔",
+    "Avg_Price": 97.3
+  },
+  {
+    "SeafoodProdName": "黑鯛",
+    "Avg_Price": 187.3
+  },
+  {
+    "SeafoodProdName": "金線",
+    "Avg_Price": 261.6
+  },
+  {
+    "SeafoodProdName": "秋姑",
+    "Avg_Price": 320.0
+  },
+  {
+    "SeafoodProdName": "紅魚",
+    "Avg_Price": 210.5
+  },
+  {
+    "SeafoodProdName": "黃花",
+    "Avg_Price": 250.0
+  },
+  {
+    "SeafoodProdName": "白口",
+    "Avg_Price": 46.9
+  },
+  {
+    "SeafoodProdName": "四破",
+    "Avg_Price": 60.0
+  },
+  {
+    "SeafoodProdName": "目孔",
+    "Avg_Price": 61.2
+  },
+  {
+    "SeafoodProdName": "巴闌",
+    "Avg_Price": 175.5
+  },
+  {
+    "SeafoodProdName": "紅魽",
+    "Avg_Price": 196.5
+  },
+  {
+    "SeafoodProdName": "白鯧",
+    "Avg_Price": 267.2
+  },
+  {
+    "SeafoodProdName": "黑鯧",
+    "Avg_Price": 376.1
+  },
+  {
+    "SeafoodProdName": "黃鰭鮪",
+    "Avg_Price": 120.0
+  },
+  {
+    "SeafoodProdName": "其他鮪魚",
+    "Avg_Price": 283.2
+  },
+  {
+    "SeafoodProdName": "白皮旗",
+    "Avg_Price": 188.5
+  },
+  {
+    "SeafoodProdName": "旗魚肉",
+    "Avg_Price": 150.0
+  },
+  {
+    "SeafoodProdName": "其他旗魚",
+    "Avg_Price": 500.0
+  },
+  {
+    "SeafoodProdName": "土魠",
+    "Avg_Price": 175.7
+  },
+  {
+    "SeafoodProdName": "角鯊",
+    "Avg_Price": 60.0
+  },
+  {
+    "SeafoodProdName": "魷魚",
+    "Avg_Price": 131.2
+  },
+  {
+    "SeafoodProdName": "花枝",
+    "Avg_Price": 100.0
+  },
+  {
+    "SeafoodProdName": "透抽",
+    "Avg_Price": 187.3
+  },
+  {
+    "SeafoodProdName": "章魚",
+    "Avg_Price": 163.6
+  },
+  {
+    "SeafoodProdName": "龍尖、青嘴",
+    "Avg_Price": 100.2
+  },
+  {
+    "SeafoodProdName": "狗母",
+    "Avg_Price": 45.7
+  },
+  {
+    "SeafoodProdName": "海鰻",
+    "Avg_Price": 277.5
+  },
+  {
+    "SeafoodProdName": "肉魚",
+    "Avg_Price": 214.6
+  },
+  {
+    "SeafoodProdName": "尖梭",
+    "Avg_Price": 76.7
+  },
+  {
+    "SeafoodProdName": "油魚",
+    "Avg_Price": 70.0
+  },
+  {
+    "SeafoodProdName": "（日本）白帶魚",
+    "Avg_Price": 151.7
+  },
+  {
+    "SeafoodProdName": "鱝(魴仔)",
+    "Avg_Price": 48.0
+  },
+  {
+    "SeafoodProdName": "烏鞭",
+    "Avg_Price": 143.0
+  },
+  {
+    "SeafoodProdName": "咬狗",
+    "Avg_Price": 391.0
+  },
+  {
+    "SeafoodProdName": "厚唇",
+    "Avg_Price": 187.8
+  },
+  {
+    "SeafoodProdName": "英哥",
+    "Avg_Price": 402.9
+  },
+  {
+    "SeafoodProdName": "青衣",
+    "Avg_Price": 157.0
+  },
+  {
+    "SeafoodProdName": "海鱺",
+    "Avg_Price": 331.2
+  },
+  {
+    "SeafoodProdName": "國光、角仔魚",
+    "Avg_Price": 32.0
+  },
+  {
+    "SeafoodProdName": "青筆、雞仔魚",
+    "Avg_Price": 140.0
+  },
+  {
+    "SeafoodProdName": "沙腸",
+    "Avg_Price": 200.0
+  },
+  {
+    "SeafoodProdName": "剝皮魚（黑達仔）",
+    "Avg_Price": 334.1
+  },
+  {
+    "SeafoodProdName": "鮭魚",
+    "Avg_Price": 241.0
+  },
+  {
+    "SeafoodProdName": "鮭魚頭/尾",
+    "Avg_Price": 61.9
+  },
+  {
+    "SeafoodProdName": "鮟鱇魚",
+    "Avg_Price": 30.4
+  },
+  {
+    "SeafoodProdName": "其他非凍結魚",
+    "Avg_Price": 18.5
+  },
+  {
+    "SeafoodProdName": "赤宗(凍)",
+    "Avg_Price": 45.1
+  },
+  {
+    "SeafoodProdName": "金線(凍)",
+    "Avg_Price": 78.0
+  },
+  {
+    "SeafoodProdName": "鱙仔(凍)",
+    "Avg_Price": 160.0
+  },
+  {
+    "SeafoodProdName": "勿仔(凍)",
+    "Avg_Price": 196.0
+  },
+  {
+    "SeafoodProdName": "午仔魚(凍)",
+    "Avg_Price": 188.0
+  },
+  {
+    "SeafoodProdName": "（日本）白帶魚凍",
+    "Avg_Price": 123.0
+  },
+  {
+    "SeafoodProdName": "秋刀(凍)",
+    "Avg_Price": 83.1
+  },
+  {
+    "SeafoodProdName": "鮭魚(凍)",
+    "Avg_Price": 89.9
+  },
+  {
+    "SeafoodProdName": "白蝦",
+    "Avg_Price": 164.7
+  },
+  {
+    "SeafoodProdName": "蟳",
+    "Avg_Price": 449.3
+  },
+  {
+    "SeafoodProdName": "其他蟹類",
+    "Avg_Price": 164.0
+  },
+  {
+    "SeafoodProdName": "牡蠣養",
+    "Avg_Price": 113.3
+  },
+  {
+    "SeafoodProdName": "文蛤養",
+    "Avg_Price": 170.8
+  },
+  {
+    "SeafoodProdName": "鳳螺(海)",
+    "Avg_Price": 239.5
+  },
+  {
+    "SeafoodProdName": "鮭魚片",
+    "Avg_Price": 120.0
+  },
+  {
+    "SeafoodProdName": "其他加工",
+    "Avg_Price": 511.6
+  },
+  {
+    "SeafoodProdName": "熟卷",
+    "Avg_Price": 291.1
+  },
+  {
+    "SeafoodProdName": "烏魚子",
+    "Avg_Price": 200.0
+  },
+  {
+    "SeafoodProdName": "熟鯖魚",
+    "Avg_Price": 120.0
+  },
+  {
+    "SeafoodProdName": "魚肚",
+    "Avg_Price": 10.0
+  },
+  {
+    "SeafoodProdName": "魚皮",
+    "Avg_Price": 20.0
+  },
+  {
+    "SeafoodProdName": "其他吳郭",
+    "Avg_Price": 107.2
+  },
+  {
+    "SeafoodProdName": "鯽魚",
+    "Avg_Price": 133.0
+  },
+  {
+    "SeafoodProdName": "金目鱸",
+    "Avg_Price": 124.7
+  },
+  {
+    "SeafoodProdName": "七星鱸",
+    "Avg_Price": 138.5
+  },
+  {
+    "SeafoodProdName": "鱺魚",
+    "Avg_Price": 190.0
+  },
+  {
+    "SeafoodProdName": "紅鰽",
+    "Avg_Price": 214.1
+  },
+  {
+    "SeafoodProdName": "珍珠龍膽/龍虎斑",
+    "Avg_Price": 186.5
+  },
+  {
+    "SeafoodProdName": "紅目鰱",
+    "Avg_Price": 131.0
+  },
+  {
+    "SeafoodProdName": "三牙",
+    "Avg_Price": 505.4
+  },
+  {
+    "SeafoodProdName": "黑口",
+    "Avg_Price": 333.4
+  },
+  {
+    "SeafoodProdName": "鮸魚",
+    "Avg_Price": 178.2
+  },
+  {
+    "SeafoodProdName": "硬尾",
+    "Avg_Price": 79.3
+  },
+  {
+    "SeafoodProdName": "甘瓜仔",
+    "Avg_Price": 95.6
+  },
+  {
+    "SeafoodProdName": "油魽",
+    "Avg_Price": 503.7
+  },
+  {
+    "SeafoodProdName": "鰺魚",
+    "Avg_Price": 8.0
+  },
+  {
+    "SeafoodProdName": "三角仔、金錢仔",
+    "Avg_Price": 420.0
+  },
+  {
+    "SeafoodProdName": "其他鰺類",
+    "Avg_Price": 365.7
+  },
+  {
+    "SeafoodProdName": "馬加",
+    "Avg_Price": 148.0
+  },
+  {
+    "SeafoodProdName": "白北",
+    "Avg_Price": 426.3
+  },
+  {
+    "SeafoodProdName": "石喬",
+    "Avg_Price": 152.2
+  },
+  {
+    "SeafoodProdName": "大鯊",
+    "Avg_Price": 100.0
+  },
+  {
+    "SeafoodProdName": "軟舌、軟絲",
+    "Avg_Price": 354.2
+  },
+  {
+    "SeafoodProdName": "小卷",
+    "Avg_Price": 173.8
+  },
+  {
+    "SeafoodProdName": "馬頭魚",
+    "Avg_Price": 131.0
+  },
+  {
+    "SeafoodProdName": "海鯰",
+    "Avg_Price": 270.0
+  },
+  {
+    "SeafoodProdName": "皮刀",
+    "Avg_Price": 65.3
+  },
+  {
+    "SeafoodProdName": "鯖魚",
+    "Avg_Price": 77.0
+  },
+  {
+    "SeafoodProdName": "龍舌",
+    "Avg_Price": 380.0
+  },
+  {
+    "SeafoodProdName": "石狗公",
+    "Avg_Price": 168.0
+  },
+  {
+    "SeafoodProdName": "赤筆",
+    "Avg_Price": 434.6
+  },
+  {
+    "SeafoodProdName": "加志",
+    "Avg_Price": 329.0
+  },
+  {
+    "SeafoodProdName": "什魚",
+    "Avg_Price": 136.4
+  },
+  {
+    "SeafoodProdName": "象魚(臭肚)",
+    "Avg_Price": 150.0
+  },
+  {
+    "SeafoodProdName": "剝皮魚",
+    "Avg_Price": 248.3
+  },
+  {
+    "SeafoodProdName": "其他鮪魚(凍)",
+    "Avg_Price": 129.0
+  },
+  {
+    "SeafoodProdName": "透抽(凍)",
+    "Avg_Price": 300.9
+  },
+  {
+    "SeafoodProdName": "肉魚(凍)",
+    "Avg_Price": 100.0
+  },
+  {
+    "SeafoodProdName": "鯖魚(凍)",
+    "Avg_Price": 232.0
+  },
+  {
+    "SeafoodProdName": "柳葉魚(凍)",
+    "Avg_Price": 50.0
+  },
+  {
+    "SeafoodProdName": "比目魚、扁鱈",
+    "Avg_Price": 505.0
+  },
+  {
+    "SeafoodProdName": "鮭魚頭/尾凍",
+    "Avg_Price": 100.0
+  },
+  {
+    "SeafoodProdName": "其他凍結(凍)",
+    "Avg_Price": 115.4
+  },
+  {
+    "SeafoodProdName": "蝦仁",
+    "Avg_Price": 220.0
+  },
+  {
+    "SeafoodProdName": "厚殼蝦海",
+    "Avg_Price": 250.0
+  },
+  {
+    "SeafoodProdName": "花市仔",
+    "Avg_Price": 81.1
+  },
+  {
+    "SeafoodProdName": "海瓜子",
+    "Avg_Price": 150.0
+  },
+  {
+    "SeafoodProdName": "圓鱈片",
+    "Avg_Price": 92.5
+  },
+  {
+    "SeafoodProdName": "鹹魚",
+    "Avg_Price": 65.0
+  },
+  {
+    "SeafoodProdName": "魚卵",
+    "Avg_Price": 118.7
+  },
+  {
+    "SeafoodProdName": "魚肉",
+    "Avg_Price": 90.0
+  },
+  {
+    "SeafoodProdName": "田蛙",
+    "Avg_Price": 60.2
+  },
+  {
+    "SeafoodProdName": "青斑",
+    "Avg_Price": 396.3
+  },
+  {
+    "SeafoodProdName": "淡水珍珠石斑",
+    "Avg_Price": 100.0
+  },
+  {
+    "SeafoodProdName": "花身",
+    "Avg_Price": 45.1
+  },
+  {
+    "SeafoodProdName": "紅尾",
+    "Avg_Price": 188.4
+  },
+  {
+    "SeafoodProdName": "鐵甲",
+    "Avg_Price": 100.0
+  },
+  {
+    "SeafoodProdName": "黑尾冬",
+    "Avg_Price": 129.5
+  },
+  {
+    "SeafoodProdName": "西鯧",
+    "Avg_Price": 50.0
+  },
+  {
+    "SeafoodProdName": "其他鯧類",
+    "Avg_Price": 233.0
+  },
+  {
+    "SeafoodProdName": "小串仔",
+    "Avg_Price": 88.0
+  },
+  {
+    "SeafoodProdName": "鯊煙",
+    "Avg_Price": 250.0
+  },
+  {
+    "SeafoodProdName": "水鯊",
+    "Avg_Price": 31.8
+  },
+  {
+    "SeafoodProdName": "石斑魚",
+    "Avg_Price": 304.0
+  },
+  {
+    "SeafoodProdName": "水針",
+    "Avg_Price": 87.5
+  },
+  {
+    "SeafoodProdName": "其他鯛類(凍)",
+    "Avg_Price": 122.5
+  },
+  {
+    "SeafoodProdName": "白鯧(凍)",
+    "Avg_Price": 300.0
+  },
+  {
+    "SeafoodProdName": "黑鯧(凍)",
+    "Avg_Price": 120.0
+  },
+  {
+    "SeafoodProdName": "黑皮旗凍",
+    "Avg_Price": 123.6
+  },
+  {
+    "SeafoodProdName": "其他鯊魚(凍)",
+    "Avg_Price": 46.4
+  },
+  {
+    "SeafoodProdName": "小卷(凍)",
+    "Avg_Price": 255.4
+  },
+  {
+    "SeafoodProdName": "章魚(凍)",
+    "Avg_Price": 100.0
+  },
+  {
+    "SeafoodProdName": "阿根廷魷魚頭",
+    "Avg_Price": 42.5
+  },
+  {
+    "SeafoodProdName": "泰國蝦養",
+    "Avg_Price": 148.0
+  },
+  {
+    "SeafoodProdName": "大正蝦海",
+    "Avg_Price": 883.5
+  },
+  {
+    "SeafoodProdName": "魚丸",
+    "Avg_Price": 60.0
+  },
+  {
+    "SeafoodProdName": "其他",
+    "Avg_Price": 20.0
+  },
+  {
+    "SeafoodProdName": "泥鰍",
+    "Avg_Price": 279.5
+  },
+  {
+    "SeafoodProdName": "黃鍚鯛",
+    "Avg_Price": 286.5
+  },
+  {
+    "SeafoodProdName": "其他鯛類",
+    "Avg_Price": 290.2
+  },
+  {
+    "SeafoodProdName": "赤海",
+    "Avg_Price": 278.3
+  },
+  {
+    "SeafoodProdName": "青魽",
+    "Avg_Price": 87.5
+  },
+  {
+    "SeafoodProdName": "勿仔",
+    "Avg_Price": 200.0
+  },
+  {
+    "SeafoodProdName": "真鰹",
+    "Avg_Price": 50.2
+  },
+  {
+    "SeafoodProdName": "花鰹",
+    "Avg_Price": 58.2
+  },
+  {
+    "SeafoodProdName": "煙仔虎",
+    "Avg_Price": 50.2
+  },
+  {
+    "SeafoodProdName": "鯊條",
+    "Avg_Price": 10.0
+  },
+  {
+    "SeafoodProdName": "其他鯊魚",
+    "Avg_Price": 33.5
+  },
+  {
+    "SeafoodProdName": "雙髻鮫",
+    "Avg_Price": 65.5
+  },
+  {
+    "SeafoodProdName": "牛尾",
+    "Avg_Price": 80.0
+  },
+  {
+    "SeafoodProdName": "金龍、石鱸",
+    "Avg_Price": 153.5
+  },
+  {
+    "SeafoodProdName": "其他鯧類(凍)",
+    "Avg_Price": 178.0
+  },
+  {
+    "SeafoodProdName": "魷魚(凍)",
+    "Avg_Price": 30.0
+  },
+  {
+    "SeafoodProdName": "香魚(凍)",
+    "Avg_Price": 158.9
+  },
+  {
+    "SeafoodProdName": "三點仔",
+    "Avg_Price": 115.3
+  },
+  {
+    "SeafoodProdName": "鐘螺(海)",
+    "Avg_Price": 261.3
+  },
+  {
+    "SeafoodProdName": "其他貝類",
+    "Avg_Price": 233.1
+  },
+  {
+    "SeafoodProdName": "比目魚片",
+    "Avg_Price": 340.0
+  },
+  {
+    "SeafoodProdName": "豆仔魚",
+    "Avg_Price": 150.0
+  },
+  {
+    "SeafoodProdName": "白鯛",
+    "Avg_Price": 220.0
+  },
+  {
+    "SeafoodProdName": "油口",
+    "Avg_Price": 232.5
+  },
+  {
+    "SeafoodProdName": "紅古",
+    "Avg_Price": 30.0
+  },
+  {
+    "SeafoodProdName": "變身苦",
+    "Avg_Price": 199.0
+  },
+  {
+    "SeafoodProdName": "竹梭",
+    "Avg_Price": 100.0
+  },
+  {
+    "SeafoodProdName": "青鞭",
+    "Avg_Price": 38.0
+  },
+  {
+    "SeafoodProdName": "剝皮魚去頭",
+    "Avg_Price": 217.5
+  },
+  {
+    "SeafoodProdName": "花枝(凍)",
+    "Avg_Price": 38.0
+  },
+  {
+    "SeafoodProdName": "紅條(凍)",
+    "Avg_Price": 464.9
+  },
+  {
+    "SeafoodProdName": "油魚(凍)",
+    "Avg_Price": 45.0
+  },
+  {
+    "SeafoodProdName": "其他蝦類",
+    "Avg_Price": 100.0
+  },
+  {
+    "SeafoodProdName": "熟丁香",
+    "Avg_Price": 120.0
+  },
+  {
+    "SeafoodProdName": "鯰魚",
+    "Avg_Price": 227.5
+  },
+  {
+    "SeafoodProdName": "丁香",
+    "Avg_Price": 85.0
+  },
+  {
+    "SeafoodProdName": "劍旗魚",
+    "Avg_Price": 197.8
+  },
+  {
+    "SeafoodProdName": "黑皮旗",
+    "Avg_Price": 142.3
+  },
+  {
+    "SeafoodProdName": "墨魚賊",
+    "Avg_Price": 55.0
+  },
+  {
+    "SeafoodProdName": "長加",
+    "Avg_Price": 50.0
+  },
+  {
+    "SeafoodProdName": "盤仔(凍)",
+    "Avg_Price": 49.8
+  },
+  {
+    "SeafoodProdName": "土魠(凍)",
+    "Avg_Price": 175.0
+  },
+  {
+    "SeafoodProdName": "墨魚賊(凍)",
+    "Avg_Price": 30.0
+  },
+  {
+    "SeafoodProdName": "軟舌、軟絲(凍)",
+    "Avg_Price": 331.3
+  },
+  {
+    "SeafoodProdName": "斑節蝦海",
+    "Avg_Price": 854.0
+  },
+  {
+    "SeafoodProdName": "劍蝦",
+    "Avg_Price": 250.0
+  },
+  {
+    "SeafoodProdName": "竹蟶海",
+    "Avg_Price": 100.0
+  },
+  {
+    "SeafoodProdName": "其他熟魚",
+    "Avg_Price": 150.0
+  },
+  {
+    "SeafoodProdName": "銀鯧",
+    "Avg_Price": 55.0
+  },
+  {
+    "SeafoodProdName": "太平洋黑鮪",
+    "Avg_Price": 193.0
+  },
+  {
+    "SeafoodProdName": "小紅鱠",
+    "Avg_Price": 562.6
+  },
+  {
+    "SeafoodProdName": "扁魚",
+    "Avg_Price": 49.9
+  },
+  {
+    "SeafoodProdName": "白松",
+    "Avg_Price": 150.0
+  },
+  {
+    "SeafoodProdName": "黃鰭鮪凍",
+    "Avg_Price": 80.9
+  },
+  {
+    "SeafoodProdName": "海菜",
+    "Avg_Price": 22.0
+  },
+  {
+    "SeafoodProdName": "紅鰽海",
+    "Avg_Price": 350.0
+  },
+  {
+    "SeafoodProdName": "青鱗",
+    "Avg_Price": 229.0
+  },
+  {
+    "SeafoodProdName": "其他鰹類",
+    "Avg_Price": 61.9
+  },
+  {
+    "SeafoodProdName": "雨傘旗",
+    "Avg_Price": 30.0
+  }
+]
