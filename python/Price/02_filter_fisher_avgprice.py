@@ -4,16 +4,10 @@ import json
 from pathlib import Path
 
 
-<<<<<<< HEAD
 # 來源資料與輸出檔案都位於此篩選程式所在的 Price 資料夾。
 BASE_DIR = Path(__file__).resolve().parent
 INPUT_PATH = BASE_DIR / "02_moa_fisher.json"
 OUTPUT_PATH = BASE_DIR / "02_moa_fisher_avgprice.json"
-=======
-# 來源資料與輸出檔案的位置。
-INPUT_PATH = Path("/Users/amy/TKR102/Price/02_moa_fisher.json")
-OUTPUT_PATH = Path(__file__).with_name("02_moa_fisher_avgprice.json")
->>>>>>> 035b0fa063cfe124d9b22f99bdad978556497911
 
 # 將使用的欄位名稱集中定義，方便日後維護。
 SEAFOOD_NAME_FIELD = "SeafoodProdName"
@@ -48,8 +42,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
     main()
-=======
-    main()
->>>>>>> 035b0fa063cfe124d9b22f99bdad978556497911

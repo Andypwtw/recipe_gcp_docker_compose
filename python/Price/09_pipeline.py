@@ -8,12 +8,7 @@
 範例：
     python pipeline.py --directory /path/to/Price
 
-<<<<<<< HEAD
 本程式每次啟動只執行一次；排程由 Airflow DAG 管理。
-=======
-預設會在完成後每 14 天重新執行一次；若只需執行一次：
-    python 09_pipeline.py --once
->>>>>>> 035b0fa063cfe124d9b22f99bdad978556497911
 """
 
 from __future__ import annotations
@@ -23,10 +18,6 @@ import json
 import os
 import subprocess
 import sys
-<<<<<<< HEAD
-=======
-import time
->>>>>>> 035b0fa063cfe124d9b22f99bdad978556497911
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable
@@ -242,39 +233,14 @@ def parse_args() -> argparse.Namespace:
         help="存放 01–08 資料處理腳本的資料夾",
     )
     parser.add_argument("--dry-run", action="store_true", help="只列出將執行的腳本")
-<<<<<<< HEAD
-=======
-    parser.add_argument(
-        "--every-days",
-        type=float,
-        default=14,
-        help="持續執行模式的間隔天數，預設為 14 天",
-    )
-    parser.add_argument("--once", action="store_true", help="只執行本次流程後結束")
->>>>>>> 035b0fa063cfe124d9b22f99bdad978556497911
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
     directory = args.directory.expanduser().resolve()
-<<<<<<< HEAD
     run_pipeline(directory, args.dry_run)
     return 0
-=======
-    if args.every_days <= 0:
-        raise ValueError("--every-days 必須大於 0")
-
-    while True:
-        started_at = time.monotonic()
-        run_pipeline(directory, args.dry_run)
-        if args.once or args.dry_run:
-            return 0
-        interval_seconds = args.every_days * 24 * 60 * 60
-        delay_seconds = max(0, interval_seconds - (time.monotonic() - started_at))
-        print(f"等待 {args.every_days:g} 天後再次執行。", flush=True)
-        time.sleep(delay_seconds)
->>>>>>> 035b0fa063cfe124d9b22f99bdad978556497911
 
 
 if __name__ == "__main__":
