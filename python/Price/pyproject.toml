@@ -1,0 +1,11 @@
+[project]
+name = "price"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "pandas>=3.0.6",
+    "openpyxl>=3.1.5",
+    "requests>=2.34.2",
+]

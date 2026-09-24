@@ -1,0 +1,42 @@
+[
+  {
+    "review_id": 13,
+    "ingredient_id": 12,
+    "ingredient_name": "黑胡椒粒",
+    "candidate_nutrition_id": 8281,
+    "candidate_name": "黑胡椒粉",
+    "score": "0.857143",
+    "decision": "APPROVED",
+    "note": "AUTO_APPROVED：同組候選中名稱核心最接近，且未發現明顯食材類別衝突。"
+  },
+  {
+    "review_id": 14,
+    "ingredient_id": 12,
+    "ingredient_name": "黑胡椒粒",
+    "candidate_nutrition_id": 8369,
+    "candidate_name": "黑胡椒醬",
+    "score": "0.857143",
+    "decision": "REJECTED",
+    "note": "AUTO_REJECTED：同一食材已有更合理候選。"
+  },
+  {
+    "review_id": 15,
+    "ingredient_id": 13,
+    "ingredient_name": "胡椒",
+    "candidate_nutrition_id": 8280,
+    "candidate_name": "紅胡椒粒",
+    "score": "0.800000",
+    "decision": "APPROVED",
+    "note": "AUTO_APPROVED：同組候選中名稱核心最接近，且未發現明顯食材類別衝突。"
+  },
+  {
+    "review_id": 16,
+    "ingredient_id": 13,
+    "ingredient_name": "胡椒",
+    "candidate_nutrition_id": 8282,
+    "candidate_name": "綠胡椒粒",
+    "score": "0.800000",
+    "decision": "REJECTED",
+    "note": "AUTO_REJECTED：同一食材已有更合理候選。"
+  }
+]

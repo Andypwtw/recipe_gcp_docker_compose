@@ -52,7 +52,7 @@ x-airflow-common: &airflow-common
     - ./airflow/dags:/opt/airflow/dags:ro
     - airflow_logs:/opt/airflow/logs
     - airflow_plugins:/opt/airflow/plugins
-    - ./python:/workspace/python:ro
+    - ./python:/workspace/python
     - ./data:/workspace/data
 
   networks:

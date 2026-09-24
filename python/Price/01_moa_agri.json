@@ -1,0 +1,7002 @@
+[
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "11",
+    "CropName": "椰子",
+    "Avg_Price": 20.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "129",
+    "CropName": "椰子-剝殼進口",
+    "Avg_Price": 30.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "31",
+    "CropName": "釋迦",
+    "Avg_Price": 70.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "459",
+    "CropName": "草莓-進口",
+    "Avg_Price": 222.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "469",
+    "CropName": "藍莓-進口",
+    "Avg_Price": 132.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "50",
+    "CropName": "百香果-其他",
+    "Avg_Price": 109.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "51",
+    "CropName": "百香果-改良種",
+    "Avg_Price": 84.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "72",
+    "CropName": "小番茄-聖女",
+    "Avg_Price": 137.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "74",
+    "CropName": "小番茄-玉女",
+    "Avg_Price": 371.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "811",
+    "CropName": "紅龍果-白肉",
+    "Avg_Price": 49.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "812",
+    "CropName": "紅龍果-紅肉",
+    "Avg_Price": 49.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "813",
+    "CropName": "紅龍果-雙色紅龍果",
+    "Avg_Price": 55.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "839",
+    "CropName": "櫻桃-進口",
+    "Avg_Price": 212.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "859",
+    "CropName": "榴槤-進口",
+    "Avg_Price": 106.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "86",
+    "CropName": "山竹",
+    "Avg_Price": 30.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "869",
+    "CropName": "山竹-進口",
+    "Avg_Price": 222.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "87",
+    "CropName": "紅毛丹",
+    "Avg_Price": 92.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "91",
+    "CropName": "其他",
+    "Avg_Price": 86.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "A1",
+    "CropName": "香蕉",
+    "Avg_Price": 35.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "A2",
+    "CropName": "香蕉-芭蕉紅芭蕉",
+    "Avg_Price": 37.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "A3",
+    "CropName": "香蕉-旦蕉",
+    "Avg_Price": 100.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "A4",
+    "CropName": "香蕉-越旦",
+    "Avg_Price": 27.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "B2",
+    "CropName": "鳳梨-金鑽鳳梨",
+    "Avg_Price": 39.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "B7",
+    "CropName": "鳳梨-牛奶鳳梨",
+    "Avg_Price": 31.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "B8",
+    "CropName": "鳳梨-西瓜鳳梨",
+    "Avg_Price": 24.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "C9",
+    "CropName": "柑橘-進口",
+    "Avg_Price": 58.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "E9",
+    "CropName": "甜橙-進口",
+    "Avg_Price": 40.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "F1",
+    "CropName": "雜柑-檸檬",
+    "Avg_Price": 36.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "F4",
+    "CropName": "雜柑-桔子",
+    "Avg_Price": 110.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "F5",
+    "CropName": "雜柑-無子檸檬",
+    "Avg_Price": 30.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "F6",
+    "CropName": "雜柑-黃金檸檬",
+    "Avg_Price": 19.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FA0",
+    "CropName": "其他花類",
+    "Avg_Price": 110.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FA1",
+    "CropName": "黃秋葵",
+    "Avg_Price": 87.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB1",
+    "CropName": "花椰菜-青梗",
+    "Avg_Price": 41.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FC1",
+    "CropName": "胡瓜-黑刺",
+    "Avg_Price": 21.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FD0",
+    "CropName": "花胡瓜-其他",
+    "Avg_Price": 60.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FD1",
+    "CropName": "花胡瓜",
+    "Avg_Price": 52.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE0",
+    "CropName": "冬瓜-其他",
+    "Avg_Price": 20.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE1",
+    "CropName": "冬瓜-白皮",
+    "Avg_Price": 27.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FF0",
+    "CropName": "絲瓜-其他",
+    "Avg_Price": 49.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FF1",
+    "CropName": "絲瓜",
+    "Avg_Price": 48.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FF2",
+    "CropName": "絲瓜-角瓜",
+    "Avg_Price": 46.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FG0",
+    "CropName": "苦瓜-其他",
+    "Avg_Price": 48.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FG1",
+    "CropName": "苦瓜-白大米",
+    "Avg_Price": 56.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FG2",
+    "CropName": "苦瓜-青大米",
+    "Avg_Price": 41.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FG3",
+    "CropName": "苦瓜-山苦瓜",
+    "Avg_Price": 50.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FG4",
+    "CropName": "苦瓜-翠綠",
+    "Avg_Price": 40.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH1",
+    "CropName": "扁蒲-長形",
+    "Avg_Price": 10.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH3",
+    "CropName": "扁蒲-花蒲",
+    "Avg_Price": 25.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH4",
+    "CropName": "扁蒲-梨子蒲",
+    "Avg_Price": 24.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FI0",
+    "CropName": "茄子-其他",
+    "Avg_Price": 38.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FI2",
+    "CropName": "茄子-麻荸茄",
+    "Avg_Price": 53.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FI3",
+    "CropName": "茄子-日本種",
+    "Avg_Price": 32.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FJ1",
+    "CropName": "番茄-黑柿",
+    "Avg_Price": 44.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FJ3",
+    "CropName": "番茄-牛番茄",
+    "Avg_Price": 74.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FK41",
+    "CropName": "甜椒-彩色種 紅色",
+    "Avg_Price": 81.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FK42",
+    "CropName": "甜椒-彩色種 黃色",
+    "Avg_Price": 92.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FK5",
+    "CropName": "甜椒-青椒",
+    "Avg_Price": 43.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FK6",
+    "CropName": "甜椒-水果彩椒",
+    "Avg_Price": 106.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FK94",
+    "CropName": "甜椒-進口 彩色種",
+    "Avg_Price": 70.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FL9",
+    "CropName": "豌豆-進口",
+    "Avg_Price": 166.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM1",
+    "CropName": "菜豆-白色",
+    "Avg_Price": 13.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM2",
+    "CropName": "菜豆-青色",
+    "Avg_Price": 59.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FN1",
+    "CropName": "敏豆-白豆",
+    "Avg_Price": 124.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FN4",
+    "CropName": "敏豆-翼豆",
+    "Avg_Price": 125.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FN5",
+    "CropName": "敏豆-醜豆",
+    "Avg_Price": 82.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FQ2",
+    "CropName": "毛豆-豆仁",
+    "Avg_Price": 368.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR9",
+    "CropName": "青花苔-進口",
+    "Avg_Price": 91.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS2",
+    "CropName": "越瓜-白色",
+    "Avg_Price": 40.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT11",
+    "CropName": "南瓜-木瓜型 阿成",
+    "Avg_Price": 48.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT12",
+    "CropName": "南瓜-木瓜型 阿嬌",
+    "Avg_Price": 25.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT2",
+    "CropName": "南瓜-圓形",
+    "Avg_Price": 35.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT3",
+    "CropName": "南瓜-黃如意",
+    "Avg_Price": 75.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT5",
+    "CropName": "南瓜-青如意",
+    "Avg_Price": 77.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT71",
+    "CropName": "南瓜-栗子 小紅",
+    "Avg_Price": 62.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT91",
+    "CropName": "南瓜-進口 木瓜型",
+    "Avg_Price": 26.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT96",
+    "CropName": "南瓜-進口 東昇",
+    "Avg_Price": 42.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT97",
+    "CropName": "南瓜-進口 栗子",
+    "Avg_Price": 28.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU1",
+    "CropName": "隼人瓜",
+    "Avg_Price": 7.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU2",
+    "CropName": "隼人瓜-瓜苗",
+    "Avg_Price": 123.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV1",
+    "CropName": "辣椒-紅小",
+    "Avg_Price": 110.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV2",
+    "CropName": "辣椒-青小",
+    "Avg_Price": 63.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV4",
+    "CropName": "辣椒-朝天椒",
+    "Avg_Price": 170.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV6",
+    "CropName": "辣椒-糯米椒",
+    "Avg_Price": 66.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV91",
+    "CropName": "辣椒-進口 紅小",
+    "Avg_Price": 50.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV94",
+    "CropName": "辣椒-進口 朝天椒",
+    "Avg_Price": 82.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY0",
+    "CropName": "玉米-其他",
+    "Avg_Price": 210.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY4",
+    "CropName": "玉米-玉米筍",
+    "Avg_Price": 143.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY41",
+    "CropName": "玉米-玉米筍 帶殼",
+    "Avg_Price": 26.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY5",
+    "CropName": "玉米-糯米黑",
+    "Avg_Price": 29.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY6",
+    "CropName": "玉米-甜軟殼",
+    "Avg_Price": 28.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY8",
+    "CropName": "玉米-白龍王",
+    "Avg_Price": 39.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY9",
+    "CropName": "玉米-進口",
+    "Avg_Price": 145.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY94",
+    "CropName": "玉米-進口 玉米筍",
+    "Avg_Price": 214.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FZ2",
+    "CropName": "落花生-熟",
+    "Avg_Price": 100.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "G2",
+    "CropName": "黃金果",
+    "Avg_Price": 85.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "G3",
+    "CropName": "酪梨",
+    "Avg_Price": 56.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "G39",
+    "CropName": "酪梨-進口",
+    "Avg_Price": 149.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "G49",
+    "CropName": "奇異果-進口",
+    "Avg_Price": 85.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "G7",
+    "CropName": "橄欖",
+    "Avg_Price": 40.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "G9",
+    "CropName": "波蘿蜜",
+    "Avg_Price": 30.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "G91",
+    "CropName": "榴槤蜜",
+    "Avg_Price": 23.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "H1",
+    "CropName": "柚子-文旦",
+    "Avg_Price": 18.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "I1",
+    "CropName": "木瓜-網室紅肉",
+    "Avg_Price": 35.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "I3",
+    "CropName": "木瓜-日昇種",
+    "Avg_Price": 87.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "I4",
+    "CropName": "木瓜-青木瓜",
+    "Avg_Price": 14.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "K3",
+    "CropName": "龍眼-粉殼",
+    "Avg_Price": 51.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "K4",
+    "CropName": "龍眼-龍眼乾帶殼",
+    "Avg_Price": 8.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LA1",
+    "CropName": "甘藍-初秋",
+    "Avg_Price": 57.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LA2",
+    "CropName": "甘藍-改良種",
+    "Avg_Price": 22.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LA4",
+    "CropName": "甘藍-紫色",
+    "Avg_Price": 5.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LA6",
+    "CropName": "甘藍-甘藍芽",
+    "Avg_Price": 117.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LA91",
+    "CropName": "甘藍-進口 初秋",
+    "Avg_Price": 27.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LA92",
+    "CropName": "甘藍-進口 改良種",
+    "Avg_Price": 13.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LB1",
+    "CropName": "小白菜-土白菜",
+    "Avg_Price": 25.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LB2",
+    "CropName": "小白菜-蚵仔白",
+    "Avg_Price": 22.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LB3",
+    "CropName": "小白菜-奶油白",
+    "Avg_Price": 55.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LB8",
+    "CropName": "小白菜-水耕",
+    "Avg_Price": 97.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LC0",
+    "CropName": "包心白-其他",
+    "Avg_Price": 128.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LC1",
+    "CropName": "包心白-包白",
+    "Avg_Price": 27.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LC9",
+    "CropName": "包心白-進口",
+    "Avg_Price": 26.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LC90",
+    "CropName": "包心白菜-進口 其他",
+    "Avg_Price": 68.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LC93",
+    "CropName": "包心白菜-進口 包頭蓮 ",
+    "Avg_Price": 37.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LD1",
+    "CropName": "青江白菜-小梗",
+    "Avg_Price": 32.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LE1",
+    "CropName": "皇宮菜-小葉",
+    "Avg_Price": 50.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LE2",
+    "CropName": "皇宮菜-大葉",
+    "Avg_Price": 30.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LF1",
+    "CropName": "蕹菜-大葉",
+    "Avg_Price": 10.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LF2",
+    "CropName": "蕹菜-小葉",
+    "Avg_Price": 48.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LF3",
+    "CropName": "蕹菜-水蕹菜",
+    "Avg_Price": 63.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LG2",
+    "CropName": "芹菜-白梗",
+    "Avg_Price": 133.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LG9",
+    "CropName": "芹菜-進口",
+    "Avg_Price": 33.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LH1",
+    "CropName": "菠菜-圓葉",
+    "Avg_Price": 62.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LH2",
+    "CropName": "菠菜-角葉",
+    "Avg_Price": 235.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LI0",
+    "CropName": "萵苣菜-其他",
+    "Avg_Price": 114.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LI1",
+    "CropName": "萵苣菜-廣東菜",
+    "Avg_Price": 82.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LI3",
+    "CropName": "萵苣菜-本島圓葉",
+    "Avg_Price": 55.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LI5",
+    "CropName": "萵苣菜-油麥菜",
+    "Avg_Price": 20.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LI6",
+    "CropName": "萵苣菜-蘿美",
+    "Avg_Price": 79.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LI71",
+    "CropName": "萵苣菜-紅捲",
+    "Avg_Price": 260.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LI8",
+    "CropName": "萵苣菜-水耕",
+    "Avg_Price": 116.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LI9",
+    "CropName": "萵苣菜-進口",
+    "Avg_Price": 103.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LI92",
+    "CropName": "萵苣菜-進口 結球萵",
+    "Avg_Price": 155.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LI96",
+    "CropName": "萵苣菜-進口 蘿美",
+    "Avg_Price": 211.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LJ4",
+    "CropName": "芥菜-小芥菜",
+    "Avg_Price": 22.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LK2",
+    "CropName": "芥藍菜",
+    "Avg_Price": 33.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LK3",
+    "CropName": "芥藍菜-芥藍芽",
+    "Avg_Price": 76.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LM1",
+    "CropName": "莧菜-紅莧菜",
+    "Avg_Price": 40.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LM2",
+    "CropName": "莧菜-白莧菜",
+    "Avg_Price": 41.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LN1",
+    "CropName": "油菜",
+    "Avg_Price": 21.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LO1",
+    "CropName": "甘薯葉",
+    "Avg_Price": 28.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LP1",
+    "CropName": "芫荽",
+    "Avg_Price": 129.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LP2",
+    "CropName": "九層塔",
+    "Avg_Price": 27.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LQ1",
+    "CropName": "紅鳳菜-紅鳳菜",
+    "Avg_Price": 75.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LS1",
+    "CropName": "茴香",
+    "Avg_Price": 150.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LT2",
+    "CropName": "海菜-海帶",
+    "Avg_Price": 50.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LT3",
+    "CropName": "海菜-水蓮",
+    "Avg_Price": 141.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LX1",
+    "CropName": "蕨菜-過貓",
+    "Avg_Price": 83.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LX2",
+    "CropName": "蕨菜-山蘇",
+    "Avg_Price": 230.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LY2",
+    "CropName": "黑甜仔菜",
+    "Avg_Price": 40.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "M3",
+    "CropName": "楊桃-馬來亞種",
+    "Avg_Price": 16.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MA1",
+    "CropName": "洋菇",
+    "Avg_Price": 226.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MA2",
+    "CropName": "洋菇-盒裝",
+    "Avg_Price": 227.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MB1",
+    "CropName": "草菇",
+    "Avg_Price": 127.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MC1",
+    "CropName": "濕木耳",
+    "Avg_Price": 81.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MD1",
+    "CropName": "濕香菇",
+    "Avg_Price": 178.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "ME1",
+    "CropName": "金絲菇-金針菇",
+    "Avg_Price": 52.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "ME2",
+    "CropName": "金絲菇-盒裝",
+    "Avg_Price": 51.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MF1",
+    "CropName": "蠔菇-鮑魚菇",
+    "Avg_Price": 92.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MI1",
+    "CropName": "秀珍菇",
+    "Avg_Price": 107.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MJ1",
+    "CropName": "杏鮑菇",
+    "Avg_Price": 78.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MJ2",
+    "CropName": "杏鮑菇-盒裝",
+    "Avg_Price": 130.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MK1",
+    "CropName": "鴻喜菇",
+    "Avg_Price": 163.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MK2",
+    "CropName": "鴻喜菇-盒裝",
+    "Avg_Price": 199.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "ML1",
+    "CropName": "珊瑚菇",
+    "Avg_Price": 120.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MN1",
+    "CropName": "柳松菇",
+    "Avg_Price": 135.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MX1",
+    "CropName": "其他菇類",
+    "Avg_Price": 122.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "N9",
+    "CropName": "李-進口",
+    "Avg_Price": 103.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "O0",
+    "CropName": "梨-其他",
+    "Avg_Price": 22.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "O10",
+    "CropName": "梨-寶島甘露梨",
+    "Avg_Price": 46.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "O3",
+    "CropName": "梨-世紀梨",
+    "Avg_Price": 33.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "O4",
+    "CropName": "梨-新興梨",
+    "Avg_Price": 43.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "O5",
+    "CropName": "梨-豐水梨",
+    "Avg_Price": 28.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "O8",
+    "CropName": "梨-4029梨",
+    "Avg_Price": 35.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "O9",
+    "CropName": "梨-其他進口",
+    "Avg_Price": 207.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "O99",
+    "CropName": "梨-西洋梨進口",
+    "Avg_Price": 35.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "OA2",
+    "CropName": "鹹菜-帶葉",
+    "Avg_Price": 35.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "OB1",
+    "CropName": "雪里紅",
+    "Avg_Price": 30.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "OD1",
+    "CropName": "蘿蔔乾",
+    "Avg_Price": 30.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "OE2",
+    "CropName": "醃瓜-漬",
+    "Avg_Price": 44.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "OG2",
+    "CropName": "熟筍-箭竹筍",
+    "Avg_Price": 80.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "OX1",
+    "CropName": "其他",
+    "Avg_Price": 42.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "P1",
+    "CropName": "番石榴-珍珠芭",
+    "Avg_Price": 91.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "P2",
+    "CropName": "番石榴-紅心",
+    "Avg_Price": 60.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "P3",
+    "CropName": "番石榴-帝王芭",
+    "Avg_Price": 44.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "Q2",
+    "CropName": "蓮霧-子彈型",
+    "Avg_Price": 65.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "Q5",
+    "CropName": "蓮霧-黑糖芭比",
+    "Avg_Price": 285.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "R0",
+    "CropName": "芒果-其他",
+    "Avg_Price": 138.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "R1",
+    "CropName": "芒果-愛文",
+    "Avg_Price": 109.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "R10",
+    "CropName": "芒果-西施",
+    "Avg_Price": 89.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "R31",
+    "CropName": "芒果-夏雪",
+    "Avg_Price": 201.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "R4",
+    "CropName": "芒果-凱特",
+    "Avg_Price": 55.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "R5",
+    "CropName": "芒果-黑香金興",
+    "Avg_Price": 40.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "R6",
+    "CropName": "芒果-金煌",
+    "Avg_Price": 46.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "S0",
+    "CropName": "葡萄-其他",
+    "Avg_Price": 209.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "S1",
+    "CropName": "葡萄-巨峰",
+    "Avg_Price": 69.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "S49",
+    "CropName": "葡萄-無子進口",
+    "Avg_Price": 124.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "S9",
+    "CropName": "葡萄-進口",
+    "Avg_Price": 331.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SA3",
+    "CropName": "蘿蔔-矸仔",
+    "Avg_Price": 9.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SA7",
+    "CropName": "蘿蔔-甜菜根",
+    "Avg_Price": 17.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SA9",
+    "CropName": "蘿蔔-進口",
+    "Avg_Price": 30.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SB1",
+    "CropName": "胡蘿蔔-未洗",
+    "Avg_Price": 17.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SB2",
+    "CropName": "胡蘿蔔-清洗",
+    "Avg_Price": 23.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SC1",
+    "CropName": "馬鈴薯-本產",
+    "Avg_Price": 26.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SC9",
+    "CropName": "馬鈴薯-進口",
+    "Avg_Price": 27.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SD1",
+    "CropName": "洋蔥-本產",
+    "Avg_Price": 25.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SD9",
+    "CropName": "洋蔥-進口",
+    "Avg_Price": 31.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SE1",
+    "CropName": "青蔥-日蔥",
+    "Avg_Price": 118.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SE2",
+    "CropName": "青蔥-北蔥",
+    "Avg_Price": 45.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SE5",
+    "CropName": "青蔥-紅蔥頭",
+    "Avg_Price": 90.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SE6",
+    "CropName": "青蔥-粉蔥",
+    "Avg_Price": 71.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SF1",
+    "CropName": "韭菜-白頭",
+    "Avg_Price": 127.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SF2",
+    "CropName": "韭菜-韭菜黃",
+    "Avg_Price": 119.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SF3",
+    "CropName": "韭菜-韭菜花",
+    "Avg_Price": 163.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SF4",
+    "CropName": "韭菜-青頭",
+    "Avg_Price": 73.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SG2",
+    "CropName": "大蒜-軟梗",
+    "Avg_Price": 151.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SG5",
+    "CropName": "大蒜-蒜頭",
+    "Avg_Price": 85.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SG6",
+    "CropName": "大蒜-蒜仁",
+    "Avg_Price": 90.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SG7",
+    "CropName": "大蒜-蒜瓣",
+    "Avg_Price": 121.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SG9",
+    "CropName": "大蒜-進口",
+    "Avg_Price": 122.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SH1",
+    "CropName": "竹筍-麻竹筍",
+    "Avg_Price": 55.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SH2",
+    "CropName": "竹筍-綠竹筍",
+    "Avg_Price": 103.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SH5",
+    "CropName": "竹筍-烏殼綠",
+    "Avg_Price": 47.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SJ2",
+    "CropName": "芋-檳榔心芋",
+    "Avg_Price": 31.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SJ3",
+    "CropName": "芋-里芋",
+    "Avg_Price": 70.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SJ4",
+    "CropName": "芋-芋莖",
+    "Avg_Price": 17.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SJ5",
+    "CropName": "芋-芋角",
+    "Avg_Price": 60.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SK1",
+    "CropName": "荸薺",
+    "Avg_Price": 65.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SK2",
+    "CropName": "荸薺-加工",
+    "Avg_Price": 70.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SL1",
+    "CropName": "豆薯",
+    "Avg_Price": 16.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SM9",
+    "CropName": "牛蒡-進口",
+    "Avg_Price": 35.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SN1",
+    "CropName": "蓮藕",
+    "Avg_Price": 50.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SO0",
+    "CropName": "甘薯-其他",
+    "Avg_Price": 15.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SO1",
+    "CropName": "甘薯-臺農57號",
+    "Avg_Price": 19.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SO2",
+    "CropName": "甘薯-芋仔甘薯",
+    "Avg_Price": 11.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SO3",
+    "CropName": "甘薯-臺農66號",
+    "Avg_Price": 13.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SP1",
+    "CropName": "薑-老薑",
+    "Avg_Price": 154.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SP2",
+    "CropName": "薑-嫩薑",
+    "Avg_Price": 65.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SP3",
+    "CropName": "薑-粉薑",
+    "Avg_Price": 77.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SP5",
+    "CropName": "薑-薑黃",
+    "Avg_Price": 110.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SQ1",
+    "CropName": "茭白筍-帶殼",
+    "Avg_Price": 68.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SQ3",
+    "CropName": "茭白筍-去殼",
+    "Avg_Price": 162.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SU21",
+    "CropName": "薯蕷-白薯蕷 人參",
+    "Avg_Price": 74.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SU9",
+    "CropName": "薯蕷-進口",
+    "Avg_Price": 130.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SV1",
+    "CropName": "蘆筍-白蘆筍",
+    "Avg_Price": 131.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SV2",
+    "CropName": "蘆筍-綠蘆筍",
+    "Avg_Price": 214.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SV3",
+    "CropName": "蘆筍-蘆筍花",
+    "Avg_Price": 240.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SV9",
+    "CropName": "蘆筍-進口",
+    "Avg_Price": 170.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SV92",
+    "CropName": "蘆筍-進口 綠蘆筍",
+    "Avg_Price": 208.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SX0",
+    "CropName": "芽菜類-其他",
+    "Avg_Price": 20.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SX1",
+    "CropName": "芽菜類-綠豆芽",
+    "Avg_Price": 12.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SX2",
+    "CropName": "芽菜類-黃豆芽",
+    "Avg_Price": 20.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SX3",
+    "CropName": "芽菜類-豌豆芽",
+    "Avg_Price": 85.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SX4",
+    "CropName": "芽菜類-苜蓿芽",
+    "Avg_Price": 50.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SZ1",
+    "CropName": "半天筍",
+    "Avg_Price": 90.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SZ8",
+    "CropName": "香茅",
+    "Avg_Price": 27.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "T0",
+    "CropName": "西瓜-其他",
+    "Avg_Price": 18.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "T5",
+    "CropName": "西瓜-黃肉",
+    "Avg_Price": 9.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "T8",
+    "CropName": "西瓜-甜美人",
+    "Avg_Price": 11.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "V0",
+    "CropName": "甜瓜-其他",
+    "Avg_Price": 186.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "V1",
+    "CropName": "甜瓜-美濃",
+    "Avg_Price": 22.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "V2",
+    "CropName": "甜瓜-溫室吊瓜",
+    "Avg_Price": 136.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "W1",
+    "CropName": "洋香瓜-網狀紅肉",
+    "Avg_Price": 39.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "W4",
+    "CropName": "洋香瓜-新疆",
+    "Avg_Price": 111.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "W8",
+    "CropName": "洋香瓜-阿露斯",
+    "Avg_Price": 30.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "W9",
+    "CropName": "洋香瓜-進口",
+    "Avg_Price": 74.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "X3",
+    "CropName": "蘋果-惠",
+    "Avg_Price": 40.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "X69",
+    "CropName": "蘋果-富士進口",
+    "Avg_Price": 60.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "Y1",
+    "CropName": "桃子-水蜜桃",
+    "Avg_Price": 166.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "Y19",
+    "CropName": "桃子-水蜜桃進口",
+    "Avg_Price": 220.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "Y39",
+    "CropName": "桃子-甜桃進口",
+    "Avg_Price": 191.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "Y9",
+    "CropName": "桃子-進口",
+    "Avg_Price": 347.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "Z1",
+    "CropName": "柿子-紅柿",
+    "Avg_Price": 33.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "Z4",
+    "CropName": "柿子-甜柿",
+    "Avg_Price": 105.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB000",
+    "CropName": "火鶴花",
+    "Avg_Price": 13.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB001",
+    "CropName": "火鶴花-混色",
+    "Avg_Price": 12.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB100",
+    "CropName": "火鶴花-紅色",
+    "Avg_Price": 15.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB106",
+    "CropName": "火鶴花-丘比特",
+    "Avg_Price": 16.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB108",
+    "CropName": "火鶴花-千里達",
+    "Avg_Price": 10.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB111",
+    "CropName": "火鶴花-月光",
+    "Avg_Price": 16.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB113",
+    "CropName": "火鶴花-紅鈴",
+    "Avg_Price": 16.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB401",
+    "CropName": "火鶴花-夏粉",
+    "Avg_Price": 8.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB405",
+    "CropName": "火鶴花-粉綠邊",
+    "Avg_Price": 17.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB407",
+    "CropName": "火鶴花-夢幻",
+    "Avg_Price": 13.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB415",
+    "CropName": "火鶴花-羅莎",
+    "Avg_Price": 24.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB416",
+    "CropName": "火鶴花-花仙子",
+    "Avg_Price": 13.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB419",
+    "CropName": "火鶴花-太極",
+    "Avg_Price": 9.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB420",
+    "CropName": "火鶴花-小紅莓",
+    "Avg_Price": 14.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB425",
+    "CropName": "火鶴花-吉祥",
+    "Avg_Price": 10.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB426",
+    "CropName": "火鶴花-粉蕾絲",
+    "Avg_Price": 16.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB500",
+    "CropName": "火鶴花-翠綠",
+    "Avg_Price": 17.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB504",
+    "CropName": "火鶴花-雷夢娜",
+    "Avg_Price": 10.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB600",
+    "CropName": "火鶴花-白色",
+    "Avg_Price": 5.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB601",
+    "CropName": "火鶴花-白青心",
+    "Avg_Price": 10.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB602",
+    "CropName": "火鶴花-白黃心",
+    "Avg_Price": 8.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB607",
+    "CropName": "火鶴花-月亮女神",
+    "Avg_Price": 5.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB700",
+    "CropName": "火鶴花-紫色",
+    "Avg_Price": 15.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB800",
+    "CropName": "火鶴花-咖啡紅",
+    "Avg_Price": 18.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB801",
+    "CropName": "火鶴花-咖啡條紋",
+    "Avg_Price": 16.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB802",
+    "CropName": "火鶴花-大地",
+    "Avg_Price": 15.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FC300",
+    "CropName": "大菊-黃",
+    "Avg_Price": 177.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FC316",
+    "CropName": "大菊-黃精競",
+    "Avg_Price": 146.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FC613",
+    "CropName": "大菊-白天星",
+    "Avg_Price": 92.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FC804",
+    "CropName": "染大菊-白天星",
+    "Avg_Price": 156.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FD001",
+    "CropName": "小菊-混合色",
+    "Avg_Price": 80.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FD131",
+    "CropName": "小菊-小紅娘",
+    "Avg_Price": 99.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FD138",
+    "CropName": "小菊-卡洛琳",
+    "Avg_Price": 93.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FD200",
+    "CropName": "小菊-金",
+    "Avg_Price": 101.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FD300",
+    "CropName": "小菊-黃",
+    "Avg_Price": 129.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FD422",
+    "CropName": "小菊-吉祥小粉",
+    "Avg_Price": 36.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FD423",
+    "CropName": "小菊-粉日記",
+    "Avg_Price": 85.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FD456",
+    "CropName": "小菊-卡洛粉",
+    "Avg_Price": 90.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FD645",
+    "CropName": "小菊-白斯不列",
+    "Avg_Price": 182.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FD800",
+    "CropName": "小菊-染色小菊",
+    "Avg_Price": 116.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FD801",
+    "CropName": "染小菊-芬蘭",
+    "Avg_Price": 132.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE000",
+    "CropName": "非洲菊",
+    "Avg_Price": 44.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE001",
+    "CropName": "非洲菊-混合色",
+    "Avg_Price": 74.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE100",
+    "CropName": "非洲菊-紅",
+    "Avg_Price": 74.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE110",
+    "CropName": "非洲菊-卡布",
+    "Avg_Price": 143.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE201",
+    "CropName": "非洲菊-太陽神",
+    "Avg_Price": 84.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE205",
+    "CropName": "非洲菊-哈利熊",
+    "Avg_Price": 112.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE302",
+    "CropName": "非洲菊-金爵",
+    "Avg_Price": 102.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE400",
+    "CropName": "非洲菊-粉",
+    "Avg_Price": 32.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE409",
+    "CropName": "非洲菊-粉紅魅力",
+    "Avg_Price": 96.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE415",
+    "CropName": "非洲菊-粉美麗",
+    "Avg_Price": 89.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE416",
+    "CropName": "非洲菊-熱情粉",
+    "Avg_Price": 82.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE600",
+    "CropName": "非洲菊-白",
+    "Avg_Price": 35.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE704",
+    "CropName": "非洲菊-女王",
+    "Avg_Price": 85.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE800",
+    "CropName": "",
+    "Avg_Price": 41.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE900",
+    "CropName": "非洲菊-迷你混色",
+    "Avg_Price": 63.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE920",
+    "CropName": "非洲菊-迷你橙",
+    "Avg_Price": 86.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE930",
+    "CropName": "非洲菊-迷你黃",
+    "Avg_Price": 49.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE960",
+    "CropName": "非洲菊-迷你白",
+    "Avg_Price": 54.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FG101",
+    "CropName": "劍蘭-４號",
+    "Avg_Price": 84.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FG105",
+    "CropName": "劍蘭-２３５號",
+    "Avg_Price": 116.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FG116",
+    "CropName": "劍蘭-雙色金紅",
+    "Avg_Price": 104.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FG121",
+    "CropName": "劍蘭-２６５號",
+    "Avg_Price": 125.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FG406",
+    "CropName": "劍蘭-青殼粉",
+    "Avg_Price": 107.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH000",
+    "CropName": "其它花卉",
+    "Avg_Price": 17.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH004",
+    "CropName": "八卦草(黃河)",
+    "Avg_Price": 59.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH006",
+    "CropName": "黃梔花",
+    "Avg_Price": 88.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH008",
+    "CropName": "洋甘菊",
+    "Avg_Price": 126.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH009",
+    "CropName": "萬壽菊",
+    "Avg_Price": 76.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH010",
+    "CropName": "",
+    "Avg_Price": 142.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH011",
+    "CropName": "",
+    "Avg_Price": 179.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH012",
+    "CropName": "",
+    "Avg_Price": 167.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH101",
+    "CropName": "天堂鳥",
+    "Avg_Price": 149.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH112",
+    "CropName": "小天堂鳥-桔帶紅",
+    "Avg_Price": 106.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH133",
+    "CropName": "鶴蕉紅美人",
+    "Avg_Price": 28.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH137",
+    "CropName": "觀音蓮",
+    "Avg_Price": 27.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH140",
+    "CropName": "薑荷花",
+    "Avg_Price": 55.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH156",
+    "CropName": "野薑花-白",
+    "Avg_Price": 71.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH158",
+    "CropName": "紅薑花",
+    "Avg_Price": 135.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH185",
+    "CropName": "嘉蘭(火焰百合)",
+    "Avg_Price": 116.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH245",
+    "CropName": "初雪草",
+    "Avg_Price": 137.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH251",
+    "CropName": "秀線",
+    "Avg_Price": 72.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH270",
+    "CropName": "千日紅",
+    "Avg_Price": 39.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH293",
+    "CropName": "向日葵-單瓣",
+    "Avg_Price": 99.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH294",
+    "CropName": "向日葵-重瓣",
+    "Avg_Price": 140.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH306",
+    "CropName": "白日草",
+    "Avg_Price": 39.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH312",
+    "CropName": "大理花-橘色",
+    "Avg_Price": 56.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH314",
+    "CropName": "大理花-粉色",
+    "Avg_Price": 72.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH316",
+    "CropName": "大理花-白色",
+    "Avg_Price": 59.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH318",
+    "CropName": "大理花-雙色",
+    "Avg_Price": 267.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH330",
+    "CropName": "雞冠花",
+    "Avg_Price": 97.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH331",
+    "CropName": "雞冠花-清紅",
+    "Avg_Price": 85.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH332",
+    "CropName": "雞冠花-暗紅",
+    "Avg_Price": 52.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH333",
+    "CropName": "雞冠花-黃",
+    "Avg_Price": 116.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH335",
+    "CropName": "槍型雞冠花",
+    "Avg_Price": 39.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH337",
+    "CropName": "雞冠花-紫紅",
+    "Avg_Price": 120.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH339",
+    "CropName": "雞冠花-粉",
+    "Avg_Price": 116.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH358",
+    "CropName": "珊瑚鳳梨",
+    "Avg_Price": 18.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH381",
+    "CropName": "麒麟草",
+    "Avg_Price": 90.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH395",
+    "CropName": "虎尾花",
+    "Avg_Price": 22.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH460",
+    "CropName": "繡球花",
+    "Avg_Price": 58.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH464",
+    "CropName": "繡球花-粉",
+    "Avg_Price": 53.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH465",
+    "CropName": "繡球花-綠色",
+    "Avg_Price": 57.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH466",
+    "CropName": "繡球花-白",
+    "Avg_Price": 39.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH521",
+    "CropName": "迥香-黃",
+    "Avg_Price": 115.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH661",
+    "CropName": "伯利恆之星",
+    "Avg_Price": 120.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH670",
+    "CropName": "茉莉花",
+    "Avg_Price": 22.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH795",
+    "CropName": "藍星花-藍色",
+    "Avg_Price": 564.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FL043",
+    "CropName": "姬百合-粉三朵",
+    "Avg_Price": 112.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FL049",
+    "CropName": "姬百合-粉多朵",
+    "Avg_Price": 109.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FL122",
+    "CropName": "LA百合-橙雙朵",
+    "Avg_Price": 100.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FL123",
+    "CropName": "LA百合-橙三朵",
+    "Avg_Price": 136.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FL129",
+    "CropName": "LA百合-橙多朵",
+    "Avg_Price": 136.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FL140",
+    "CropName": "LA百合-粉",
+    "Avg_Price": 120.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FL149",
+    "CropName": "LA百合-粉多朵",
+    "Avg_Price": 125.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM041",
+    "CropName": "重瓣百合-粉單朵",
+    "Avg_Price": 134.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM042",
+    "CropName": "重瓣百合-粉雙朵",
+    "Avg_Price": 237.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM043",
+    "CropName": "重瓣百合-粉三朵",
+    "Avg_Price": 272.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM049",
+    "CropName": "重瓣百合-粉多朵",
+    "Avg_Price": 254.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM062",
+    "CropName": "重瓣百合-白雙朵",
+    "Avg_Price": 252.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM063",
+    "CropName": "重瓣百合-白三朵",
+    "Avg_Price": 269.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM069",
+    "CropName": "重瓣百合-白多朵",
+    "Avg_Price": 334.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM180",
+    "CropName": "重瓣百合-安諾斯卡",
+    "Avg_Price": 175.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM182",
+    "CropName": "重瓣百合-安諾斯卡雙朵",
+    "Avg_Price": 268.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM183",
+    "CropName": "重瓣百合-安諾斯卡三朵",
+    "Avg_Price": 375.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM189",
+    "CropName": "重瓣百合-安諾斯卡多朵",
+    "Avg_Price": 421.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM213",
+    "CropName": "重瓣百合-艾蓮娜三朵",
+    "Avg_Price": 121.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM219",
+    "CropName": "重瓣百合-艾蓮娜多朵",
+    "Avg_Price": 124.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM282",
+    "CropName": "重瓣百合-莎曼莎雙朵",
+    "Avg_Price": 262.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM283",
+    "CropName": "重瓣百合-莎曼莎三朵",
+    "Avg_Price": 332.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM289",
+    "CropName": "重瓣百合-莎曼莎多朵",
+    "Avg_Price": 375.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO000",
+    "CropName": "蘭花",
+    "Avg_Price": 136.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO002",
+    "CropName": "腎藥蘭",
+    "Avg_Price": 156.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO003",
+    "CropName": "腎藥蘭-曼谷火焰",
+    "Avg_Price": 188.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO007",
+    "CropName": "千代蘭",
+    "Avg_Price": 125.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO009",
+    "CropName": "萬代蘭",
+    "Avg_Price": 129.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO011",
+    "CropName": "拖鞋蘭",
+    "Avg_Price": 120.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO021",
+    "CropName": "萬代蘭-巨輪紅",
+    "Avg_Price": 27.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO022",
+    "CropName": "萬代蘭-巨輪橙",
+    "Avg_Price": 42.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO024",
+    "CropName": "萬代蘭-巨輪粉",
+    "Avg_Price": 41.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO027",
+    "CropName": "萬代蘭-巨輪紫",
+    "Avg_Price": 29.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO029",
+    "CropName": "萬代蘭-巨輪棕",
+    "Avg_Price": 60.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO333",
+    "CropName": "香水文心蘭",
+    "Avg_Price": 155.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO335",
+    "CropName": "檸檬綠文心蘭",
+    "Avg_Price": 131.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO336",
+    "CropName": "文心蘭-太陽之子",
+    "Avg_Price": 196.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO340",
+    "CropName": "文心蘭-愛琳娜",
+    "Avg_Price": 206.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO341",
+    "CropName": "文心蘭-月光旋律",
+    "Avg_Price": 219.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO361",
+    "CropName": "文心蘭-白雪",
+    "Avg_Price": 112.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO600",
+    "CropName": "蝴蝶蘭-混色",
+    "Avg_Price": 31.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO610",
+    "CropName": "蝴蝶蘭-紅色",
+    "Avg_Price": 24.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FO640",
+    "CropName": "蝴蝶蘭-粉色",
+    "Avg_Price": 33.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR000",
+    "CropName": "玫瑰",
+    "Avg_Price": 282.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR001",
+    "CropName": "玫瑰-混合色",
+    "Avg_Price": 115.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR111",
+    "CropName": "玫瑰-新櫻紅",
+    "Avg_Price": 54.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR116",
+    "CropName": "玫瑰-翡翠紅",
+    "Avg_Price": 209.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR117",
+    "CropName": "玫瑰-萬年紅",
+    "Avg_Price": 37.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR120",
+    "CropName": "玫瑰-埔里之星",
+    "Avg_Price": 97.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR122",
+    "CropName": "玫瑰-卡門",
+    "Avg_Price": 104.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR200",
+    "CropName": "玫瑰-橙",
+    "Avg_Price": 70.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR208",
+    "CropName": "玫瑰-香吉士",
+    "Avg_Price": 199.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR211",
+    "CropName": "玫瑰-馬卡龍",
+    "Avg_Price": 183.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR300",
+    "CropName": "玫瑰-黃",
+    "Avg_Price": 126.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR400",
+    "CropName": "玫瑰-粉",
+    "Avg_Price": 100.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR408",
+    "CropName": "玫瑰-黛安娜粉",
+    "Avg_Price": 86.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR417",
+    "CropName": "玫瑰-甜心",
+    "Avg_Price": 123.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR436",
+    "CropName": "玫瑰-翡翠粉",
+    "Avg_Price": 123.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR439",
+    "CropName": "玫瑰-翡翠香檳",
+    "Avg_Price": 151.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR451",
+    "CropName": "玫瑰-翡翠佳人",
+    "Avg_Price": 76.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR452",
+    "CropName": "玫瑰-珍愛你",
+    "Avg_Price": 133.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR455",
+    "CropName": "玫瑰-翡翠珍珠",
+    "Avg_Price": 209.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR461",
+    "CropName": "玫瑰-新娘粉",
+    "Avg_Price": 210.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR600",
+    "CropName": "玫瑰-白",
+    "Avg_Price": 39.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR607",
+    "CropName": "玫瑰-翡翠白",
+    "Avg_Price": 113.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR705",
+    "CropName": "玫瑰-紫天王",
+    "Avg_Price": 93.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR710",
+    "CropName": "玫瑰-真心紫",
+    "Avg_Price": 293.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR711",
+    "CropName": "玫瑰-天堂紫",
+    "Avg_Price": 82.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR712",
+    "CropName": "玫瑰-拿鐵",
+    "Avg_Price": 165.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR713",
+    "CropName": "玫瑰-蒙馬特",
+    "Avg_Price": 137.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR715",
+    "CropName": "玫瑰-紫霧",
+    "Avg_Price": 85.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR814",
+    "CropName": "玫瑰-山中傳奇",
+    "Avg_Price": 340.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR816",
+    "CropName": "玫瑰-愛麗絲",
+    "Avg_Price": 124.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR900",
+    "CropName": "玫瑰-多朵混合",
+    "Avg_Price": 352.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR922",
+    "CropName": "玫瑰-心動果汁",
+    "Avg_Price": 572.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR933",
+    "CropName": "玫瑰-香草琳娜",
+    "Avg_Price": 780.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR934",
+    "CropName": "玫瑰-卡特琳娜",
+    "Avg_Price": 860.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR940",
+    "CropName": "玫瑰-多朵粉",
+    "Avg_Price": 109.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR941",
+    "CropName": "玫瑰-泡泡粉(銀粉)",
+    "Avg_Price": 660.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR942",
+    "CropName": "玫瑰-心動雙粉",
+    "Avg_Price": 356.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR943",
+    "CropName": "玫瑰-第一名粉",
+    "Avg_Price": 580.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR972",
+    "CropName": "玫瑰-心動小紫",
+    "Avg_Price": 525.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR980",
+    "CropName": "玫瑰-多朵雙色",
+    "Avg_Price": 113.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS019",
+    "CropName": "香水百合-紅多朵",
+    "Avg_Price": 225.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS032",
+    "CropName": "香水百合-黃雙朵",
+    "Avg_Price": 143.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS033",
+    "CropName": "香水百合-黃三朵",
+    "Avg_Price": 205.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS039",
+    "CropName": "香水百合-黃多朵",
+    "Avg_Price": 226.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS040",
+    "CropName": "香水百合-粉",
+    "Avg_Price": 140.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS049",
+    "CropName": "香水百合-粉多朵",
+    "Avg_Price": 152.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS060",
+    "CropName": "香水百合-白",
+    "Avg_Price": 86.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS470",
+    "CropName": "水晶香水",
+    "Avg_Price": 97.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS472",
+    "CropName": "水晶香水-雙朵",
+    "Avg_Price": 122.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS473",
+    "CropName": "水晶香水-三朵",
+    "Avg_Price": 196.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS479",
+    "CropName": "水晶香水-多朵",
+    "Avg_Price": 200.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS623",
+    "CropName": "香水百合-耶蘿琳三朵",
+    "Avg_Price": 89.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS629",
+    "CropName": "香水百合-耶蘿琳多朵",
+    "Avg_Price": 95.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS630",
+    "CropName": "OT曼尼薩",
+    "Avg_Price": 154.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS631",
+    "CropName": "OT曼尼薩-單朵",
+    "Avg_Price": 82.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS632",
+    "CropName": "OT曼尼薩-雙朵",
+    "Avg_Price": 138.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS633",
+    "CropName": "OT曼尼薩-三朵",
+    "Avg_Price": 194.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS639",
+    "CropName": "OT曼尼薩-多朵",
+    "Avg_Price": 213.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS772",
+    "CropName": "OT百合-節奏舞者二朵",
+    "Avg_Price": 119.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS773",
+    "CropName": "OT百合-節奏舞者三朵",
+    "Avg_Price": 189.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS779",
+    "CropName": "OT百合-節奏舞者多朵",
+    "Avg_Price": 218.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS783",
+    "CropName": "OT百合-貝維爾三朵",
+    "Avg_Price": 127.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS789",
+    "CropName": "OT百合-貝維爾多朵",
+    "Avg_Price": 144.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS792",
+    "CropName": "OT百合-維尼雙朵",
+    "Avg_Price": 163.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS793",
+    "CropName": "OT百合-維尼三朵",
+    "Avg_Price": 191.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS799",
+    "CropName": "OT百合-維尼多朵",
+    "Avg_Price": 204.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS870",
+    "CropName": "OT大連",
+    "Avg_Price": 243.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS871",
+    "CropName": "OT大連-單朵",
+    "Avg_Price": 115.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS872",
+    "CropName": "OT大連-雙朵",
+    "Avg_Price": 192.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS873",
+    "CropName": "OT大連-三朵",
+    "Avg_Price": 237.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS879",
+    "CropName": "OT大連-多朵",
+    "Avg_Price": 267.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS890",
+    "CropName": "OT帕雷諾",
+    "Avg_Price": 182.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS892",
+    "CropName": "OT帕雷諾-雙朵",
+    "Avg_Price": 204.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS893",
+    "CropName": "OT帕雷諾-三朵",
+    "Avg_Price": 210.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS899",
+    "CropName": "OT帕雷諾-多朵",
+    "Avg_Price": 239.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS960",
+    "CropName": "OT試金石",
+    "Avg_Price": 155.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS963",
+    "CropName": "OT試金石-三朵",
+    "Avg_Price": 199.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS969",
+    "CropName": "OT試金石-多朵",
+    "Avg_Price": 206.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS970",
+    "CropName": "OT紅福特",
+    "Avg_Price": 250.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS973",
+    "CropName": "OT紅福特-三朵",
+    "Avg_Price": 204.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS979",
+    "CropName": "OT紅福特-多朵",
+    "Avg_Price": 233.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS982",
+    "CropName": "OT百合-美麗果雙朵",
+    "Avg_Price": 134.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS983",
+    "CropName": "OT百合-美麗果三朵",
+    "Avg_Price": 193.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FS989",
+    "CropName": "OT百合-美麗果多朵",
+    "Avg_Price": 245.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT041",
+    "CropName": "鐵砲百合-粉單朵",
+    "Avg_Price": 74.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT043",
+    "CropName": "鐵砲百合-粉三朵",
+    "Avg_Price": 111.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT061",
+    "CropName": "鐵砲百合-白單朵",
+    "Avg_Price": 100.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT062",
+    "CropName": "鐵砲百合-白雙朵",
+    "Avg_Price": 131.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT063",
+    "CropName": "鐵砲百合-白三朵",
+    "Avg_Price": 122.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU000",
+    "CropName": "洋桔梗",
+    "Avg_Price": 171.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU111",
+    "CropName": "洋桔梗-單瓣紅",
+    "Avg_Price": 90.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU141",
+    "CropName": "洋桔梗-單瓣粉",
+    "Avg_Price": 124.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU151",
+    "CropName": "洋吉梗-單瓣彩藍",
+    "Avg_Price": 161.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU161",
+    "CropName": "洋桔梗-單瓣白",
+    "Avg_Price": 185.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU171",
+    "CropName": "洋桔梗-單瓣紫",
+    "Avg_Price": 137.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU211",
+    "CropName": "洋桔梗-單瓣白紅邊",
+    "Avg_Price": 133.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU271",
+    "CropName": "洋桔梗-單瓣白紫邊",
+    "Avg_Price": 134.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU402",
+    "CropName": "洋桔梗-雙瓣(混色)",
+    "Avg_Price": 74.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU412",
+    "CropName": "洋桔梗-雙瓣紅",
+    "Avg_Price": 155.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU421",
+    "CropName": "洋桔梗-小夏橘",
+    "Avg_Price": 415.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU441",
+    "CropName": "洋桔梗-順風粉",
+    "Avg_Price": 195.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU442",
+    "CropName": "洋桔梗-雙瓣粉",
+    "Avg_Price": 129.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU445",
+    "CropName": "洋桔梗-可羅淺粉",
+    "Avg_Price": 124.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU449",
+    "CropName": "洋桔梗-艾瑞娜彩粉",
+    "Avg_Price": 206.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU455",
+    "CropName": "洋桔梗-羅西娜綠",
+    "Avg_Price": 89.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU458",
+    "CropName": "洋桔梗-艾瑞娜綠",
+    "Avg_Price": 86.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU462",
+    "CropName": "洋桔梗-雙瓣白",
+    "Avg_Price": 96.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU465",
+    "CropName": "洋桔梗-名人華麗白",
+    "Avg_Price": 162.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU469",
+    "CropName": "洋桔梗-皇后白",
+    "Avg_Price": 112.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU471",
+    "CropName": "洋桔梗-重瓣淺紫",
+    "Avg_Price": 115.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU478",
+    "CropName": "洋桔梗-羅西娜紫",
+    "Avg_Price": 220.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU480",
+    "CropName": "洋桔梗-順風紫",
+    "Avg_Price": 91.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU482",
+    "CropName": "洋桔梗-拉弗爾酒彩",
+    "Avg_Price": 145.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU483",
+    "CropName": "洋桔梗-新禧亮紫",
+    "Avg_Price": 145.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU562",
+    "CropName": "洋桔梗-珍妮白",
+    "Avg_Price": 149.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU563",
+    "CropName": "洋桔梗-新禧４雪白",
+    "Avg_Price": 185.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU572",
+    "CropName": "洋桔梗-雙瓣白紫邊",
+    "Avg_Price": 130.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU641",
+    "CropName": "洋桔梗-女王３彩粉",
+    "Avg_Price": 111.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU642",
+    "CropName": "洋桔梗-斐諾淺粉",
+    "Avg_Price": 164.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU643",
+    "CropName": "洋桔梗-順風淺粉",
+    "Avg_Price": 245.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU645",
+    "CropName": "",
+    "Avg_Price": 131.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU651",
+    "CropName": "洋桔梗-典雅綠",
+    "Avg_Price": 95.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FW240",
+    "CropName": "粉孔雀",
+    "Avg_Price": 74.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FW270",
+    "CropName": "紫孔雀",
+    "Avg_Price": 171.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FW472",
+    "CropName": "卡斯比亞-無葉",
+    "Avg_Price": 81.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY000",
+    "CropName": "切葉類",
+    "Avg_Price": 39.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY001",
+    "CropName": "尤加利葉",
+    "Avg_Price": 100.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY003",
+    "CropName": "唐棉",
+    "Avg_Price": 72.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY004",
+    "CropName": "黃椰心葉",
+    "Avg_Price": 166.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY008",
+    "CropName": "雲龍柳",
+    "Avg_Price": 21.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY009",
+    "CropName": "電信蘭葉",
+    "Avg_Price": 78.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY013",
+    "CropName": "星點木",
+    "Avg_Price": 22.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY015",
+    "CropName": "葉蘭",
+    "Avg_Price": 15.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY017",
+    "CropName": "八角金盤",
+    "Avg_Price": 16.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY021",
+    "CropName": "扁柏",
+    "Avg_Price": 45.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY050",
+    "CropName": "山蘇葉",
+    "Avg_Price": 25.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY057",
+    "CropName": "百合竹",
+    "Avg_Price": 12.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY071",
+    "CropName": "雪松",
+    "Avg_Price": 84.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY084",
+    "CropName": "火龍果",
+    "Avg_Price": 295.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY093",
+    "CropName": "水燭葉",
+    "Avg_Price": 20.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY100",
+    "CropName": "山防風",
+    "Avg_Price": 97.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY991",
+    "CropName": "青竹",
+    "Avg_Price": 126.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY992",
+    "CropName": "紅竹",
+    "Avg_Price": 72.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY993",
+    "CropName": "白竹",
+    "Avg_Price": 116.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY996",
+    "CropName": "蓮花竹",
+    "Avg_Price": 20.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "IC350",
+    "CropName": "進口大菊-黃乒乓",
+    "Avg_Price": 165.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "IC608",
+    "CropName": "進口大菊-白乒乓",
+    "Avg_Price": 165.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "IC800",
+    "CropName": "進口染色大菊",
+    "Avg_Price": 160.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "IC803",
+    "CropName": "進口染色大菊-牡丹",
+    "Avg_Price": 279.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "ID361",
+    "CropName": "進口小菊-蒙娜麗莎黃",
+    "Avg_Price": 180.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "ID600",
+    "CropName": "進口小菊-白",
+    "Avg_Price": 140.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "ID800",
+    "CropName": "進口小菊-染色小菊",
+    "Avg_Price": 184.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "ID900",
+    "CropName": "進口小菊-迷你翠菊",
+    "Avg_Price": 215.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "IH000",
+    "CropName": "進口其它花卉",
+    "Avg_Price": 179.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "IH363",
+    "CropName": "進口金魚草-黃色",
+    "Avg_Price": 120.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "IH461",
+    "CropName": "繡球花-紅",
+    "Avg_Price": 125.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "IH464",
+    "CropName": "繡球花-粉",
+    "Avg_Price": 102.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "IH466",
+    "CropName": "繡球花-白",
+    "Avg_Price": 115.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "IH485",
+    "CropName": "進口風鈴花",
+    "Avg_Price": 27.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "IO519",
+    "CropName": "進口石斛蘭-深紅",
+    "Avg_Price": 154.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "IO540",
+    "CropName": "進口石斛蘭-粉",
+    "Avg_Price": 178.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "IO541",
+    "CropName": "進口石斛蘭-荷粉",
+    "Avg_Price": 183.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "IO560",
+    "CropName": "進口石斛蘭-白",
+    "Avg_Price": 168.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "IS043",
+    "CropName": "進口香水百合-粉三朵",
+    "Avg_Price": 169.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "IW560",
+    "CropName": "進口滿天星-白",
+    "Avg_Price": 165.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "11",
+    "CropName": "椰子",
+    "Avg_Price": 20.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "12",
+    "CropName": "椰子-剝殼",
+    "Avg_Price": 12.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "129",
+    "CropName": "椰子-剝殼進口",
+    "Avg_Price": 70.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "31",
+    "CropName": "釋迦",
+    "Avg_Price": 83.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "459",
+    "CropName": "草莓-進口",
+    "Avg_Price": 200.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "469",
+    "CropName": "藍莓-進口",
+    "Avg_Price": 207.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "50",
+    "CropName": "百香果-其他",
+    "Avg_Price": 103.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "51",
+    "CropName": "百香果-改良種",
+    "Avg_Price": 101.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "61",
+    "CropName": "甘蔗-帶皮",
+    "Avg_Price": 10.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "72",
+    "CropName": "小番茄-聖女",
+    "Avg_Price": 109.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "74",
+    "CropName": "小番茄-玉女",
+    "Avg_Price": 299.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "811",
+    "CropName": "紅龍果-白肉",
+    "Avg_Price": 48.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "812",
+    "CropName": "紅龍果-紅肉",
+    "Avg_Price": 46.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "813",
+    "CropName": "紅龍果-雙色紅龍果",
+    "Avg_Price": 68.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "839",
+    "CropName": "櫻桃-進口",
+    "Avg_Price": 186.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "87",
+    "CropName": "紅毛丹",
+    "Avg_Price": 88.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "91",
+    "CropName": "其他",
+    "Avg_Price": 25.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "919",
+    "CropName": "其他-進口",
+    "Avg_Price": 94.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "A1",
+    "CropName": "香蕉",
+    "Avg_Price": 30.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "A2",
+    "CropName": "香蕉-芭蕉紅芭蕉",
+    "Avg_Price": 42.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "A3",
+    "CropName": "香蕉-旦蕉",
+    "Avg_Price": 45.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "A4",
+    "CropName": "香蕉-越旦",
+    "Avg_Price": 28.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "B2",
+    "CropName": "鳳梨-金鑽鳳梨",
+    "Avg_Price": 36.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "B7",
+    "CropName": "鳳梨-牛奶鳳梨",
+    "Avg_Price": 34.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "B8",
+    "CropName": "鳳梨-西瓜鳳梨",
+    "Avg_Price": 21.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "B9",
+    "CropName": "鳳梨-進口",
+    "Avg_Price": 53.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "C9",
+    "CropName": "柑橘-進口",
+    "Avg_Price": 55.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "E9",
+    "CropName": "甜橙-進口",
+    "Avg_Price": 43.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "F1",
+    "CropName": "雜柑-檸檬",
+    "Avg_Price": 42.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "F4",
+    "CropName": "雜柑-桔子",
+    "Avg_Price": 131.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "F5",
+    "CropName": "雜柑-無子檸檬",
+    "Avg_Price": 41.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "F6",
+    "CropName": "雜柑-黃金檸檬",
+    "Avg_Price": 14.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FA1",
+    "CropName": "黃秋葵",
+    "Avg_Price": 83.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB1",
+    "CropName": "花椰菜-青梗",
+    "Avg_Price": 61.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FC1",
+    "CropName": "胡瓜-黑刺",
+    "Avg_Price": 28.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FD0",
+    "CropName": "花胡瓜-其他",
+    "Avg_Price": 96.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FD1",
+    "CropName": "花胡瓜",
+    "Avg_Price": 80.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE1",
+    "CropName": "冬瓜-白皮",
+    "Avg_Price": 25.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FF0",
+    "CropName": "絲瓜-其他",
+    "Avg_Price": 46.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FF1",
+    "CropName": "絲瓜",
+    "Avg_Price": 53.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FF2",
+    "CropName": "絲瓜-角瓜",
+    "Avg_Price": 57.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FF4",
+    "CropName": "絲瓜-長絲瓜",
+    "Avg_Price": 29.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FG0",
+    "CropName": "苦瓜-其他",
+    "Avg_Price": 54.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FG1",
+    "CropName": "苦瓜-白大米",
+    "Avg_Price": 67.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FG3",
+    "CropName": "苦瓜-山苦瓜",
+    "Avg_Price": 60.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FG4",
+    "CropName": "苦瓜-翠綠",
+    "Avg_Price": 47.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH3",
+    "CropName": "扁蒲-花蒲",
+    "Avg_Price": 20.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH4",
+    "CropName": "扁蒲-梨子蒲",
+    "Avg_Price": 22.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FI0",
+    "CropName": "茄子-其他",
+    "Avg_Price": 43.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FI2",
+    "CropName": "茄子-麻荸茄",
+    "Avg_Price": 49.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FI3",
+    "CropName": "茄子-日本種",
+    "Avg_Price": 26.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FJ1",
+    "CropName": "番茄-黑柿",
+    "Avg_Price": 130.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FJ3",
+    "CropName": "番茄-牛番茄",
+    "Avg_Price": 84.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FK3",
+    "CropName": "甜椒-新香",
+    "Avg_Price": 100.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FK41",
+    "CropName": "甜椒-彩色種 紅色",
+    "Avg_Price": 80.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FK42",
+    "CropName": "甜椒-彩色種 黃色",
+    "Avg_Price": 90.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FK5",
+    "CropName": "甜椒-青椒",
+    "Avg_Price": 36.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FK6",
+    "CropName": "甜椒-水果彩椒",
+    "Avg_Price": 135.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FK94",
+    "CropName": "甜椒-進口 彩色種",
+    "Avg_Price": 20.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FL92",
+    "CropName": "豌豆-進口 紅花",
+    "Avg_Price": 170.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FL96",
+    "CropName": "豌豆-進口 甜豌豆",
+    "Avg_Price": 164.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM1",
+    "CropName": "菜豆-白色",
+    "Avg_Price": 90.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM2",
+    "CropName": "菜豆-青色",
+    "Avg_Price": 70.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FN1",
+    "CropName": "敏豆-白豆",
+    "Avg_Price": 161.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FN4",
+    "CropName": "敏豆-翼豆",
+    "Avg_Price": 128.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FN5",
+    "CropName": "敏豆-醜豆",
+    "Avg_Price": 114.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FQ2",
+    "CropName": "毛豆-豆仁",
+    "Avg_Price": 411.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR1",
+    "CropName": "青花苔",
+    "Avg_Price": 65.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR9",
+    "CropName": "青花苔-進口",
+    "Avg_Price": 98.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT1",
+    "CropName": "南瓜-木瓜形",
+    "Avg_Price": 27.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT11",
+    "CropName": "南瓜-木瓜型 阿成",
+    "Avg_Price": 39.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT12",
+    "CropName": "南瓜-木瓜型 阿嬌",
+    "Avg_Price": 22.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT2",
+    "CropName": "南瓜-圓形",
+    "Avg_Price": 42.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT3",
+    "CropName": "南瓜-黃如意",
+    "Avg_Price": 72.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT5",
+    "CropName": "南瓜-青如意",
+    "Avg_Price": 84.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT7",
+    "CropName": "南瓜-栗子",
+    "Avg_Price": 130.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT90",
+    "CropName": "南瓜-進口 其他",
+    "Avg_Price": 31.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT91",
+    "CropName": "南瓜-進口 木瓜型",
+    "Avg_Price": 31.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT96",
+    "CropName": "南瓜-進口 東昇",
+    "Avg_Price": 57.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT97",
+    "CropName": "南瓜-進口 栗子",
+    "Avg_Price": 33.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU1",
+    "CropName": "隼人瓜",
+    "Avg_Price": 10.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU2",
+    "CropName": "隼人瓜-瓜苗",
+    "Avg_Price": 101.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV0",
+    "CropName": "辣椒-其他",
+    "Avg_Price": 236.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV1",
+    "CropName": "辣椒-紅小",
+    "Avg_Price": 99.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV2",
+    "CropName": "辣椒-青小",
+    "Avg_Price": 121.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV3",
+    "CropName": "辣椒-雞心",
+    "Avg_Price": 220.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV4",
+    "CropName": "辣椒-朝天椒",
+    "Avg_Price": 159.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV6",
+    "CropName": "辣椒-糯米椒",
+    "Avg_Price": 62.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV9",
+    "CropName": "辣椒-進口",
+    "Avg_Price": 50.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV91",
+    "CropName": "辣椒-進口 紅小",
+    "Avg_Price": 63.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV94",
+    "CropName": "辣椒-進口 朝天椒",
+    "Avg_Price": 80.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY0",
+    "CropName": "玉米-其他",
+    "Avg_Price": 80.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY2",
+    "CropName": "玉米-甜硬殼",
+    "Avg_Price": 11.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY4",
+    "CropName": "玉米-玉米筍",
+    "Avg_Price": 52.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY41",
+    "CropName": "玉米-玉米筍 帶殼",
+    "Avg_Price": 25.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY5",
+    "CropName": "玉米-糯米黑",
+    "Avg_Price": 33.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY6",
+    "CropName": "玉米-甜軟殼",
+    "Avg_Price": 32.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY8",
+    "CropName": "玉米-白龍王",
+    "Avg_Price": 64.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY9",
+    "CropName": "玉米-進口",
+    "Avg_Price": 180.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY94",
+    "CropName": "玉米-進口 玉米筍",
+    "Avg_Price": 184.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FZ1",
+    "CropName": "落花生-生",
+    "Avg_Price": 85.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FZ2",
+    "CropName": "落花生-熟",
+    "Avg_Price": 70.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "G2",
+    "CropName": "黃金果",
+    "Avg_Price": 51.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "G3",
+    "CropName": "酪梨",
+    "Avg_Price": 58.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "G39",
+    "CropName": "酪梨-進口",
+    "Avg_Price": 136.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "G49",
+    "CropName": "奇異果-進口",
+    "Avg_Price": 98.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "G7",
+    "CropName": "橄欖",
+    "Avg_Price": 40.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "G9",
+    "CropName": "波蘿蜜",
+    "Avg_Price": 27.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "G91",
+    "CropName": "榴槤蜜",
+    "Avg_Price": 25.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "H1",
+    "CropName": "柚子-文旦",
+    "Avg_Price": 29.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "H2",
+    "CropName": "柚子-白柚",
+    "Avg_Price": 10.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "H49",
+    "CropName": "葡萄柚-紅肉進口",
+    "Avg_Price": 40.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "H5",
+    "CropName": "葡萄柚-白肉",
+    "Avg_Price": 25.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "I1",
+    "CropName": "木瓜-網室紅肉",
+    "Avg_Price": 32.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "I3",
+    "CropName": "木瓜-日昇種",
+    "Avg_Price": 75.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "I4",
+    "CropName": "木瓜-青木瓜",
+    "Avg_Price": 11.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "K3",
+    "CropName": "龍眼-粉殼",
+    "Avg_Price": 53.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "K4",
+    "CropName": "龍眼-龍眼乾帶殼",
+    "Avg_Price": 110.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LA1",
+    "CropName": "甘藍-初秋",
+    "Avg_Price": 48.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LA2",
+    "CropName": "甘藍-改良種",
+    "Avg_Price": 25.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LA4",
+    "CropName": "甘藍-紫色",
+    "Avg_Price": 22.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LA5",
+    "CropName": "甘藍-甘藍心",
+    "Avg_Price": 176.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LA6",
+    "CropName": "甘藍-甘藍芽",
+    "Avg_Price": 30.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LA91",
+    "CropName": "甘藍-進口 初秋",
+    "Avg_Price": 30.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LA92",
+    "CropName": "甘藍-進口 改良種",
+    "Avg_Price": 13.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LA94",
+    "CropName": "甘藍-進口 紫色",
+    "Avg_Price": 8.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LB0",
+    "CropName": "小白菜-其他",
+    "Avg_Price": 30.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LB1",
+    "CropName": "小白菜-土白菜",
+    "Avg_Price": 31.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LB2",
+    "CropName": "小白菜-蚵仔白",
+    "Avg_Price": 32.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LB3",
+    "CropName": "小白菜-奶油白",
+    "Avg_Price": 107.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LC1",
+    "CropName": "包心白-包白",
+    "Avg_Price": 30.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LC90",
+    "CropName": "包心白菜-進口 其他",
+    "Avg_Price": 60.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LC93",
+    "CropName": "包心白菜-進口 包頭蓮 ",
+    "Avg_Price": 29.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LD1",
+    "CropName": "青江白菜-小梗",
+    "Avg_Price": 39.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LE1",
+    "CropName": "皇宮菜-小葉",
+    "Avg_Price": 64.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LE2",
+    "CropName": "皇宮菜-大葉",
+    "Avg_Price": 37.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LF2",
+    "CropName": "蕹菜-小葉",
+    "Avg_Price": 48.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LF3",
+    "CropName": "蕹菜-水蕹菜",
+    "Avg_Price": 73.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LG2",
+    "CropName": "芹菜-白梗",
+    "Avg_Price": 160.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LG9",
+    "CropName": "芹菜-進口",
+    "Avg_Price": 35.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LH2",
+    "CropName": "菠菜-角葉",
+    "Avg_Price": 256.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LI0",
+    "CropName": "萵苣菜-其他",
+    "Avg_Price": 174.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LI1",
+    "CropName": "萵苣菜-廣東菜",
+    "Avg_Price": 64.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LI3",
+    "CropName": "萵苣菜-本島圓葉",
+    "Avg_Price": 56.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LI5",
+    "CropName": "萵苣菜-油麥菜",
+    "Avg_Price": 28.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LI71",
+    "CropName": "萵苣菜-紅捲",
+    "Avg_Price": 277.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LI72",
+    "CropName": "萵苣菜-綠捲",
+    "Avg_Price": 391.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LI8",
+    "CropName": "萵苣菜-水耕",
+    "Avg_Price": 100.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LI92",
+    "CropName": "萵苣菜-進口 結球萵",
+    "Avg_Price": 198.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LI96",
+    "CropName": "萵苣菜-進口 蘿美",
+    "Avg_Price": 177.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LJ3",
+    "CropName": "芥菜-大芥菜",
+    "Avg_Price": 4.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LJ4",
+    "CropName": "芥菜-小芥菜",
+    "Avg_Price": 27.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LK2",
+    "CropName": "芥藍菜",
+    "Avg_Price": 28.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LK3",
+    "CropName": "芥藍菜-芥藍芽",
+    "Avg_Price": 71.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LM1",
+    "CropName": "莧菜-紅莧菜",
+    "Avg_Price": 34.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LM2",
+    "CropName": "莧菜-白莧菜",
+    "Avg_Price": 37.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LN1",
+    "CropName": "油菜",
+    "Avg_Price": 21.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LN2",
+    "CropName": "油菜-小松菜",
+    "Avg_Price": 32.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LO1",
+    "CropName": "甘薯葉",
+    "Avg_Price": 43.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LP1",
+    "CropName": "芫荽",
+    "Avg_Price": 105.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LP2",
+    "CropName": "九層塔",
+    "Avg_Price": 34.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LP3",
+    "CropName": "羅勒",
+    "Avg_Price": 66.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LQ1",
+    "CropName": "紅鳳菜-紅鳳菜",
+    "Avg_Price": 78.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LT2",
+    "CropName": "海菜-海帶",
+    "Avg_Price": 50.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LT3",
+    "CropName": "海菜-水蓮",
+    "Avg_Price": 146.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LV1",
+    "CropName": "巴西利",
+    "Avg_Price": 104.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LX1",
+    "CropName": "蕨菜-過貓",
+    "Avg_Price": 95.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LX2",
+    "CropName": "蕨菜-山蘇",
+    "Avg_Price": 435.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "LZ2",
+    "CropName": "藤川七-川七葉",
+    "Avg_Price": 194.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "M2",
+    "CropName": "楊桃-紅龍",
+    "Avg_Price": 29.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "M3",
+    "CropName": "楊桃-馬來亞種",
+    "Avg_Price": 32.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MA1",
+    "CropName": "洋菇",
+    "Avg_Price": 185.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MA2",
+    "CropName": "洋菇-盒裝",
+    "Avg_Price": 234.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MC1",
+    "CropName": "濕木耳",
+    "Avg_Price": 52.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MD1",
+    "CropName": "濕香菇",
+    "Avg_Price": 187.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "ME0",
+    "CropName": "金絲菇-其他",
+    "Avg_Price": 5.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "ME1",
+    "CropName": "金絲菇-金針菇",
+    "Avg_Price": 47.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "ME2",
+    "CropName": "金絲菇-盒裝",
+    "Avg_Price": 53.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MI1",
+    "CropName": "秀珍菇",
+    "Avg_Price": 85.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MJ1",
+    "CropName": "杏鮑菇",
+    "Avg_Price": 69.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MJ2",
+    "CropName": "杏鮑菇-盒裝",
+    "Avg_Price": 111.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MK0",
+    "CropName": "鴻喜菇-其他",
+    "Avg_Price": 145.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MK1",
+    "CropName": "鴻喜菇",
+    "Avg_Price": 130.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MK2",
+    "CropName": "鴻喜菇-盒裝",
+    "Avg_Price": 212.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "MX1",
+    "CropName": "其他菇類",
+    "Avg_Price": 145.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "N9",
+    "CropName": "李-進口",
+    "Avg_Price": 118.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "O0",
+    "CropName": "梨-其他",
+    "Avg_Price": 46.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "O1",
+    "CropName": "梨-橫山梨",
+    "Avg_Price": 13.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "O10",
+    "CropName": "梨-寶島甘露梨",
+    "Avg_Price": 48.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "O3",
+    "CropName": "梨-世紀梨",
+    "Avg_Price": 46.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "O4",
+    "CropName": "梨-新興梨",
+    "Avg_Price": 38.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "O5",
+    "CropName": "梨-豐水梨",
+    "Avg_Price": 29.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "O9",
+    "CropName": "梨-其他進口",
+    "Avg_Price": 151.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "OA2",
+    "CropName": "鹹菜-帶葉",
+    "Avg_Price": 35.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "OB1",
+    "CropName": "雪里紅",
+    "Avg_Price": 14.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "OC1",
+    "CropName": "榨菜",
+    "Avg_Price": 33.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "OD1",
+    "CropName": "蘿蔔乾",
+    "Avg_Price": 33.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "OE2",
+    "CropName": "醃瓜-漬",
+    "Avg_Price": 37.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "OG1",
+    "CropName": "熟筍-桂竹筍",
+    "Avg_Price": 80.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "OI4",
+    "CropName": "筍茸",
+    "Avg_Price": 28.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "OL1",
+    "CropName": "朴菜",
+    "Avg_Price": 30.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "OX1",
+    "CropName": "其他",
+    "Avg_Price": 69.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "P1",
+    "CropName": "番石榴-珍珠芭",
+    "Avg_Price": 93.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "P2",
+    "CropName": "番石榴-紅心",
+    "Avg_Price": 72.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "P3",
+    "CropName": "番石榴-帝王芭",
+    "Avg_Price": 103.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "P4",
+    "CropName": "番石榴-世紀芭",
+    "Avg_Price": 42.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "P5",
+    "CropName": "番石榴-水晶無子",
+    "Avg_Price": 209.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "Q1",
+    "CropName": "蓮霧-紅蓮霧",
+    "Avg_Price": 301.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "Q2",
+    "CropName": "蓮霧-子彈型",
+    "Avg_Price": 75.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "Q5",
+    "CropName": "蓮霧-黑糖芭比",
+    "Avg_Price": 232.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "R0",
+    "CropName": "芒果-其他",
+    "Avg_Price": 82.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "R1",
+    "CropName": "芒果-愛文",
+    "Avg_Price": 161.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "R10",
+    "CropName": "芒果-西施",
+    "Avg_Price": 114.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "R2",
+    "CropName": "芒果-玉文",
+    "Avg_Price": 45.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "R4",
+    "CropName": "芒果-凱特",
+    "Avg_Price": 51.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "R5",
+    "CropName": "芒果-黑香金興",
+    "Avg_Price": 82.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "R6",
+    "CropName": "芒果-金煌",
+    "Avg_Price": 65.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "R8",
+    "CropName": "芒果-芒果青",
+    "Avg_Price": 62.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "S0",
+    "CropName": "葡萄-其他",
+    "Avg_Price": 100.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "S1",
+    "CropName": "葡萄-巨峰",
+    "Avg_Price": 78.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "S9",
+    "CropName": "葡萄-進口",
+    "Avg_Price": 213.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SA3",
+    "CropName": "蘿蔔-矸仔",
+    "Avg_Price": 20.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SA4",
+    "CropName": "蘿蔔-櫻桃",
+    "Avg_Price": 187.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SA7",
+    "CropName": "蘿蔔-甜菜根",
+    "Avg_Price": 55.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SA9",
+    "CropName": "蘿蔔-進口",
+    "Avg_Price": 29.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SB1",
+    "CropName": "胡蘿蔔-未洗",
+    "Avg_Price": 17.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SB2",
+    "CropName": "胡蘿蔔-清洗",
+    "Avg_Price": 17.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SC1",
+    "CropName": "馬鈴薯-本產",
+    "Avg_Price": 23.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SC9",
+    "CropName": "馬鈴薯-進口",
+    "Avg_Price": 24.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SD1",
+    "CropName": "洋蔥-本產",
+    "Avg_Price": 24.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SD9",
+    "CropName": "洋蔥-進口",
+    "Avg_Price": 29.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SE1",
+    "CropName": "青蔥-日蔥",
+    "Avg_Price": 117.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SE2",
+    "CropName": "青蔥-北蔥",
+    "Avg_Price": 49.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SE5",
+    "CropName": "青蔥-紅蔥頭",
+    "Avg_Price": 100.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SE6",
+    "CropName": "青蔥-粉蔥",
+    "Avg_Price": 72.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SF1",
+    "CropName": "韭菜-白頭",
+    "Avg_Price": 103.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SF2",
+    "CropName": "韭菜-韭菜黃",
+    "Avg_Price": 146.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SF3",
+    "CropName": "韭菜-韭菜花",
+    "Avg_Price": 171.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SF4",
+    "CropName": "韭菜-青頭",
+    "Avg_Price": 58.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SG2",
+    "CropName": "大蒜-軟梗",
+    "Avg_Price": 138.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SG4",
+    "CropName": "大蒜-蔥蒜",
+    "Avg_Price": 141.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SG5",
+    "CropName": "大蒜-蒜頭",
+    "Avg_Price": 108.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SG6",
+    "CropName": "大蒜-蒜仁",
+    "Avg_Price": 84.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SG7",
+    "CropName": "大蒜-蒜瓣",
+    "Avg_Price": 147.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SG9",
+    "CropName": "大蒜-進口",
+    "Avg_Price": 100.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SH1",
+    "CropName": "竹筍-麻竹筍",
+    "Avg_Price": 55.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SH2",
+    "CropName": "竹筍-綠竹筍",
+    "Avg_Price": 143.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SH5",
+    "CropName": "竹筍-烏殼綠",
+    "Avg_Price": 52.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SH7",
+    "CropName": "竹筍-去殼",
+    "Avg_Price": 37.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SJ2",
+    "CropName": "芋-檳榔心芋",
+    "Avg_Price": 20.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SJ3",
+    "CropName": "芋-里芋",
+    "Avg_Price": 49.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SJ4",
+    "CropName": "芋-芋莖",
+    "Avg_Price": 10.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SJ5",
+    "CropName": "芋-芋角",
+    "Avg_Price": 46.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SK2",
+    "CropName": "荸薺-加工",
+    "Avg_Price": 65.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SL1",
+    "CropName": "豆薯",
+    "Avg_Price": 21.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SM1",
+    "CropName": "牛蒡",
+    "Avg_Price": 45.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SM9",
+    "CropName": "牛蒡-進口",
+    "Avg_Price": 40.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SN1",
+    "CropName": "蓮藕",
+    "Avg_Price": 44.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SN2",
+    "CropName": "蓮藕-蓮子",
+    "Avg_Price": 230.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SO0",
+    "CropName": "甘薯-其他",
+    "Avg_Price": 20.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SO1",
+    "CropName": "甘薯-臺農57號",
+    "Avg_Price": 20.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SO2",
+    "CropName": "甘薯-芋仔甘薯",
+    "Avg_Price": 46.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SO3",
+    "CropName": "甘薯-臺農66號",
+    "Avg_Price": 30.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SP0",
+    "CropName": "薑-其他",
+    "Avg_Price": 80.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SP1",
+    "CropName": "薑-老薑",
+    "Avg_Price": 183.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SP2",
+    "CropName": "薑-嫩薑",
+    "Avg_Price": 67.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SP3",
+    "CropName": "薑-粉薑",
+    "Avg_Price": 111.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SP5",
+    "CropName": "薑-薑黃",
+    "Avg_Price": 100.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SQ1",
+    "CropName": "茭白筍-帶殼",
+    "Avg_Price": 79.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SQ3",
+    "CropName": "茭白筍-去殼",
+    "Avg_Price": 143.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SR1",
+    "CropName": "菱角-生菱角",
+    "Avg_Price": 100.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SU1",
+    "CropName": "薯蕷-紅薯蕷",
+    "Avg_Price": 120.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SU2",
+    "CropName": "薯蕷-白薯蕷",
+    "Avg_Price": 65.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SU21",
+    "CropName": "薯蕷-白薯蕷 人參",
+    "Avg_Price": 83.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SU9",
+    "CropName": "薯蕷-進口",
+    "Avg_Price": 165.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SV1",
+    "CropName": "蘆筍-白蘆筍",
+    "Avg_Price": 227.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SV2",
+    "CropName": "蘆筍-綠蘆筍",
+    "Avg_Price": 235.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SV3",
+    "CropName": "蘆筍-蘆筍花",
+    "Avg_Price": 280.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SV9",
+    "CropName": "蘆筍-進口",
+    "Avg_Price": 289.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SV92",
+    "CropName": "蘆筍-進口 綠蘆筍",
+    "Avg_Price": 249.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SX1",
+    "CropName": "芽菜類-綠豆芽",
+    "Avg_Price": 13.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SX2",
+    "CropName": "芽菜類-黃豆芽",
+    "Avg_Price": 20.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SX3",
+    "CropName": "芽菜類-豌豆芽",
+    "Avg_Price": 80.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SX4",
+    "CropName": "芽菜類-苜蓿芽",
+    "Avg_Price": 80.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SZ1",
+    "CropName": "半天筍",
+    "Avg_Price": 100.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SZ6",
+    "CropName": "半天花",
+    "Avg_Price": 300.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SZ7",
+    "CropName": "晚香玉筍",
+    "Avg_Price": 158.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "SZ8",
+    "CropName": "香茅",
+    "Avg_Price": 42.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "T0",
+    "CropName": "西瓜-其他",
+    "Avg_Price": 66.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "T1",
+    "CropName": "西瓜-大西瓜",
+    "Avg_Price": 12.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "T5",
+    "CropName": "西瓜-黃肉",
+    "Avg_Price": 8.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "T6",
+    "CropName": "西瓜-紅肉",
+    "Avg_Price": 6.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "T8",
+    "CropName": "西瓜-甜美人",
+    "Avg_Price": 12.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "V0",
+    "CropName": "甜瓜-其他",
+    "Avg_Price": 84.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "V1",
+    "CropName": "甜瓜-美濃",
+    "Avg_Price": 26.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "V2",
+    "CropName": "甜瓜-溫室吊瓜",
+    "Avg_Price": 191.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "W1",
+    "CropName": "洋香瓜-網狀紅肉",
+    "Avg_Price": 39.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "W2",
+    "CropName": "洋香瓜-網狀綠肉",
+    "Avg_Price": 28.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "W4",
+    "CropName": "洋香瓜-新疆",
+    "Avg_Price": 99.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "W8",
+    "CropName": "洋香瓜-阿露斯",
+    "Avg_Price": 56.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "W9",
+    "CropName": "洋香瓜-進口",
+    "Avg_Price": 66.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "X0",
+    "CropName": "蘋果-其他",
+    "Avg_Price": 45.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "X3",
+    "CropName": "蘋果-惠",
+    "Avg_Price": 37.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "X69",
+    "CropName": "蘋果-富士進口",
+    "Avg_Price": 64.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "Y1",
+    "CropName": "桃子-水蜜桃",
+    "Avg_Price": 96.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "Y9",
+    "CropName": "桃子-進口",
+    "Avg_Price": 314.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "Z1",
+    "CropName": "柿子-紅柿",
+    "Avg_Price": 29.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "Z4",
+    "CropName": "柿子-甜柿",
+    "Avg_Price": 85.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "11",
+    "CropName": "椰子",
+    "Avg_Price": 20.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "129",
+    "CropName": "椰子-剝殼進口",
+    "Avg_Price": 35.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "22",
+    "CropName": "棗子",
+    "Avg_Price": 45.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "31",
+    "CropName": "釋迦",
+    "Avg_Price": 49.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "469",
+    "CropName": "藍莓-進口",
+    "Avg_Price": 350.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "50",
+    "CropName": "百香果-其他",
+    "Avg_Price": 65.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "51",
+    "CropName": "百香果-改良種",
+    "Avg_Price": 69.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "61",
+    "CropName": "甘蔗-帶皮",
+    "Avg_Price": 9.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "72",
+    "CropName": "小番茄-聖女",
+    "Avg_Price": 92.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "74",
+    "CropName": "小番茄-玉女",
+    "Avg_Price": 161.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "811",
+    "CropName": "紅龍果-白肉",
+    "Avg_Price": 43.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "812",
+    "CropName": "紅龍果-紅肉",
+    "Avg_Price": 43.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "813",
+    "CropName": "紅龍果-雙色紅龍果",
+    "Avg_Price": 25.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "859",
+    "CropName": "榴槤-進口",
+    "Avg_Price": 170.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "869",
+    "CropName": "山竹-進口",
+    "Avg_Price": 666.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "87",
+    "CropName": "紅毛丹",
+    "Avg_Price": 87.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "91",
+    "CropName": "其他",
+    "Avg_Price": 5.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "A0",
+    "CropName": "香蕉-其他",
+    "Avg_Price": 10.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "A1",
+    "CropName": "香蕉",
+    "Avg_Price": 30.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "A2",
+    "CropName": "香蕉-芭蕉紅芭蕉",
+    "Avg_Price": 20.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "A4",
+    "CropName": "香蕉-越旦",
+    "Avg_Price": 27.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "B0",
+    "CropName": "鳳梨-其他",
+    "Avg_Price": 25.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "B7",
+    "CropName": "鳳梨-牛奶鳳梨",
+    "Avg_Price": 19.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "C9",
+    "CropName": "柑橘-進口",
+    "Avg_Price": 99.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "F1",
+    "CropName": "雜柑-檸檬",
+    "Avg_Price": 25.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "F5",
+    "CropName": "雜柑-無子檸檬",
+    "Avg_Price": 23.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "F6",
+    "CropName": "雜柑-黃金檸檬",
+    "Avg_Price": 20.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FA1",
+    "CropName": "黃秋葵",
+    "Avg_Price": 39.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FB1",
+    "CropName": "花椰菜-青梗",
+    "Avg_Price": 45.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FC1",
+    "CropName": "胡瓜-黑刺",
+    "Avg_Price": 19.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FD0",
+    "CropName": "花胡瓜-其他",
+    "Avg_Price": 82.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FD1",
+    "CropName": "花胡瓜",
+    "Avg_Price": 49.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FE1",
+    "CropName": "冬瓜-白皮",
+    "Avg_Price": 20.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FF0",
+    "CropName": "絲瓜-其他",
+    "Avg_Price": 41.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FF1",
+    "CropName": "絲瓜",
+    "Avg_Price": 39.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FF2",
+    "CropName": "絲瓜-角瓜",
+    "Avg_Price": 29.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FG0",
+    "CropName": "苦瓜-其他",
+    "Avg_Price": 42.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FG1",
+    "CropName": "苦瓜-白大米",
+    "Avg_Price": 44.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FG3",
+    "CropName": "苦瓜-山苦瓜",
+    "Avg_Price": 55.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FG4",
+    "CropName": "苦瓜-翠綠",
+    "Avg_Price": 35.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH3",
+    "CropName": "扁蒲-花蒲",
+    "Avg_Price": 20.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FH4",
+    "CropName": "扁蒲-梨子蒲",
+    "Avg_Price": 16.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FI0",
+    "CropName": "茄子-其他",
+    "Avg_Price": 26.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FI2",
+    "CropName": "茄子-麻荸茄",
+    "Avg_Price": 41.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FI3",
+    "CropName": "茄子-日本種",
+    "Avg_Price": 14.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FJ3",
+    "CropName": "番茄-牛番茄",
+    "Avg_Price": 67.4
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FK3",
+    "CropName": "甜椒-新香",
+    "Avg_Price": 30.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FK41",
+    "CropName": "甜椒-彩色種 紅色",
+    "Avg_Price": 56.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FK42",
+    "CropName": "甜椒-彩色種 黃色",
+    "Avg_Price": 49.1
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FK5",
+    "CropName": "甜椒-青椒",
+    "Avg_Price": 46.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FK6",
+    "CropName": "甜椒-水果彩椒",
+    "Avg_Price": 87.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FK94",
+    "CropName": "甜椒-進口 彩色種",
+    "Avg_Price": 90.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FL9",
+    "CropName": "豌豆-進口",
+    "Avg_Price": 250.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FM2",
+    "CropName": "菜豆-青色",
+    "Avg_Price": 60.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FN1",
+    "CropName": "敏豆-白豆",
+    "Avg_Price": 105.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FN4",
+    "CropName": "敏豆-翼豆",
+    "Avg_Price": 41.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FN5",
+    "CropName": "敏豆-醜豆",
+    "Avg_Price": 70.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FQ2",
+    "CropName": "毛豆-豆仁",
+    "Avg_Price": 130.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR1",
+    "CropName": "青花苔",
+    "Avg_Price": 69.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FR9",
+    "CropName": "青花苔-進口",
+    "Avg_Price": 103.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT0",
+    "CropName": "南瓜-其他",
+    "Avg_Price": 32.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT1",
+    "CropName": "南瓜-木瓜形",
+    "Avg_Price": 20.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT11",
+    "CropName": "南瓜-木瓜型 阿成",
+    "Avg_Price": 33.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT12",
+    "CropName": "南瓜-木瓜型 阿嬌",
+    "Avg_Price": 24.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT5",
+    "CropName": "南瓜-青如意",
+    "Avg_Price": 66.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT9",
+    "CropName": "南瓜-進口",
+    "Avg_Price": 69.2
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT91",
+    "CropName": "南瓜-進口 木瓜型",
+    "Avg_Price": 21.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FT97",
+    "CropName": "南瓜-進口 栗子",
+    "Avg_Price": 27.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU1",
+    "CropName": "隼人瓜",
+    "Avg_Price": 7.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FU2",
+    "CropName": "隼人瓜-瓜苗",
+    "Avg_Price": 107.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV1",
+    "CropName": "辣椒-紅小",
+    "Avg_Price": 53.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV4",
+    "CropName": "辣椒-朝天椒",
+    "Avg_Price": 114.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV5",
+    "CropName": "辣椒-青龍",
+    "Avg_Price": 32.7
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV6",
+    "CropName": "辣椒-糯米椒",
+    "Avg_Price": 36.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV9",
+    "CropName": "辣椒-進口",
+    "Avg_Price": 100.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FV94",
+    "CropName": "辣椒-進口 朝天椒",
+    "Avg_Price": 90.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY4",
+    "CropName": "玉米-玉米筍",
+    "Avg_Price": 105.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY41",
+    "CropName": "玉米-玉米筍 帶殼",
+    "Avg_Price": 26.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY5",
+    "CropName": "玉米-糯米黑",
+    "Avg_Price": 31.8
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY6",
+    "CropName": "玉米-甜軟殼",
+    "Avg_Price": 24.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FY94",
+    "CropName": "玉米-進口 玉米筍",
+    "Avg_Price": 91.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "FZ1",
+    "CropName": "落花生-生",
+    "Avg_Price": 35.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "G2",
+    "CropName": "黃金果",
+    "Avg_Price": 45.3
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "G3",
+    "CropName": "酪梨",
+    "Avg_Price": 48.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "G49",
+    "CropName": "奇異果-進口",
+    "Avg_Price": 101.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "G9",
+    "CropName": "波蘿蜜",
+    "Avg_Price": 20.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "G91",
+    "CropName": "榴槤蜜",
+    "Avg_Price": 19.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "H1",
+    "CropName": "柚子-文旦",
+    "Avg_Price": 16.9
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "H49",
+    "CropName": "葡萄柚-紅肉進口",
+    "Avg_Price": 45.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "I1",
+    "CropName": "木瓜-網室紅肉",
+    "Avg_Price": 31.0
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "I3",
+    "CropName": "木瓜-日昇種",
+    "Avg_Price": 39.6
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "I4",
+    "CropName": "木瓜-青木瓜",
+    "Avg_Price": 10.5
+  },
+  {
+    "Start_time": "115.08.11",
+    "End_time": "115.08.25",
+    "CropCode": "K3",
+    "CropName": "龍眼-粉殼",
+    "Avg_Price": 42.4
+  }
+]

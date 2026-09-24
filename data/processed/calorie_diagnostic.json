@@ -1,0 +1,31 @@
+{
+  "policy_version": "2026-09-21-v2",
+  "energy_source_column": "熱量(kcal)",
+  "main_ingredient_policy": {
+    "missing_ratio_limit_percent": 20,
+    "known_kcal_override_strictly_greater_than": 500,
+    "aromatic_main_threshold_g": 80,
+    "spices_excluded_from_main_missing_ratio": true
+  },
+  "seasoning_policy": {
+    "missing_weight": "EXCLUDE_FROM_CALORIE",
+    "ordinary_min_weight_g": 50,
+    "high_energy_min_weight_g": 20
+  },
+  "price_policy": {
+    "per_item": true,
+    "missing_display": "$無資料",
+    "rounding": "CEILING_TO_INTEGER_PER_ITEM",
+    "total": "SUM_OF_ROUNDED_KNOWN_ITEM_PRICES",
+    "all_missing_total": "$無資料"
+  },
+  "summary": {
+    "recipe_count": 0,
+    "calorie_calculated_count": 0,
+    "calorie_insufficient_count": 0,
+    "price_calculated_count": 0,
+    "price_partial_count": 0,
+    "price_insufficient_count": 0
+  },
+  "problem_recipes": []
+}

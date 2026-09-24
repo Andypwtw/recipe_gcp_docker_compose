@@ -1,0 +1,16 @@
+{
+  "applied": {
+    "unit_weight_map": 0,
+    "density_map": 0,
+    "qualitative_high_confidence": 0,
+    "count_fallback": 0,
+    "volume_fallback": 0,
+    "unresolved_qualitative": 0
+  },
+  "summary": {
+    "total_lines": 0,
+    "has_weight": null,
+    "missing_weight": null,
+    "estimated_weight_lines": null
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "input_count": 0,
+  "output_count": 0,
+  "removed_duplicate_count": 0,
+  "duplicate_group_count": 0,
+  "empty_name_skipped_count": 0,
+  "rule": "Remove trailing (number), group by base_name, prefer unsuffixed recipe, otherwise keep first.",
+  "removed": [],
+  "empty_name_rows": []
+}
