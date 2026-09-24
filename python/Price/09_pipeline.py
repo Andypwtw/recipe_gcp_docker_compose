@@ -18,11 +18,23 @@ import json
 import os
 import subprocess
 import sys
+import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable
 
 from openpyxl import load_workbook
+
+
+TAIWAN_TIMEZONE = "Asia/Taipei"
+
+
+def configure_taiwan_timezone() -> None:
+    """將本流程與啟動的子程式固定使用台灣時區。"""
+    os.environ["TZ"] = TAIWAN_TIMEZONE
+    # Linux 的 Airflow 容器支援 tzset；保留 hasattr 以維持跨平台相容性。
+    if hasattr(time, "tzset"):
+        time.tzset()
 
 
 @dataclass(frozen=True)
@@ -237,6 +249,8 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
+    configure_taiwan_timezone()
+    print(f"執行時區：{TAIWAN_TIMEZONE}", flush=True)
     args = parse_args()
     directory = args.directory.expanduser().resolve()
     run_pipeline(directory, args.dry_run)
