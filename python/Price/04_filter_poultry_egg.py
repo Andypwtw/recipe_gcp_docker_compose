@@ -4,10 +4,16 @@ import json
 from pathlib import Path
 
 
+<<<<<<< HEAD
 # 來源資料與輸出檔案都位於此篩選程式所在的 Price 資料夾。
 BASE_DIR = Path(__file__).resolve().parent
 INPUT_PATH = BASE_DIR / "04_moa_poultry_eggs.json"
 OUTPUT_PATH = BASE_DIR / "04_moa_poultry_eggs_avgprice.json"
+=======
+# 來源資料與輸出檔案位置。
+INPUT_PATH = Path("/Users/amy/TKR102/Price/04_moa_poultry_eggs.json")
+OUTPUT_PATH = Path(__file__).with_name("04_moa_poultry_eggs_avgprice.json")
+>>>>>>> 035b0fa063cfe124d9b22f99bdad978556497911
 
 # 兩種肉雞重量區間的價格欄位，會合併後計算單一雞價平均值。
 CHICKEN_PRICE_FIELDS = (
@@ -59,4 +65,8 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     main()
+=======
+    main()
+>>>>>>> 035b0fa063cfe124d9b22f99bdad978556497911

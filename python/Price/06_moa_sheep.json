@@ -128,6 +128,7 @@
     "Log_Owner": "OD排程介接"
   },
   {
+<<<<<<< HEAD
     "marketID": "632",
     "shortName": "雲林縣",
     "name": "雲林縣肉品市場",
@@ -189,6 +190,69 @@
     "highestPrice": "239",
     "Record_ID": "15552",
     "Log_UpdateTime": "2026/9/7 下午 11:30:00",
+=======
+    "marketID": "514",
+    "shortName": "彰化縣",
+    "name": "彰化縣肉品市場",
+    "transDate": "2026/08/13",
+    "productID": "G41",
+    "productName": "努比亞雜交閹公羊",
+    "productTypeName": "",
+    "quantity": "82",
+    "avgWeight": "65",
+    "avgPrice": "327",
+    "highestPrice": "361",
+    "Record_ID": "15533",
+    "Log_UpdateTime": "2026/8/26 下午 11:30:00",
+    "Log_Owner": "OD排程介接"
+  },
+  {
+    "marketID": "514",
+    "shortName": "彰化縣",
+    "name": "彰化縣肉品市場",
+    "transDate": "2026/08/13",
+    "productID": "G42",
+    "productName": "閹公羊",
+    "productTypeName": "",
+    "quantity": "36",
+    "avgWeight": "60",
+    "avgPrice": "273",
+    "highestPrice": "311",
+    "Record_ID": "15534",
+    "Log_UpdateTime": "2026/8/26 下午 11:30:00",
+    "Log_Owner": "OD排程介接"
+  },
+  {
+    "marketID": "514",
+    "shortName": "彰化縣",
+    "name": "彰化縣肉品市場",
+    "transDate": "2026/08/13",
+    "productID": "G21",
+    "productName": "女羊",
+    "productTypeName": "",
+    "quantity": "34",
+    "avgWeight": "53",
+    "avgPrice": "267",
+    "highestPrice": "329",
+    "Record_ID": "15535",
+    "Log_UpdateTime": "2026/8/26 下午 11:30:00",
+    "Log_Owner": "OD排程介接"
+  },
+  {
+    "marketID": "514",
+    "shortName": "彰化縣",
+    "name": "彰化縣肉品市場",
+    "transDate": "2026/08/13",
+    "productID": "G32",
+    "productName": "規格外羊",
+    "productTypeName": "",
+    "quantity": "63",
+    "avgWeight": "52",
+    "avgPrice": "152",
+    "highestPrice": "212",
+    "Record_ID": "15536",
+    "Log_UpdateTime": "2026/8/26 下午 11:30:00",
+>>>>>>> 035b0fa063cfe124d9b22f99bdad978556497911
     "Log_Owner": "OD排程介接"
   },
   {
@@ -254,6 +318,7 @@
     "Record_ID": "15544",
     "Log_UpdateTime": "2026/9/2 下午 11:30:00",
     "Log_Owner": "OD排程介接"
+<<<<<<< HEAD
   },
   {
     "marketID": "514",
@@ -318,5 +383,7 @@
     "Record_ID": "15536",
     "Log_UpdateTime": "2026/8/26 下午 11:30:00",
     "Log_Owner": "OD排程介接"
+=======
+>>>>>>> 035b0fa063cfe124d9b22f99bdad978556497911
   }
 ]

@@ -5,10 +5,19 @@ import json
 from pathlib import Path
 
 
+<<<<<<< HEAD
 # 原始 MOA 資料與此篩選程式都位於同一個 Price 資料夾。
 BASE_DIR = Path(__file__).resolve().parent
 INPUT_PATH = BASE_DIR / "01_moa_agri.json"
 OUTPUT_PATH = BASE_DIR / "01_moa_agri_avgprice.json"
+=======
+# 來源資料位置；若原始篩選檔已改名，改用同內容的 agri 檔案。
+INPUT_PATHS = (
+    Path("/Users/amy/TKR102/Price/01_moa_agri.json"),
+    Path("/Users/amy/TKR102/Price/01_moa_agri_avgprice.json"),
+)
+OUTPUT_PATH = Path(__file__).with_name("01_moa_agri_avgprice.json")
+>>>>>>> 035b0fa063cfe124d9b22f99bdad978556497911
 
 # 將欄位名稱集中定義，日後調整資料格式時更容易維護。
 PRICE_FIELD = "Avg_Price"
@@ -16,11 +25,21 @@ CROP_NAME_FIELD = "CropName"
 
 
 def main() -> None:
+<<<<<<< HEAD
     if not INPUT_PATH.is_file():
         raise FileNotFoundError(f"找不到農產品來源 JSON 檔案：{INPUT_PATH}")
 
     # 讀取原始 JSON 陣列。
     with INPUT_PATH.open("r", encoding="utf-8") as input_file:
+=======
+    # 取得目前存在的來源檔案，避免檔案改名時無法執行。
+    input_path = next((path for path in INPUT_PATHS if path.exists()), None)
+    if input_path is None:
+        raise FileNotFoundError("找不到農產品來源 JSON 檔案。")
+
+    # 讀取原始 JSON 陣列。
+    with input_path.open("r", encoding="utf-8") as input_file:
+>>>>>>> 035b0fa063cfe124d9b22f99bdad978556497911
         records = json.load(input_file)
 
     # 記錄已輸出的品項名稱，用於刪除同一品項的重複資料。

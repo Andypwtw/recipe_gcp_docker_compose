@@ -5,10 +5,16 @@ from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
 
+<<<<<<< HEAD
 # 來源資料與輸出檔案都位於此篩選程式所在的 Price 資料夾。
 BASE_DIR = Path(__file__).resolve().parent
 INPUT_PATH = BASE_DIR / "06_moa_sheep.json"
 OUTPUT_PATH = BASE_DIR / "06_moa_sheep_avgprice.json"
+=======
+# 要處理的羊價 JSON 檔案與平均值輸出檔案。
+INPUT_PATH = Path(__file__).with_name("06_moa_sheep.json")
+OUTPUT_PATH = Path(__file__).with_name("06_moa_sheep_avgprice.json")
+>>>>>>> 035b0fa063cfe124d9b22f99bdad978556497911
 PRICE_FIELD = "avgPrice"
 
 
@@ -48,4 +54,8 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     main()
+=======
+    main()
+>>>>>>> 035b0fa063cfe124d9b22f99bdad978556497911

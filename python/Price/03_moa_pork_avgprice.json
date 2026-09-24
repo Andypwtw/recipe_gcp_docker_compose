@@ -1,5 +1,6 @@
 {
   "TransNum_AvgPrice": [
+<<<<<<< HEAD
     106.03,
     102.61,
     103.21,
@@ -21,4 +22,9 @@
     108.05
   ],
   "TransNum_AvgPrice_Average": 104.93
+=======
+    109.33
+  ],
+  "TransNum_AvgPrice_Average": 109.33
+>>>>>>> 035b0fa063cfe124d9b22f99bdad978556497911
 }

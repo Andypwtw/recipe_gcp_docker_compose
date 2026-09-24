@@ -1,5 +1,6 @@
 [
   {
+<<<<<<< HEAD
     "TransDate": "1150825",
     "MarketName": "花蓮縣",
     "TransNum_Total": 432,
@@ -617,12 +618,32 @@
     "Num_115up": 734,
     "AvgWgt_115up": 126.0,
     "AvgPrice_115up": 109.6,
+=======
+    "TransDate": "1150823",
+    "MarketName": "澎湖縣",
+    "TransNum_Total": 68,
+    "TransNum_AvgWgt": 125.04,
+    "TransNum_AvgPrice": 109.33,
+    "SpecPig_Num": 0,
+    "SpecPig_AvgWgt": 0.0,
+    "SpecPig_AvgPrice": 0.0,
+    "Num_95in_115in": 0,
+    "AvgWgt_95in_115in": 0.0,
+    "AvgPrice_95in_115in": 0.0,
+    "Num_75in_95": 0,
+    "AvgWgt_75in_95": 0.0,
+    "AvgPrice_75in_95": 0.0,
+    "Num_115up": 0,
+    "AvgWgt_115up": 0.0,
+    "AvgPrice_115up": 0.0,
+>>>>>>> 035b0fa063cfe124d9b22f99bdad978556497911
     "Num_75low": 0,
     "AvgWgt_75low": 0.0,
     "AvgPrice_75low": 0.0,
     "OutPigs_Num": 0,
     "OutPigs_AvgWgt": 0.0,
     "OutPigs_AvgPrice": 0.0,
+<<<<<<< HEAD
     "OtherPigs_Num": 0,
     "OtherPigs_AvgWgt": 0.0,
     "OtherPigs_AvgPrice": 0.0,
@@ -758,5 +779,22 @@
     "KgPig6_Q": 189,
     "KgPig6_W": 163.71,
     "KgPig6_P": 107.35
+=======
+    "OtherPigs_Num": 68,
+    "OtherPigs_AvgWgt": 0.0,
+    "OtherPigs_AvgPrice": 109.33,
+    "FreezerPigs_Num": 0,
+    "FreezerPigs_AvgWgt": 0.0,
+    "FreezerPigs_AvgPrice": 0.0,
+    "TotalTrans_ExcludeFreezer_Num": 68,
+    "TotalTrans_ExcludeFreezer_AvgWeight": 125.04,
+    "TotalTrans_ExcludeFreezer_AvgPrice": 109.33,
+    "KgPig5_Q": 0,
+    "KgPig5_W": 0.0,
+    "KgPig5_P": 0.0,
+    "KgPig6_Q": 0,
+    "KgPig6_W": 0.0,
+    "KgPig6_P": 0.0
+>>>>>>> 035b0fa063cfe124d9b22f99bdad978556497911
   }
 ]
