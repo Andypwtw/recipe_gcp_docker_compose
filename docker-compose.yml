@@ -151,14 +151,18 @@ services:
     # ==========================================================
     command: >
       sh -c "
-        mkdir -p /mnt/mysql /mnt/mongodb /mnt/kafka /mnt/postgres /mnt/airflow-logs /mnt/airflow-plugins /mnt/data/raw /mnt/data/reference /mnt/data/processed &&
+        mkdir -p /mnt/mysql /mnt/mongodb /mnt/kafka /mnt/postgres /mnt/airflow-logs /mnt/airflow-plugins /mnt/data/raw /mnt/data/reference /mnt/data/processed /mnt/python/Price &&
         chown -R 999:999 /mnt/mysql &&
         chown -R 999:999 /mnt/mongodb &&
         chown -R 1000:1000 /mnt/kafka &&
         chown -R 70:70 /mnt/postgres &&
         chown -R ${AIRFLOW_UID:-50000}:0 /mnt/airflow-logs /mnt/airflow-plugins /mnt/data &&
         chmod -R ug+rwX,o+rX /mnt/airflow-logs /mnt/airflow-plugins /mnt/data &&
-        find /mnt/airflow-logs /mnt/airflow-plugins /mnt/data -type d -exec chmod 2775 {} +
+        find /mnt/airflow-logs /mnt/airflow-plugins /mnt/data -type d -exec chmod 2775 {} + &&
+        chown ${AIRFLOW_UID:-50000}:0 /mnt/python/Price &&
+        chmod 2775 /mnt/python/Price &&
+        find /mnt/python/Price -maxdepth 1 -type f -name '*.json' -exec chown ${AIRFLOW_UID:-50000}:0 {} + &&
+        find /mnt/python/Price -maxdepth 1 -type f -name '*.json' -exec chmod 0664 {} +
       "
 
     volumes:
@@ -169,6 +173,7 @@ services:
       - airflow_logs:/mnt/airflow-logs
       - airflow_plugins:/mnt/airflow-plugins
       - ./data:/mnt/data
+      - ./python:/mnt/python
 
 
   mysql:
