@@ -2,10 +2,14 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timedelta
+from datetime import timedelta
 
+import pendulum
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+
+
+TAIWAN_TIMEZONE = pendulum.timezone("Asia/Taipei")
 
 
 DEFAULT_ARGS = {
@@ -22,7 +26,8 @@ with DAG(
     dag_id="price_recipe_full_pipeline",
     description="每 14 天依序更新 MOA 食品價格與食譜營養資料",
     default_args=DEFAULT_ARGS,
-    start_date=datetime(2026, 9, 22),
+    # 使用帶時區的時間，讓每 14 天的排程以台灣時間為基準。
+    start_date=pendulum.datetime(2026, 9, 22, tz=TAIWAN_TIMEZONE),
     schedule_interval=timedelta(days=14),
     catchup=False,
     max_active_runs=1,
