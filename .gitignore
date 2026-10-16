@@ -44,6 +44,5 @@ python/Price/08_match_nutrition_foods__moa_prices.json
 
 # Wan Jia nutrition comparison runtime artifacts
 /data/processed/wanjia_ytower_comparison/
-/python/Price/ytower_nutrition_comparison.xlsx
 /python/Price/ytower_nutrition_comparison.before_wanjia_comparison.xlsx
 /data/reference/food_nutrition_2025.before_wanjia_price.xlsx
