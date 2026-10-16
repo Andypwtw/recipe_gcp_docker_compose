@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-"""Match column-A ingredients in ytower_nutrition_comparison.xlsx to Wan Jia Fu.
+"""Match nutrition ingredients to Wan Jia Fu and update per-100g prices.
 
-This module reuses the catalog crawl, site-search fallback, matching rules,
-product-spec parsing, and per-100g calculation in the adjacent wanjia_crawler.py.
-It is designed for the repository's Airflow/Docker mount layout as well as local
-runs. The source workbook is backed up once before the first write.
+Catalog crawling, product matching, and unit conversion are embedded here so
+this Airflow entry point runs without a separate wanjia_crawler.py module.
 
 Docker/Airflow example:
   python /workspace/python/Price/wanjia_ytower_nutrition_comparison.py \
@@ -26,15 +24,543 @@ import time
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlencode
+from urllib.parse import parse_qs, urlencode, urljoin, urlparse
+from collections import deque
+from difflib import SequenceMatcher
+import unicodedata
+
+import requests
+from bs4 import BeautifulSoup
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+from types import SimpleNamespace
 
 from openpyxl import load_workbook
 from openpyxl.styles import Alignment
 from openpyxl.utils import get_column_letter
 
-# The script and source crawler are mounted together at /workspace/python/Price
-# in Docker and are adjacent in the local repository.
-import wanjia_crawler as crawler
+# All crawler helpers are embedded above for standalone Airflow execution.
+BASE_URL = "https://online.uni-prosperity.com.tw"
+
+CATEGORY_URLS = {
+    "生鮮冷凍": f"{BASE_URL}/zh/%E7%94%9F%E9%AE%AE%E5%86%B7%E5%87%8D",
+    "米油沖泡": f"{BASE_URL}/zh/%E7%B1%B3%E6%B2%B9%E6%B2%96%E6%B3%A1",
+    "飲料零食": f"{BASE_URL}/zh/%E9%A3%B2%E6%96%99%E9%9B%B6%E9%A3%9F",
+}
+
+HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+    ),
+    "Accept-Language": "zh-TW,zh;q=0.9,en;q=0.8",
+}
+
+ALIASES = {
+    "大麥片": ("大燕麥片",),
+    "即食燕麥片": ("即食大燕麥片", "燕麥片"),
+    "即時燕麥片": ("即食大燕麥片", "燕麥片"),
+    "甘扁桃仁片": ("杏仁片",),
+    "小米": ("譽方媽媽小米",),
+    "秈米": ("三好米",),
+    "山藥": ("日本山藥",),
+    "糯玉米": ("玉米",),
+    "黑芝麻": ("黑芝麻粉",),
+    "大西洋鮭魚": ("鮭魚輪切", "大西洋鮭魚輪切", "鮭魚"),
+    "米": ("白米", "蓬萊米", "稻米", "米粒"),
+    "無子檸檬": ("檸檬", "萊姆"),
+}
+
+FRUIT_SUFFIXES = (
+    "檸檬", "萊姆", "柿子", "柿", "蓮霧", "西瓜", "蘋果", "芒果", "鳳梨",
+    "香蕉", "橘子", "柑", "柳橙", "葡萄", "梨", "釋迦", "荔枝", "龍眼",
+    "木瓜", "番石榴", "芭樂", "山竹", "草莓", "桃", "李", "柚子", "哈密瓜",
+)
+
+PROCESSED_FRUIT_RE = re.compile(r"果醬|果汁|果乾|蜜餞|果凍|水果醋|果醋|愛玉|茶飲|飲料|果泥")
+
+NONFOOD_RE = re.compile(
+    r"拖鞋|鞋(?!粉)|手機|平板|保護貼|手機殼|手環|錶帶|耳機|充電器|玩具|"
+    r"服飾|清潔劑|洗衣精|收納盒|鍋具|餐具|盆栽|種子|飾品|飾物|首飾|"
+    r"高凳|凳子|鍋墊|杯墊|濕紙巾|溼紙巾|紙巾|酒精抗菌|驅蚊|防蚊|噴霧|殺蟲|"
+    r"佛像|摩尼佛|佛具|化妝品|保養品|香氛|寢具|衛生棉|清潔刷|垃圾袋|"
+    r"油漆|漆筆|油漆筆|文具|電錘|撲克牌|濾心|濾芯|刮皮刀|純銀|s925|"
+    r"麻將蓆|涼蓆|竹蓆|透氣雙人|玩偶|娃娃|濕巾|溼巾|去味|冰箱專用|"
+    r"貓睡床|收納貓|睡床|蜂巢紙|紙收納|合金|牙刷|"
+    r"保健食品|萃取物|膠囊|錠劑",
+    re.IGNORECASE,
+)
+
+DRINK_PRODUCT_RE = re.compile(
+    r"果汁|蔬果汁|四物飲|牛乳|鮮乳|調味乳|乳飲|奶茶|豆漿|米漿|飲料|飲品|"
+    r"茶飲|汽水|沖泡飲|機能飲|水果醋|濃縮飲|酒類|啤酒|果醋",
+    re.IGNORECASE,
+)
+
+BAKERY_RE = re.compile(
+    r"麵包|吐司|餐包|可頌|貝果|蛋糕|餅乾|披薩|漢堡|烘焙|裸焙坊|橄欖形",
+    re.IGNORECASE,
+)
+
+MEASURE_RE = re.compile(
+    r"(?P<amount>\d+(?:\.\d+)?)\s*"
+    r"(?P<unit>公斤|千克|公克|毫升|公升|台斤|台兩|斤|兩|kg|克|g|ml|l)"
+    r"(?=$|[^a-z]|[x×*]\s*\d)",
+    re.IGNORECASE,
+)
+
+PRICE_RE = re.compile(r"\d[\d,]*(?:\.\d+)?")
+
+REJECTED_PRODUCT_PATHS = {"B303026187101.html"}
+
+def create_session() -> requests.Session:
+    """Retry transient DNS/connectivity and server errors before recording a miss."""
+    session = requests.Session()
+    retry = Retry(
+        total=4,
+        connect=4,
+        read=2,
+        status=3,
+        backoff_factor=0.6,
+        status_forcelist=(429, 500, 502, 503, 504),
+        allowed_methods=frozenset({"GET"}),
+        respect_retry_after_header=True,
+    )
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+    session.headers.update(HEADERS)
+    return session
+
+def clean(value: object) -> str:
+    return re.sub(r"\s+", " ", str(value or "")).strip()
+
+def normalize(value: str) -> str:
+    value = unicodedata.normalize("NFKC", value).lower()
+    return re.sub(r"[\s\W_]+", "", value, flags=re.UNICODE)
+
+def base_name(value: str) -> str:
+    original = clean(value)
+    result = re.sub(r"[（(].*?[）)]", "", original)
+    result = re.sub(r"(平均值|平均|樣品|取樣)$", "", result).strip()
+    return result or original
+
+def split_names(value: str) -> list[str]:
+    return [base_name(token) for token in re.split(r"[,，、;；/|\s]+", clean(value)) if token]
+
+def sample_search_terms(sample: dict) -> list[str]:
+    name = base_name(sample.get("樣品名稱", ""))
+    terms = [name, *ALIASES.get(name, ())]
+    for field in ("俗名", "建議搜尋詞"):
+        for term in split_names(sample.get(field, "")):
+            terms.extend((term, *ALIASES.get(term, ())))
+    # Add a shorter fruit-specific search term for cultivar/condition names.
+    # Never shorten arbitrary ingredients: only known fruit suffixes qualify.
+    fruit_inputs = list(terms)
+    for term in fruit_inputs:
+        compact = normalize(term)
+        for suffix in FRUIT_SUFFIXES:
+            suffix_key = normalize(suffix)
+            if compact.endswith(suffix_key) and len(compact) > len(suffix_key):
+                terms.append(suffix)
+                if suffix in {"柿", "柿子"}:
+                    terms.append("柿子")
+                break
+    if any("柿" in normalize(term) for term in fruit_inputs):
+        terms.append("柿子")
+    result, seen = [], set()
+    for term in terms:
+        key = normalize(term)
+        if len(key) >= 2 and key not in seen:
+            result.append(clean(term))
+            seen.add(key)
+    return result
+
+def product_name(element) -> str:
+    for selector in (
+        "a.gtm-product-alink[data-name]", "[data-name]", ".pdp-link a",
+        ".product-name a", ".product-name", "a[title]",
+    ):
+        node = element if getattr(element, "name", None) == "a" and selector.startswith("a.") else element.select_one(selector)
+        if node:
+            name = clean(node.get("data-name") or node.get("title") or node.get_text(" ", strip=True))
+            if name:
+                return name
+    return ""
+
+def numeric_price(value: object) -> float | None:
+    match = PRICE_RE.search(clean(value).replace("$", ""))
+    if not match:
+        return None
+    try:
+        amount = float(match.group(0).replace(",", ""))
+        return amount if amount > 0 else None
+    except ValueError:
+        return None
+
+def extract_products(html: str, page_url: str) -> list[dict]:
+    soup = BeautifulSoup(html, "html.parser")
+    products: dict[str, dict] = {}
+    elements = list(soup.select(
+        "#productgrid .hot-recommend-item, .hot-recommend-item, #productgrid .product, "
+        "#productgrid .product-tile, #productgrid .grid-tile, .product-tile, [data-pid], [data-product-id]"
+    )) + list(soup.select("a.gtm-product-alink[data-name], a[data-name]"))
+    for element in elements:
+        link = element if getattr(element, "name", None) == "a" else element.select_one("a[href]")
+        name = product_name(element)
+        if not name and link:
+            name = clean(link.get("data-name") or link.get("title") or link.get_text(" ", strip=True))
+        if not name or NONFOOD_RE.search(name):
+            continue
+        href = clean(link.get("href", "")) if link else ""
+        price_value = (link or element).get("data-price", "")
+        if not price_value:
+            price_node = element.select_one(".sales .value, .sales, .price .value, .price, [itemprop='price'], [class*='price']")
+            if price_node:
+                price_value = price_node.get("content") or price_node.get_text(" ", strip=True)
+        key = normalize(name)
+        if key:
+            products.setdefault(key, {
+                "商品名稱": name,
+                "商品價格": numeric_price(price_value),
+                "商品網址": urljoin(page_url, href),
+            })
+
+    for node in soup.select('script[type="application/ld+json"]'):
+        try:
+            parsed = json.loads(node.string or node.get_text())
+        except (json.JSONDecodeError, TypeError):
+            continue
+        stack = parsed if isinstance(parsed, list) else [parsed]
+        while stack:
+            obj = stack.pop()
+            if not isinstance(obj, dict):
+                continue
+            if isinstance(obj.get("@graph"), list):
+                stack.extend(obj["@graph"])
+            if obj.get("@type") != "Product" or not obj.get("name"):
+                continue
+            name = clean(obj["name"])
+            if NONFOOD_RE.search(name):
+                continue
+            offers = obj.get("offers") or {}
+            if isinstance(offers, list):
+                offers = offers[0] if offers else {}
+            key = normalize(name)
+            products.setdefault(key, {
+                "商品名稱": name,
+                "商品價格": numeric_price(offers.get("price")) if isinstance(offers, dict) else None,
+                "商品網址": urljoin(page_url, clean(obj.get("url", ""))),
+            })
+    return list(products.values())
+
+def page_links(soup: BeautifulSoup, current_url: str, root_path: str) -> list[str]:
+    host = urlparse(BASE_URL).netloc
+    links = []
+    for anchor in soup.select("a[href]"):
+        href = clean(anchor.get("href"))
+        onclick = clean(anchor.get("onclick"))
+        match = re.search(r"p_page\(['\"]([^'\"]+)['\"]\)", onclick)
+        if match:
+            href = match.group(1)
+        elif not href or href.startswith(("#", "javascript:", "mailto:")):
+            continue
+        absolute = urljoin(current_url, href)
+        parsed = urlparse(absolute)
+        if parsed.netloc != host:
+            continue
+        query = parse_qs(parsed.query)
+        cls = " ".join(anchor.get("class", [])).lower()
+        label = clean(anchor.get_text(" ", strip=True))
+        same_root = parsed.path.rstrip("/") == root_path.rstrip("/")
+        ajax_page = parsed.path.endswith("/Search-UpdateGrid") and "start" in query
+        category_child = parsed.path.startswith(root_path.rstrip("/") + "/") and not parsed.path.lower().endswith(".html")
+        paging = parsed.path.endswith("/Search-UpdateGrid") or "start" in query or "page" in query or "pagination" in cls or label in {"下一頁", "下頁", "Next", "›", "»"}
+        if (paging and (same_root or ajax_page)) or category_child:
+            links.append(absolute)
+    return links
+
+def get_html(session: requests.Session, url: str, timeout: float) -> tuple[str, str]:
+    response = session.get(url, timeout=timeout)
+    response.raise_for_status()
+    return response.text, response.url
+
+def crawl_catalog(session: requests.Session, max_pages: int, timeout: float, delay: float,
+                  network_failures: list[dict]) -> list[dict]:
+    queue = deque((url, urlparse(url).path, category) for category, url in CATEGORY_URLS.items())
+    visited: set[str] = set()
+    products: dict[str, dict] = {}
+    while queue and (max_pages <= 0 or len(visited) < max_pages):
+        url, root_path, root_category = queue.popleft()
+        if url in visited:
+            continue
+        visited.add(url)
+        page_limit = str(max_pages) if max_pages > 0 else "不限"
+        print(f"型錄 {len(visited)}/{page_limit}：{url}", flush=True)
+        try:
+            html, final_url = get_html(session, url, timeout)
+        except requests.RequestException as exc:
+            print(f"警告：型錄頁讀取失敗：{exc}", file=sys.stderr, flush=True)
+            network_failures.append({"階段": "型錄", "網址": url, "錯誤": str(exc)})
+            continue
+        for product in extract_products(html, final_url):
+            product.setdefault("網站大類", root_category)
+            products.setdefault(normalize(product["商品名稱"]), product)
+        for link in page_links(BeautifulSoup(html, "html.parser"), final_url, root_path):
+            if link not in visited and all(link != queued[0] for queued in queue):
+                queue.append((link, root_path, root_category))
+        if queue:
+            time.sleep(max(0.0, delay))
+    if queue and max_pages > 0:
+        print(f"警告：型錄頁數達上限 {max_pages}，尚有 {len(queue)} 個分類/分頁待讀取。請提高 --max-pages 後重跑。", file=sys.stderr, flush=True)
+    print(f"型錄商品讀取：{len(products)} 筆；瀏覽頁數：{len(visited)}", flush=True)
+    return list(products.values())
+
+def plausible(sample: dict, product_name_value: str) -> bool:
+    if NONFOOD_RE.search(product_name_value):
+        return False
+    category = clean(sample.get("食品分類", ""))
+    name = clean(sample.get("樣品名稱", ""))
+    if ("穀物" in category or "小麥胚芽" in name) and BAKERY_RE.search(product_name_value):
+        return False
+    if "果" in category and not re.search(r"果汁|果乾|果醬|蜜餞|果凍", name):
+        if PROCESSED_FRUIT_RE.search(product_name_value):
+            return False
+    # A raw ingredient should not match a beverage/juice that merely contains
+    # its name (e.g. 山竹 -> 山竹果汁, 黑芝麻 -> 黑芝麻牛乳, 青木瓜 -> 四物飲).
+    terms = sample_search_terms(sample)
+    if DRINK_PRODUCT_RE.search(product_name_value) and not DRINK_PRODUCT_RE.search(" ".join(terms)):
+        return False
+    return True
+
+def score_terms(terms: list[str], product_name_value: str) -> tuple[float, str]:
+    product = normalize(product_name_value)
+    best = (0.0, "")
+    for term in terms:
+        key = normalize(term)
+        if not key:
+            continue
+        score = 1.0 if len(key) >= 2 and key in product else SequenceMatcher(None, key, product).ratio()
+        if score > best[0]:
+            best = (score, term)
+    return best
+
+def matching_candidates(sample: dict, products: list[dict], threshold: float) -> list[dict]:
+    terms = sample_search_terms(sample)
+    candidates = []
+    for product in products:
+        if urlparse(product.get("商品網址", "")).path.rsplit("/", 1)[-1] in REJECTED_PRODUCT_PATHS:
+            continue
+        if not plausible(sample, product["商品名稱"]):
+            continue
+        score, term = score_terms(terms, product["商品名稱"])
+        direct = any(normalize(term) in normalize(product["商品名稱"]) for term in terms)
+        if score >= threshold and (direct or score >= max(0.84, threshold)):
+            candidates.append({**product, "相似度": round(score, 4), "命中搜尋詞": term})
+    candidates.sort(key=lambda candidate: candidate["相似度"], reverse=True)
+    return candidates
+
+def unit_measure(amount: float, unit: str, following: str) -> dict:
+    unit = unit.lower()
+    multiplier_match = re.match(r"\s*(?:克)?\s*[x×*]\s*(\d+(?:\.\d+)?)", following, re.IGNORECASE)
+    multiplier = float(multiplier_match.group(1)) if multiplier_match else 1.0
+    amount *= multiplier
+    if unit in {"台斤", "斤"}:
+        grams = amount * 600
+        return {"重量g": grams, "容量ml": None, "規格": f"{amount:g}{unit}", "密度假設": ""}
+    if unit in {"台兩", "兩"}:
+        grams = amount * 37.5
+        return {"重量g": grams, "容量ml": None, "規格": f"{amount:g}{unit}", "密度假設": ""}
+    if unit in {"公斤", "千克", "kg"}:
+        return {"重量g": amount * 1000, "容量ml": None, "規格": f"{amount:g}kg", "密度假設": ""}
+    if unit in {"公克", "克", "g"}:
+        return {"重量g": amount, "容量ml": None, "規格": f"{amount:g}g", "密度假設": ""}
+    if unit in {"公升", "l"}:
+        volume_ml = amount * 1000
+        return {"重量g": volume_ml, "容量ml": volume_ml, "規格": f"{amount:g}L", "密度假設": "1 ml = 1 g"}
+    return {"重量g": amount, "容量ml": amount, "規格": f"{amount:g}ml", "密度假設": "1 ml = 1 g"}
+
+def extract_measure(value: str) -> dict:
+    text = clean(value)
+    match = MEASURE_RE.search(text)
+    if not match:
+        return {"重量g": None, "容量ml": None, "規格": "", "密度假設": ""}
+    return unit_measure(float(match.group("amount")), match.group("unit"), text[match.end():])
+
+COUNT_UNIT_RE = re.compile(r"(?P<count>\d+(?:\.\d+)?)\s*(?P<unit>片|排|顆|粒|個|尾|隻|根|條|瓣|朵|枚)")
+
+def estimate_count_measure(sample: dict, text: str) -> dict:
+    """Conservative item-weight estimates for explicit count packaging only.
+
+    Estimates are deliberately limited to common named foods with a reasonably
+    recognizable unit. They are marked as estimates in the output.
+    """
+    match = COUNT_UNIT_RE.search(clean(text))
+    if not match:
+        return {"重量g": None, "容量ml": None, "規格": "", "密度假設": "", "重量估算說明": ""}
+    count = float(match.group("count"))
+    unit = match.group("unit")
+    food = normalize(" ".join((sample.get("樣品名稱", ""), sample.get("俗名", ""), text)))
+    grams_each = None
+    label = ""
+    if unit in {"片", "排"} and re.search(r"豬排|大排|里肌排|豬扒", food):
+        grams_each, label = 150, "豬排按每片150g估算"
+    elif unit in {"片", "排"} and re.search(r"鮭魚|魚排|魚片", food):
+        grams_each, label = 120, "魚排/魚片按每片120g估算"
+    elif unit in {"顆", "個"} and re.search(r"雞蛋|鴨蛋|鵪鶉蛋", food):
+        grams_each, label = (55 if "鵪鶉" not in food else 10), "蛋按單顆平均重量估算"
+    elif unit in {"顆", "個"} and re.search(r"蘋果", food):
+        grams_each, label = 180, "蘋果按每顆180g估算"
+    elif unit in {"顆", "個"} and re.search(r"蓮霧", food):
+        grams_each, label = 120, "蓮霧按每顆120g估算"
+    elif unit in {"顆", "個"} and re.search(r"柿", food):
+        grams_each, label = 150, "柿子按每顆150g估算"
+    elif unit in {"顆", "個"} and re.search(r"檸檬|萊姆", food):
+        grams_each, label = 100, "檸檬/萊姆按每顆100g估算"
+    elif unit in {"根", "條"} and re.search(r"香蕉", food):
+        grams_each, label = 120, "香蕉按每根120g估算"
+    elif unit in {"尾", "隻"} and re.search(r"蝦", food):
+        grams_each, label = 20, "蝦按每尾20g估算"
+    elif unit == "尾" and re.search(r"魚|鯛|鯖|鱸|鮭|鱈", food):
+        grams_each, label = 400, "魚按每尾400g估算"
+    elif unit == "隻" and re.search(r"雞", food):
+        grams_each, label = 1500, "全雞按每隻1500g估算"
+    elif unit in {"顆", "個"} and re.search(r"番茄|蕃茄", food):
+        grams_each, label = 120, "番茄按每顆120g估算"
+    elif unit in {"顆", "個"} and re.search(r"高麗菜|甘藍|白菜", food):
+        grams_each, label = 1000, "球葉蔬菜按每顆1000g估算"
+    elif unit in {"根", "條"} and re.search(r"竹筍|筍", food):
+        grams_each, label = 300, "竹筍按每條300g估算"
+    elif unit == "瓣" and re.search(r"蒜", food):
+        grams_each, label = 5, "蒜瓣按每瓣5g估算"
+    elif unit == "朵" and re.search(r"香菇|蘑菇|菇", food):
+        grams_each, label = 15, "單朵菇類按每朵15g估算"
+    elif unit == "枚" and re.search(r"蛋", food):
+        grams_each, label = 55, "蛋按每枚55g估算"
+    if grams_each is None:
+        return {"重量g": None, "容量ml": None, "規格": "", "密度假設": "", "重量估算說明": ""}
+    grams = count * grams_each
+    return {
+        "重量g": grams, "容量ml": None,
+        "規格": f"{count:g}{unit}（估算{grams_each:g}g/{unit}）",
+        "密度假設": "", "重量估算說明": label,
+    }
+
+def price_per_100g(product: dict, measure: dict) -> tuple[float | None, str]:
+    price = product.get("商品價格")
+    grams = measure.get("重量g")
+    if price is None:
+        return None, "網站未提供可辨識的商品價格"
+    if grams is None:
+        return None, "未讀到商品重量規格"
+    if grams <= 0:
+        return None, "商品重量不是正數"
+    return round(price / grams * 100, 4), ""
+
+def fetch_spec(session: requests.Session, url: str, timeout: float) -> tuple[str, dict]:
+    if not url:
+        return "", {"重量g": None, "容量ml": None, "規格": "", "密度假設": ""}
+    try:
+        html, _ = get_html(session, url, timeout)
+    except requests.RequestException as exc:
+        return f"商品規格頁讀取失敗：{exc}", {"重量g": None, "容量ml": None, "規格": "", "密度假設": ""}
+    soup = BeautifulSoup(html, "html.parser")
+    spec_text = ""
+    for text in soup.stripped_strings:
+        if "規格" in text:
+            part = re.split(r"規格\s*[:：]", clean(text), maxsplit=1)
+            if len(part) == 2 and (MEASURE_RE.search(part[1]) or COUNT_UNIT_RE.search(part[1])):
+                spec_text = part[1]
+                break
+    if not spec_text:
+        for node in soup.find_all(string=re.compile(r"規格\s*[:：]")):
+            parent = node.parent.parent if node.parent and node.parent.parent else node.parent
+            if parent:
+                match = re.search(r"規格\s*[:：]\s*(.*)", clean(parent.get_text(" ", strip=True)))
+                if match and (MEASURE_RE.search(match.group(1)) or COUNT_UNIT_RE.search(match.group(1))):
+                    spec_text = match.group(1)
+                    break
+    return spec_text, extract_measure(spec_text)
+
+def measure_for_candidate(sample: dict, session: requests.Session, candidate: dict, timeout: float, cache: dict) -> tuple[str, dict]:
+    measure = extract_measure(candidate["商品名稱"])
+    measure.setdefault("重量估算說明", "")
+    spec_text = measure["規格"]
+    if not measure["規格"]:
+        url = candidate.get("商品網址", "")
+        if url not in cache:
+            cache[url] = fetch_spec(session, url, timeout)
+        spec_text, measure = cache[url]
+    if not measure.get("重量g"):
+        estimate = estimate_count_measure(sample, spec_text or candidate.get("商品名稱", ""))
+        if estimate.get("重量g"):
+            measure = estimate
+            spec_text = estimate["規格"]
+    return spec_text, measure
+
+def choose_measurable_candidate(sample: dict, candidates: list[dict], session: requests.Session, timeout: float,
+                                spec_cache: dict, max_detail_checks: int = 40) -> tuple[dict, str, dict] | None:
+    """Prefer the highest-ranked candidate with price and a readable mass/volume."""
+    fallback = None
+    detail_checks = 0
+    for candidate in candidates:
+        has_title_measure = bool(extract_measure(candidate.get("商品名稱", "")).get("規格"))
+        if not has_title_measure and detail_checks >= max_detail_checks:
+            continue
+        if not has_title_measure:
+            detail_checks += 1
+        spec, measure = measure_for_candidate(sample, session, candidate, timeout, spec_cache)
+        if fallback is None:
+            fallback = (candidate, spec, measure)
+        if measure.get("重量g") and candidate.get("商品價格") is not None:
+            return candidate, spec, measure
+    return fallback
+
+def match_from_pool(sample: dict, products: list[dict], threshold: float, session: requests.Session,
+                    timeout: float, spec_cache: dict) -> dict | None:
+    selected = choose_measurable_candidate(
+        sample, matching_candidates(sample, products, threshold), session, timeout, spec_cache,
+    )
+    if not selected:
+        return None
+    candidate, spec, measure = selected
+    per_100g, reason = price_per_100g(candidate, measure)
+    return {
+        **{key: sample.get(key, "") for key in ("來源列號", "食品分類", "樣品名稱", "俗名")},
+        "狀態": "成功" if per_100g is not None else "找到商品但未換算",
+        "補查基礎食材": base_name(sample.get("樣品名稱", "")),
+        "商品名稱": candidate["商品名稱"],
+        "商品網址": candidate.get("商品網址", ""),
+        "網站大類": candidate.get("網站大類") or "站內搜尋",
+        "商品價格": candidate.get("商品價格"),
+        "規格": spec or measure.get("規格", ""),
+        "重量g": measure.get("重量g"),
+        "密度假設": measure.get("密度假設", ""),
+        "重量估算說明": measure.get("重量估算說明", ""),
+        "每100g的價格": per_100g,
+        "相似度": candidate.get("相似度"),
+        "命中搜尋詞": candidate.get("命中搜尋詞", ""),
+        "未換算原因": reason,
+        "Excel列": sample.get("Excel列"),
+    }
+
+crawler = SimpleNamespace(
+    ALIASES=ALIASES,
+    BASE_URL=BASE_URL,
+    CATEGORY_URLS=CATEGORY_URLS,
+    BeautifulSoup=BeautifulSoup,
+    base_name=base_name,
+    clean=clean,
+    crawl_catalog=crawl_catalog,
+    create_session=create_session,
+    extract_measure=extract_measure,
+    extract_products=extract_products,
+    get_html=get_html,
+    match_from_pool=match_from_pool,
+    normalize=normalize,
+    price_per_100g=price_per_100g,
+    sample_search_terms=sample_search_terms,
+)
 
 # A's 「米飯」 and B's 「白飯」 refer to cooked rice here. Search the store's
 # shelf-stable cooked-rice term as well, and prefer this verified product page
